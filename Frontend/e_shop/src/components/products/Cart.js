@@ -1,29 +1,21 @@
 import { useState } from "react";
+import CartItems from "./Cartitems";
 
-function Cart(props) {
+function Cart({data, removeItem}) {
+  
    
 
 
 
     return (
-        <div className="max-w-auto max-h=auto">
+        <div className="max-w-auto max-h=auto bg-gray-900">
         <div className="flex flex-col h-auto justify-end">
             <div>
                 <h1 className="text-lg font-bold mb-6">Shopping Cart</h1>
                 {
-                    props.data.length > 0 ? (
-                        props.data.map((item) => (
-                            <div className="flex justify-between items-center mx-auto mb-4">
-                                <div className="flex items-center">
-                                    <img src={item.img_link} alt="Product Image" className=" max-w-20 max-h-sm mr-4"/>
-                                    <div>
-                                        <h2 className="font-bold text-red-50">{item.name}</h2>
-                                        <p className="text-black-700">{item.type}</p>
-                                        <p className="text-black-700">{item.price}</p>
-                                        <p className="text-black-700">1</p>
-                                    </div>
-                                </div>
-                            </div>
+                    data.length > 0 ? (
+                        data.map((item) => (
+                         <CartItems data={item} removefunc={removeItem} />
                         ))
                     ) : (
                         <p>no products added</p>

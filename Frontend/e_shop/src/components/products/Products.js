@@ -20,6 +20,11 @@ function Products() {
 
     function addItems(item){
         setItems(prevItems => [...cartitem,item])
+       
+    }
+
+    function removeItem(name){
+        setItems(prevItems => prevItems.filter(item => item.name !== name));
     }
     
     
@@ -33,7 +38,7 @@ function Products() {
 
           {
             products.map((product)=>(
-                <Product key= {product.id} data={product} addItems={addItems} />
+                <Product key= {product.id} data={product} addItems={addItems}  />
             ))
           }
                
@@ -52,7 +57,7 @@ function Products() {
         </div>
         <div className="w-1/4">
         <div className="flex-wrap">
-            <Cart data={cartitem}/>
+            <Cart data={cartitem} removeItem={removeItem}/>
         </div>
 
        
