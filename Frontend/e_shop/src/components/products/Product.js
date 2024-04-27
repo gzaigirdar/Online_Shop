@@ -2,12 +2,15 @@ import { data } from "autoprefixer";
 import Image from "next/image";
 import { useState } from "react";
 
-export default function Product({data , addItems} ) {
+export default function Product({data , addItems, updateTotal} ) {
   
   const prod = data;
+  const Item_price = parseFloat(data.price)
   
 function OnclickHandle(){
   addItems(prod);
+  updateTotal('add',Item_price);
+
   
 
 }
@@ -19,7 +22,7 @@ function OnclickHandle(){
 
     
 <div className="max-w-sm max-h-sm mx-auto my-3">
-	<a href="#" class="group relative block overflow-hidden">
+	<a href="#" className="group relative block overflow-hidden">
  
 
   <img

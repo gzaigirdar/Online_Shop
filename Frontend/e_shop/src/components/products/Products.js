@@ -17,6 +17,25 @@ function Products() {
     {id:"2",name:"strewberry cake",price:'10.99', type:"cake",img_link:'https://thetinyfairy.com/wp-content/uploads/2021/03/img_3202-scaled.jpg'}
     ]
     const [cartitem,setItems] = useState([]);
+    const[subtotal,setsubTotal] = useState(0);
+    const taxes = 0.06;
+    const [total,setTotal] = useState((taxes*subtotal)+subtotal);
+     
+    function updateTotal(bool,price){
+    
+    if(bool === 'add'){
+        setsubTotal(prev => prev + price)
+
+    }
+    else{
+       if( subtotal !== 0){
+
+         setsubTotal(prev => prev - price)
+       
+       }
+    }
+  }
+  
 
     function addItems(item){
         setItems(prevItems => [...cartitem,item])
@@ -38,7 +57,7 @@ function Products() {
 
           {
             products.map((product)=>(
-                <Product key= {product.id} data={product} addItems={addItems}  />
+                <Product key= {product.id} data={product} addItems={addItems} updateTotal={updateTotal} />
             ))
           }
                
@@ -57,7 +76,7 @@ function Products() {
         </div>
         <div className="w-1/4">
         <div className="flex-wrap">
-            <Cart data={cartitem} removeItem={removeItem}/>
+            <Cart data={cartitem} removeItem={removeItem} updateTotal={updateTotal}  subtotal={subtotal} total={total}/>
         </div>
 
        

@@ -3,27 +3,38 @@ import { useState } from "react";
 
 function CartItems({data,removefunc,updateTotal}) {
    const [quantity,setQuantity] = useState(1);
+   const prod_price = parseFloat(data.price)
 
 
    function removeItem(){
        // calling removefunction from the parent component 
        removefunc(data.name);
+       
    }
-    const prod_price = parseFloat(data.price)
+   
 
   
     // function to handle increase quantiy button 
     function adjust_quan(value) {
+       
       
-        if (value === 'increase') {
+        if (quantity >= 0 && value === 'increase') {
           setQuantity(prev => prev + 1);
           updateTotal('add', prod_price);
-        } else {
-          if (quantity !== 0) {
+        } else if (quantity !== 0){
+           
             setQuantity(prev => prev - 1);
             updateTotal('none', prod_price);
-          }
+            if(quantity === 1){
+                removeItem();
+            }
+          
         }
+        else{
+            setQuantity(0)
+            removeItem()
+        }
+       
       }
       
     return (  

@@ -4,28 +4,10 @@ import { useState } from "react";
 
 import CartItems from "./Cartitems";
 
-function Cart({ data, removeItem }) {
+function Cart({ data, removeItem, updateTotal, subtotal,total }) {
   
-    const[total,setTotal] = useState(0);
-
-    function updateTotal(bool,price){
-    
-    if(bool === 'add'){
-        setTotal(prev => prev + price)
-
-    }
-    else{
-        if(total === price ){
-
-            setTotal(0)
-        }
-        else{
-            setTotal(prev => prev - price)
-        }
-    }
-  }
-  
-
+console.log(subtotal)
+         
   
   
     return (
@@ -49,7 +31,7 @@ function Cart({ data, removeItem }) {
           <hr className="my-4" />
           <div className="flex justify-between items-center">
             <span className="font-bold">Subtotal:</span>
-            <span className="font-bold">$19.99</span>
+            <span className="font-bold">${subtotal.toFixed(2)}</span>
           </div>
           <div className="flex justify-between items-center mt-4">
             <span>Taxes:</span>
@@ -57,7 +39,7 @@ function Cart({ data, removeItem }) {
           </div>
           <hr className="my-4" />
           <div className="flex justify-between items-center">
-            <span className="font-bold">{total}</span>
+            <span className="font-bold">total</span>
             <span className="font-bold">{total}</span>
           </div>
           <div className="flex justify-center mt-6">
