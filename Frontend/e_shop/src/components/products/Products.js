@@ -5,6 +5,7 @@ import Product from "./product";
 import Cart from "./Cart";
 import Menu from "./Menu";
 import { useState } from "react";
+import MenuBar from "./Menubar";
 
 
 
@@ -15,7 +16,10 @@ function Products() {
         {id:"1",name:'Choclate cake',price:'5.99',type:"cake",img_link:'https://i2.wp.com/www.livewellbakeoften.com/wp-content/uploads/2018/05/Chocolate-Layer-Cake-3.jpg?resize=1360%2C2040&ssl=1'},
     {id:"2",name:"strewberry cake",price:'10.99', type:"cake",img_link:'https://thetinyfairy.com/wp-content/uploads/2021/03/img_3202-scaled.jpg'},   {id:"1",name:'Choclate cake',price:'5.99',type:"cake",img_link:'https://i2.wp.com/www.livewellbakeoften.com/wp-content/uploads/2018/05/Chocolate-Layer-Cake-3.jpg?resize=1360%2C2040&ssl=1'},
     {id:"2",name:"strewberry cake",price:'10.99', type:"cake",img_link:'https://thetinyfairy.com/wp-content/uploads/2021/03/img_3202-scaled.jpg'}
-    ]
+    ,{id:"1",name:'Choclate cake',price:'5.99',type:"cake",img_link:'https://i2.wp.com/www.livewellbakeoften.com/wp-content/uploads/2018/05/Chocolate-Layer-Cake-3.jpg?resize=1360%2C2040&ssl=1'},
+    {id:"2",name:"strewberry cake",price:'10.99', type:"cake",img_link:'https://thetinyfairy.com/wp-content/uploads/2021/03/img_3202-scaled.jpg'},   {id:"1",name:'Choclate cake',price:'5.99',type:"cake",img_link:'https://i2.wp.com/www.livewellbakeoften.com/wp-content/uploads/2018/05/Chocolate-Layer-Cake-3.jpg?resize=1360%2C2040&ssl=1'},
+    {id:"2",name:"strewberry cake",price:'10.99', type:"cake",img_link:'https://thetinyfairy.com/wp-content/uploads/2021/03/img_3202-scaled.jpg'}
+  ]
     const [cartitem,setItems] = useState([]);
     const[subtotal,setsubTotal] = useState(0);
     const taxes = 0.06;
@@ -27,12 +31,15 @@ function Products() {
         setsubTotal(prev => prev + price)
 
     }
-    else{
-       if( subtotal !== 0){
-
-         setsubTotal(prev => prev - price)
+    else if (bool !== 'add' && subtotal > price )
+    
+    {
+      setsubTotal(prev => prev - price)
        
-       }
+       
+    }
+    else{
+      setsubTotal(0);
     }
   }
   
@@ -49,17 +56,24 @@ function Products() {
     
     
     return (  
-        
-        <div className=" flex flex-wrap">
-           
-        <div className="w-3/4 flex flex-wrap mx-auto pt-10 pr-0 pb-12">
-          
+       
+<>
 
+        <div className=" flex flex-wrap">
+         
+       
+          
+           
+        <div className="w-3/4 flex flex-wrap mx-auto pt-2 pr-2 pb-12  justify-start">
+          
+        
+       
           {
             products.map((product)=>(
-                <Product key= {product.id} data={product} addItems={addItems} updateTotal={updateTotal} />
+              <Product key= {product.id} data={product} addItems={addItems} updateTotal={updateTotal} />
             ))
           }
+         
                
          
            
@@ -82,7 +96,7 @@ function Products() {
        
         </div>
     </div>
-
+    </>
 
 
          

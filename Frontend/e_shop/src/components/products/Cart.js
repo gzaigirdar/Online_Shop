@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import CartItems from "./Cartitems";
 
-function Cart({ data, removeItem, updateTotal, subtotal,total }) {
+function Cart({ data, removeItem, updateTotal, subtotal, total }) {
   
 console.log(subtotal)
          

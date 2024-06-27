@@ -21,7 +21,7 @@ function OnclickHandle(){
 
 
     
-<div className="max-w-sm max-h-sm mx-auto my-3">
+<div className="max-w-sm max-h-sm mx-auto my-3 mr-2 justify-start">
 	<a href="#" className="group relative block overflow-hidden">
  
 

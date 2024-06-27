@@ -9,6 +9,7 @@ function CartItems({data,removefunc,updateTotal}) {
    function removeItem(){
        // calling removefunction from the parent component 
        removefunc(data.name);
+       updateTotal('decrese',data.price)
        
    }
    
@@ -21,19 +22,26 @@ function CartItems({data,removefunc,updateTotal}) {
         if (quantity >= 0 && value === 'increase') {
           setQuantity(prev => prev + 1);
           updateTotal('add', prod_price);
-        } else if (quantity !== 0){
+        } 
+        else if (quantity >= 0 && value === 'decrease'){
            
-            setQuantity(prev => prev - 1);
-            updateTotal('none', prod_price);
-            if(quantity === 1){
+            
+           
+            if(quantity === 1 || quantity > 1){
+                setQuantity(prev => prev - 1);
                 removeItem();
+                updateTotal('none', prod_price);
+                
+            }
+            else{
+                setQuantity(0)
+               
+                updateTotal('none', 0);
+                
             }
           
         }
-        else{
-            setQuantity(0)
-            removeItem()
-        }
+      
        
       }
       
