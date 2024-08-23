@@ -1,15 +1,22 @@
 'use client'
 import { useState } from "react";
 
-function CartItems({data,removefunc,updateTotal}) {
+function CartItems({data,removefunc,updateTotal,updateQuantityById,update_finalTotal}) {
    const [quantity,setQuantity] = useState(1);
    const prod_price = parseFloat(data.price)
+
+
+   function update_quanity_global(id,quant){
+    updateQuantityById(id,quant)
+
+   }
 
 
    function removeItem(){
        // calling removefunction from the parent component 
        removefunc(data.name);
        updateTotal('decrese',data.price)
+       update_finalTotal()
        
    }
    
@@ -17,33 +24,44 @@ function CartItems({data,removefunc,updateTotal}) {
   
     // function to handle increase quantiy button 
     function adjust_quan(value) {
+        let new_quantity;
        
       
-        if (quantity >= 0 && value === 'increase') {
-          setQuantity(prev => prev + 1);
+        if (value === 'increase') {
+          new_quantity = quantity + 1
+          setQuantity(new_quantity);
           updateTotal('add', prod_price);
+          update_quanity_global(data.id,new_quantity)
+          update_finalTotal()
+         
         } 
-        else if (quantity >= 0 && value === 'decrease'){
+        else if (quantity > 1 && value === 'decrease'){
+            new_quantity = quantity - 1
+            setQuantity(new_quantity);
+            
+            updateTotal('none', prod_price);
+            update_quanity_global(data.id,new_quantity)
+            update_finalTotal()
            
+        
             
            
-            if(quantity === 1 || quantity > 1){
-                setQuantity(prev => prev - 1);
-                removeItem();
-                updateTotal('none', prod_price);
-                
-            }
-            else{
-                setQuantity(0)
+         
+        }
+        else{
+               
+              
                
                 updateTotal('none', 0);
+                removeItem();
+                update_finalTotal()
                 
             }
           
         }
       
        
-      }
+      
       
     return (  
         <div className="flex justify-between items-center mx-auto mb-4">

@@ -1,4 +1,37 @@
+
+'use client'
+import { useState } from "react";
+
+
+
 function PaymentForm({ closeform }) {
+
+
+    const [Formdata,setForm] = useState({
+        name:' ',
+        cardNumber: '  ',
+        card_exp:' ',
+        card_csv: ' ',
+
+    })
+
+    function HandlleSubmit(){
+
+        closeform(Formdata)
+        
+    }
+
+    function handleChange(e){
+        const {name,value} = e.target; 
+        setForm((prevdata)=>({...prevdata,[name]:value,
+            
+        }))
+      
+
+
+
+    }
+
   return (
       <div className="mx-auto max-w-screen-xl px-4 py-3 xl:px-0">
           <div className="mx-auto max-w-5xl">
@@ -13,10 +46,12 @@ function PaymentForm({ closeform }) {
                               </label>
                               <input
                                   type="text"
-                                  id="full_name"
+                                  id="name"
                                   className="block w-full rounded-lg border border-gray-600 bg-gray-700 p-2.5 text-sm text-white placeholder-gray-400 focus:border-primary-500 focus:ring-primary-500"
                                   placeholder="Bonnie Green"
                                   required
+                                  name="name"
+                                  onChange={handleChange}
                               />
                           </div>
 
@@ -31,6 +66,8 @@ function PaymentForm({ closeform }) {
                                   placeholder="xxxx-xxxx-xxxx-xxxx"
                                   pattern="^[0-9]{13}(?:[0-9]{3})?$"
                                   required
+                                  name="cardNumber"
+                                  onChange={handleChange}
                               />
                           </div>
 
@@ -63,6 +100,7 @@ function PaymentForm({ closeform }) {
                                       type="text"
                                       className="block w-full rounded-lg border border-gray-600 bg-gray-700 p-2.5 pl-9 text-sm text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500"
                                       placeholder="12/23"
+                                      name="card_exp"
                                       required
                                   />
                               </div>
@@ -104,14 +142,16 @@ function PaymentForm({ closeform }) {
                                   aria-describedby="helper-text-explanation"
                                   className="block w-full rounded-lg border border-gray-600 bg-gray-700 p-2.5 text-sm text-white placeholder-gray-400 focus:border-primary-500 focus:ring-primary-500"
                                   placeholder="•••"
+                                  name="card_csv"
                                   required
+                                  onChange={handleChange}
                               />
                           </div>
                       </div>
 
                       <button
                           type="submit"
-                          onClick={closeform}
+                          onClick={HandlleSubmit}
                           className="flex w-full items-center justify-center rounded-lg bg-primary-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-800"
                       >
                           Pay now

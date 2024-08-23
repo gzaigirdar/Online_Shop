@@ -4,14 +4,25 @@ import PaymentForm from "./PaymentForm";
 function Bill_Order() {
 
     const [form,setForm] = useState(false);
+    const [info,setInfo] = useState({
+        name:' None ',
+        cardNumber: ' None ',
+        card_exp:'None ',
+        card_csv: ' None',
+        
+
+    })
 
 
     function HandleClick(){
         setForm(true);
     }
-    function closeform(){
-      setForm(false);
+    function closeform(data){
+        
+        setInfo(data);
+        setForm(false);
     }
+
     
 
 
@@ -26,10 +37,13 @@ function Bill_Order() {
                 <div className="mt-6 space-y-4 border-b border-t border-gray-700 py-8 sm:mt-8">
                     <h4 className="text-lg font-semibold text-white">Billing information</h4>
     
-                    <dl>
+                    <dl className="text-center">
                         <dt className="text-base font-medium text-white">Individual</dt>
                         <dd className="mt-1 text-base font-normal text-gray-400">
-                            Bonnie Green - +1 234 567 890, San Francisco, California, United States, 3454, Scott Street
+                            {info.name}
+                        </dd>
+                        <dd className="mt-1 text-base font-normal text-gray-400">
+                            {info.card_exp}
                         </dd>
                     </dl>
     
