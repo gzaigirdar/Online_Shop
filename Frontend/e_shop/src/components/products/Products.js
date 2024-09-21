@@ -5,9 +5,11 @@ import Product from "./product";
 import Cart from "./Cart";
 import Menu from "./Menu";
 import { useState } from "react";
-import MenuBar from "./Menubar";
+
 import Order from "../order/Order";
 import { useEffect } from "react";
+import MenuBar from "./Menubar";
+
 
 
 
@@ -92,61 +94,50 @@ function Products() {
     
     
     return (  
-       
-<>
-      {
-        checkout? <Order cartitem={cartitem} total={total} subtotal={subtotal} taxes={taxes}/>:
-        <div className=" flex flex-wrap">
-         
-       
-          
-           
-        <div className="w-3/4 flex flex-wrap mx-sm pt-2 pr-5 pb-2  justify-start">
+ 
+            <>
+              {!checkout ? (
+                <div className="flex">
+                 
+                  <div className="w-3/4 flex flex-col">
+                    
+                    <div className=" mx-sm ml-5 w-1/2 justify-center text-align-center">
+                      <p> place holder for menu </p>
+                    </div>
+                    
+                   
+                    <div className="flex flex-wrap mx-sm pt-5 pr-5 pb-2 justify-start">
+                      {products.map((product) => (
+                        <Product
+                          key={product.id}
+                          data={product}
+                          addItems={addItems}
+                          updateTotal={updateTotal}
+                          update_finalTotal={update_finalTotal}
+                        />
+                      ))}
+                    </div>
+                  </div>
         
-       
-          {
-            products.map((product)=>(
-              <Product  data={product} addItems={addItems} updateTotal={updateTotal} update_finalTotal={update_finalTotal} />
-            ))
-          }
-         
-               
-         
-           
-          
-          
-            
-            
-            
-               
-              
-            
-           
-          
-        </div>
-        <div className="w-1/4">
-        <div className="flex-wrap">
-            <Cart data={cartitem} removeItem={removeItem} updateTotal={updateTotal} subtotal={subtotal} total={total} checkout={set_checkout}  updateQuantityById={updateQuantityById} update_finalTotal={update_finalTotal}/>
-        </div>
-
-       
-        </div>
-    </div>
-    }
-    </>
-
-
-         
-  
-        
-
-
-
-
-
-
-    );
-            }
+                  <div className="w-1/4">
+                    <Cart
+                      data={cartitem}
+                      removeItem={removeItem}
+                      updateTotal={updateTotal}
+                      subtotal={subtotal}
+                      total={total}
+                      checkout={set_checkout}
+                      updateQuantityById={updateQuantityById}
+                      update_finalTotal={update_finalTotal}
+                    />
+                  </div>
+                </div>
+              ) : (
+                <Order cartitem={cartitem} total={total} subtotal={subtotal} taxes={taxes} />
+              )}
+            </>
+          );
+        }
 
 
 export default Products;

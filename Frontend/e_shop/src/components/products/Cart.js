@@ -16,11 +16,11 @@ function Cart({ key,data, removeItem, updateTotal, subtotal, total,checkout,upda
   
     return (
 
-      <div className="max-w-auto max-h-auto px-1 py-2 bg-gray-900 text-white">
+      <div className="max-w-auto max-h-auto mr-5 px-10 py-5 bg-gray-700 text-white">
       <div className="flex flex-col h-auto justify-end">
         <div>
           
-          <h1 className="text-lg justify-center items-center font-bold mb-6"> Shopping Cart </h1>
+          <h1 className="text-lg text-center justify-center items-center font-bold mb-6"> Shopping Cart </h1>
           {/* rendering all the cart items */}
           {data.length > 0 ? (
             data.map((item) => (

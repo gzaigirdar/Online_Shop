@@ -22,7 +22,7 @@ function OnclickHandle(){
 
 
     
-<div className="max-w-lg max-h-lg mx-auto my-3  justify-start">
+<div className="max-w-lg max-h-lg mx-6 my-3  justify-start">
 	<a href="#" className="group relative block overflow-hidden">
  
 
@@ -32,7 +32,7 @@ function OnclickHandle(){
     className="h-m w-m object-cover transition duration-500 group-hover:scale-105 sm:h-72"
   />
 
-  <div className="relative border border-gray-100 bg-slate-300 p-6">
+  <div className="relative border border-gray-100 bg-lime-50 p-6">
     <span className="whitespace-nowrap bg-green-400 px-3 py-1.5 text-xs font-medium"> {data.type}</span>
 
     <h3 className="mt-4 text-sm font-medium text-gray-900">{data.name}</h3>
