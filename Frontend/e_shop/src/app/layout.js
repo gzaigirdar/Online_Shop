@@ -16,8 +16,13 @@ export default function RootLayout({ children }) {
   return (
   <html lang="en">
     <body>
-
+    
+     
+      
       <main>{children}</main>
+        
+      <div id="modal-root">  </div>
+     
     </body>
   </html>
   )
