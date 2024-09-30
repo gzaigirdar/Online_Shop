@@ -1,7 +1,7 @@
 
 'use client';
 
-import Product from "./product";
+import Product from "./Product.js";
 import Cart from "./Cart";
 import Menu from "./Menu";
 import { useState } from "react";
@@ -41,6 +41,11 @@ function Products() {
 
 
     }
+
+
+
+   
+
     // using useffect to update total, total will be udpated anytime subtotal or taxes changes
     useEffect(() => {
       setTotal(subtotal > 0 ? taxes + subtotal : 0);
