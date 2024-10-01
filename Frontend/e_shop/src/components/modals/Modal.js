@@ -9,6 +9,18 @@ function Modal({show, onClose, children}) {
 
     useEffect(()=>{
         setIsBroweser(true)
+        if (show) {
+            // prevents background scrolling when modal is open by setting overflow-hidden class to body
+            document.body.classList.add('overflow-hidden');
+        } else {
+           // removes overflow hidden after modal is  closed
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        // returning a funtion, it is used react to clean up any elements added once componet is removed from the dom.
+        return () => {
+            document.body.classList.remove('overflow-hidden');
+        };
     },[])
     if(!isBrowser) return null;
 
