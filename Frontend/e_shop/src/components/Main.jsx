@@ -8,16 +8,20 @@ import { LoginProvider } from "./context/login_context";
 
 function Main() {
     
-    const [showModal,setShowModal] = useState(false)
+    const [showModal,setShowModal] = useState(false);
+
+    function open_modal(){
+      setShowModal(true)
+    }
     return (  
       <div>
           <LoginProvider>
-        <Navbar/>
-        <button onClick={() => setShowModal(true)}>Open Modal</button>
-        <Products/>
+        <Navbar open_modal={open_modal}/>
+      
+        <Products showModal={showModal} setShowModal={open_modal}/>
         {showModal && (
         <Modal show={showModal} onClose={() => setShowModal(false)}> 
-          <Loginform />
+          <Loginform closeIt={() => setShowModal(false)} />
         </Modal>
       )}
       </LoginProvider>

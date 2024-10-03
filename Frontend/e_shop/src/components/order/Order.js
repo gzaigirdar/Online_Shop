@@ -13,7 +13,7 @@ function Order ({cartitem,total,subtotal,taxes})  {
   
   return (
     <div>
-    <div className="grid grid-cols-2 h-screen overflow-hidden">
+    <div className="grid grid-cols-2 h-screen ">
     <div className="container mx-auto mt-4 ">
     <div className="overflow-y-auto pr-4 mx-1 border border-blue-200 rounded-lg shadow-sm" 
           style={{ height: '50vh' }}>

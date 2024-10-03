@@ -11,7 +11,7 @@ function page() {
     return ( 
       <>
         <div>
-      <button onClick={() => setShowModal(true)}>Open Modal</button>
+      <button onClick={() => setShowModal(true)}>Login</button>
       <p>Hello World</p>
       <div> <Navbar/></div>
       

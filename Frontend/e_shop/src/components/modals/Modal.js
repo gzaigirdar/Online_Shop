@@ -31,16 +31,15 @@ function Modal({show, onClose, children}) {
     // creating the modal content in variable
     const modalContent = show ? (
 
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center" >
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex flex-col items-center justify-center" >
             <div>
+                <button className=" justify-center text-center" onClick={handleClose}> close </button>
                 {children}
+               
             </div>
-            <div>
-                <button onClick={handleClose}> close </button>
-            </div>
-
+          
         </div>): null;
-    if (isBrowser) {
+      if (isBrowser) {
         return createPortal(
           modalContent,
           document.getElementById('modal-root') || document.body

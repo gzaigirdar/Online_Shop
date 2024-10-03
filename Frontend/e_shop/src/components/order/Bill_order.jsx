@@ -31,7 +31,7 @@ function Bill_Order() {
        { form ? (<PaymentForm closeform={closeform}/>):(
         <div className="bg-gray-800 my-5">
         <form action="#" className="mx-auto max-w-screen-xl px-4 2xl:px-0">
-            <div className="mx-auto max-w-3xl">
+            <div className="mx-auto max-w-3xl text-center">
                 <h2 className="text-xl font-semibold text-white sm:text-2xl">Order summary</h2>
     
                 <div className="mt-6 space-y-4 border-b border-t border-gray-700 py-8 sm:mt-8">

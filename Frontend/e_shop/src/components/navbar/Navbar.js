@@ -3,9 +3,10 @@ import { useState,useContext } from "react"
 import { Login } from "../context/login_context"
 
 
-export default function Navbar(){
+export default function Navbar({open_modal}){
    const {logged,changeStatus} = useContext(Login)
    const [show,setShow] =  useState(false)
+  
   
 
     return(
@@ -35,8 +36,8 @@ export default function Navbar(){
                         <li><a className="md:p-4 py-3 px-0 block" href="#">Review</a></li>
                         <li><a className="md:p-4 py-3 px-0 block" href="#">Contact</a></li>
                         {
-                            logged?<li><a className="md:p-4 py-3 px-0 block md:mb-0 mb-2" href="#">Log out</a></li>:
-                            <li><a className="md:p-4 py-3 px-0 block md:mb-0 mb-2" href="#">Log in</a></li>
+                            logged?<li onClick={()=> changeStatus(false)}><a className="md:p-4 py-3 px-0 block md:mb-0 mb-2" href="#">Log out</a></li>:
+                            <li onClick={()=> open_modal()}><a className="md:p-4 py-3 px-0 block md:mb-0 mb-2" href="#">Log in</a></li>
                         }
                         
                     
