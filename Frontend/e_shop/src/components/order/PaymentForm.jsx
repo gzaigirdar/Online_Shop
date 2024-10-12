@@ -15,7 +15,8 @@ function PaymentForm({ closeform }) {
 
     })
 
-    function HandlleSubmit(){
+    function HandlleSubmit(e){
+        e.preventDefault()
 
         closeform(Formdata)
         
@@ -60,11 +61,13 @@ function PaymentForm({ closeform }) {
                                   Card number*
                               </label>
                               <input
-                                  type="text"
+                                  type="tel"
                                   id="card-number-input"
                                   className="block w-full rounded-lg border border-gray-600 bg-gray-700 p-2.5 text-sm text-white placeholder-gray-400 focus:border-primary-500 focus:ring-primary-500"
                                   placeholder="xxxx-xxxx-xxxx-xxxx"
-                                  pattern="^[0-9]{13}(?:[0-9]{3})?$"
+                                  pattern="^4[0-9]{12}(?:[0-9]{3})?$"
+                                  maxLength={19}
+                                  
                                   required
                                   name="cardNumber"
                                   onChange={handleChange}
@@ -94,12 +97,12 @@ function PaymentForm({ closeform }) {
                                       </svg>
                                   </div>
                                   <input
-                                      datepicker
-                                      datepicker-format="mm/yy"
+                                      
                                       id="card-expiration-input"
-                                      type="text"
+                                      type="month"
                                       className="block w-full rounded-lg border border-gray-600 bg-gray-700 p-2.5 pl-9 text-sm text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500"
                                       placeholder="12/23"
+                                      pattern="^(0[1-9]|1[0-2])\/[0-9]{2}$"
                                       name="card_exp"
                                       required
                                   />
@@ -137,15 +140,20 @@ function PaymentForm({ closeform }) {
                                   </div>
                               </label>
                               <input
-                                  type="number"
+                                  type="tel"
                                   id="cvv-input"
                                   aria-describedby="helper-text-explanation"
                                   className="block w-full rounded-lg border border-gray-600 bg-gray-700 p-2.5 text-sm text-white placeholder-gray-400 focus:border-primary-500 focus:ring-primary-500"
                                   placeholder="•••"
+                                  minLength={3}
+                                  maxLength={4}
                                   name="card_csv"
+                                  
                                   required
                                   onChange={handleChange}
                               />
+                             
+                             
                           </div>
                       </div>
 
