@@ -6,7 +6,9 @@ import cookieParser from 'cookie-parser'
 import mongoSantitize from 'express-mongo-sanitize'
 import { urlencoded } from 'express';
 import cors from 'cors'
-import db from './db.js';
+
+import mainRouter from './Routes/main.router.js';
+import initdb from './db.js';
 dotenv.config()
 
 const port = process.env.PORT || 5000;
@@ -22,7 +24,8 @@ app.use(mongoSantitize())
 app.use(cookieParser())
 // protects routes and restricts access to the server 
 app.use(cors())
-
+app.use(mainRouter)
+initdb()
 app.listen(port,() => {
         console.log(`listening on port ${port}`)
     }
