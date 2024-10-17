@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import validator from 'validator'
+import bcrypt from 'bcrypt'
 
 const userSchema = mongoose.Schema({
     name:{
@@ -40,6 +41,22 @@ const userSchema = mongoose.Schema({
 
 
 )
+
+userSchema.pre('save',async function(next){
+    try{
+        if(this.isNew){
+            const salt = await bcrypt.genSalt(10)
+            const hashedPass = await bcrypt.hash(this.password,salt)
+            this.password = hashedPass
+
+        }
+    }
+    catch(error){
+        return error; 
+
+    }
+
+})
 
 const userModal = mongoose.models.userModal || mongoose.model("UserModel",userSchema)
 export default userModal;

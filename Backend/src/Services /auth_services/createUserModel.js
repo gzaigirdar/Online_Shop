@@ -1,7 +1,7 @@
-import userModal from "../Models/userModel.js";
+import userModal from "../../Models/userModel.js";
 
 
- async function createUser ({fname,lname,email,password}){
+ async function createUserModel ({fname,lname,email,password}){
     const user =  new userModal({
         name:{
             fname:fname,
@@ -16,13 +16,14 @@ import userModal from "../Models/userModel.js";
 
     try{
         await user.save()
+        return user
        
     }
     catch(error){
        
-        console.log(error)
+        return error
     }
 
     
 }
-export default createUser;
+export default createUserModel;
