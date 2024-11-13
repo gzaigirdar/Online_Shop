@@ -8,10 +8,10 @@ function PaymentForm({ closeform }) {
 
 
     const [Formdata,setForm] = useState({
-        name:' ',
-        cardNumber: '  ',
-        card_exp:' ',
-        card_csv: ' ',
+        name:' Enter your name ',
+        cardNumber: ' enter your card number ',
+        card_exp:' experiratin date ',
+        card_csv: ' card security code',
 
     })
 
@@ -49,7 +49,7 @@ function PaymentForm({ closeform }) {
                                   type="text"
                                   id="name"
                                   className="block w-full rounded-lg border border-gray-600 bg-gray-700 p-2.5 text-sm text-white placeholder-gray-400 focus:border-primary-500 focus:ring-primary-500"
-                                  placeholder="Bonnie Green"
+                                  placeholder={Formdata.name}
                                   required
                                   name="name"
                                   onChange={handleChange}
@@ -64,7 +64,7 @@ function PaymentForm({ closeform }) {
                                   type="tel"
                                   id="card-number-input"
                                   className="block w-full rounded-lg border border-gray-600 bg-gray-700 p-2.5 text-sm text-white placeholder-gray-400 focus:border-primary-500 focus:ring-primary-500"
-                                  placeholder="xxxx-xxxx-xxxx-xxxx"
+                                  placeholder={Formdata.cardNumber}
                                   pattern="^4[0-9]{12}(?:[0-9]{3})?$"
                                   maxLength={19}
                                   
@@ -101,10 +101,11 @@ function PaymentForm({ closeform }) {
                                       id="card-expiration-input"
                                       type="month"
                                       className="block w-full rounded-lg border border-gray-600 bg-gray-700 p-2.5 pl-9 text-sm text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500"
-                                      placeholder="12/23"
+                                      placeholder={Formdata.card_exp}
                                       pattern="^(0[1-9]|1[0-2])\/[0-9]{2}$"
                                       name="card_exp"
                                       required
+                                      onChange={handleChange}
                                   />
                               </div>
                           </div>
@@ -147,7 +148,7 @@ function PaymentForm({ closeform }) {
                                   placeholder="•••"
                                   minLength={3}
                                   maxLength={4}
-                                  name="card_csv"
+                                  name={Formdata.card_csv}
                                   
                                   required
                                   onChange={handleChange}

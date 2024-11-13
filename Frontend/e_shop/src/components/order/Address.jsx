@@ -21,6 +21,7 @@ function Address() {
     function update(data){
        setusrDetails(data)
        setDetails(false)
+       
 
     }
     return (
