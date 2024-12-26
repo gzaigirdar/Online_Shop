@@ -2,11 +2,11 @@ import { createContext,useState } from "react";
 
 export const Order_info = createContext()
 
-export function order_provider({children}){
+export function Order_provider({children}){
 
-    const [payment_info,set_payment] = useState({})
+    const [payment_info,set_payment] = useState('')
 
-    const [address_info,setAddress] = useState({})
+    const [address_info,setAddress] = useState('')
 
     function change_payment_info(data){
         set_payment(data)    

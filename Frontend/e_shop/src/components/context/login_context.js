@@ -4,7 +4,7 @@ export const Login = createContext()
 
 
 export function LoginProvider ({children}) {
-    const [logged,setStatus] = useState(false)
+    const [logged,setStatus] = useState(true)
     function changeStatus(bool_value){
         setStatus(bool_value);
 

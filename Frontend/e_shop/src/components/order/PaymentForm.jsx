@@ -1,10 +1,16 @@
 
 'use client'
 import { useState } from "react";
-
+import { useContext } from "react";
+import { Order_info } from "../context/Order_context";
 
 
 function PaymentForm({ closeform }) {
+    const {change_payment_info} = useContext(Order_info);
+
+    function update_pay(data){
+        change_payment_info(data)
+    }
 
 
     const [Formdata,setForm] = useState({
@@ -16,9 +22,9 @@ function PaymentForm({ closeform }) {
     })
 
     function HandlleSubmit(e){
-        e.preventDefault()
-
-        closeform(Formdata)
+        e.preventDefault();
+        update_pay(Formdata);
+        closeform(Formdata);
         
     }
 

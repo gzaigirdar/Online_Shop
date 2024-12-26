@@ -1,8 +1,15 @@
 'use client'
 import { useState } from "react";
+import { useContext } from "react";
+import { Order_info } from "../context/Order_context";
+
 
 function AddressForm({update}) {
-  console.log('update function',update)
+  const{change_address_info} = useContext(Order_info)
+ function update_addy(data){
+    change_address_info(data);
+
+ }
 
   const [addresinfo,setInfo] = useState({
     street_address: '',
@@ -22,6 +29,7 @@ function AddressForm({update}) {
 
  function onsubmit(e){
   e.preventDefault()
+  update_addy(addresinfo);
   
   update(addresinfo)
 
