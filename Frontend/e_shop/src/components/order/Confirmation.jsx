@@ -16,8 +16,8 @@ function Confirmation() {
         <div className=" bg-white h-screen m-0.5 p-0.5">
 
             <section>
-                <div className="border border-s-violet-600 p-10  mt-20 ml-10 mr-10 mb-20 justify-center">
-                <p className=" text-black text-center ">
+                <div className="border rounded-full border-s-violet-600 p-10  mt-20 ml-10 mr-10 mb-20 justify-center">
+                <p className=" text-black text-center text-20">
                     Thank you for placing the order!! 
                 <p className="p-5"> Order Number:123124314221 </p>
                 <p className="p-5 text-lg"> <span> Information </span></p>

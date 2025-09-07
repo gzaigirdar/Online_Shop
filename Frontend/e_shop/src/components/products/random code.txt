@@ -1,0 +1,55 @@
+<>
+              {checkout && logged ? (
+                 <Order cartitem={cartitem} total={total} subtotal={subtotal} taxes={taxes} />
+               
+              ) : (
+               
+              
+              
+                (
+                  <div className="h-screen overflow-auto justify-start items-start ">
+                   
+                    <div className="">
+                      
+                      <div className=" ">
+                        <p> place holder for menu </p>
+                      </div>
+                      
+                     
+                      <div className="">
+                        {/* {products.map((product) => ( */}
+                          <Product
+                            key='1'
+                            data={prod}
+                            addItems={addItems}
+                            updateTotal={updateTotal}
+                            update_finalTotal={update_finalTotal}
+                          />
+                        {/* ))} */}
+                      </div>
+                    </div>
+            
+                    <div className="">
+                      <Cart
+                        data={cartitem}
+                        removeItem={removeItem}
+                        updateTotal={updateTotal}
+                        subtotal={subtotal}
+                        total={total}
+                        checkout={set_checkout}
+                        updateQuantityById={updateQuantityById}
+                        update_finalTotal={update_finalTotal}
+                        setShowModal={setShowModal}
+                      />
+                    </div>
+                  </div>
+                ) 
+              
+              
+              
+              
+              
+              
+              
+              )}
+            </>

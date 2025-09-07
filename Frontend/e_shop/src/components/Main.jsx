@@ -17,7 +17,7 @@ function Main() {
       <div>
           <LoginProvider>
         <Navbar open_modal={open_modal}/>
-      
+       
         <Products showModal={showModal} setShowModal={open_modal}/>
         
         {showModal && (

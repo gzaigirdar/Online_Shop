@@ -28,17 +28,15 @@ function Modal({show, onClose, children}) {
         e.preventDefault(e);
         onClose();
     }
+    
     // creating the modal content in variable
     const modalContent = show ? (
-
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex flex-col items-center justify-center" >
-            <div>
-                <button className=" justify-center text-center" onClick={handleClose}> close </button>
+            <div className="fixed inset-0 bg-black bg-opacity-50 z-50 overflow-auto flex flex-col items-center">
+            <div className="relative mt-10">  
                 {children}
-               
             </div>
-          
-        </div>): null;
+            </div>
+    ): null;
       if (isBrowser) {
         return createPortal(
           modalContent,

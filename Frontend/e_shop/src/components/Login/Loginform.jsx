@@ -30,8 +30,14 @@ function Loginform({closeIt}) {
   }
     return (
       
-      <div className=" bg-gray-900 h-screen-full w-screen-full p-10 mr-5">
-      <h1 className="text-4xl text-center mb-5">Login to Your Account</h1>
+      <div className="relative bg-gray-900 h-screen-full overflow-auto w-screen-full p-10 mr-5">
+         <button 
+            onClick={close} 
+            className="absolute top-5 right-5 text-white text-2xl font-bold bg-red-700 hover:text-gray-300 px-2 py-1 rounded"
+          >
+            X
+        </button>
+      <h1 className="pt-5 text-4xl text-center mb-5">Login to Your Account</h1>
       <form className="max-w-md mx-auto p-5 bg-gray-900 shadow-lg rounded-md">
         <div className="mb-5">
           <label for="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
@@ -54,7 +60,9 @@ function Loginform({closeIt}) {
         <p className="text-gray-500 mb-3">Forgot your password?</p>
         <p className="text-gray-500 mb-5">Don't have an account? <a href="#" className="underline text-blue-600 hover:text-blue-900 transition duration-150 ease-in-out">Sign up now</a></p>
       </div>
+     
     </div>
+    
     
       );
 }
