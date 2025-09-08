@@ -10,42 +10,35 @@ export default function Navbar({open_modal}){
   
 
     return(
-        <> 
-        <div>
-        
+        <>
+  <header className=" bg-slate-900 text-gray-200  flex items-center justify-between py-2 px-2 md:px-4 lg:px-4 shadow-2xl rounded-md ring-3 ring-black">
 
-        </div>
-            
-        <header className="lg:px-4 px-4 bg-orange-200 flex flex-wrap items-center py-2 shadow-md">
-            <div className="flex-1 flex justify-between items-center">
-                <a href="#" className=" text-gray-500 text--md">Company</a>
-            </div>
-            <label htmlFor="menu-toggle" className="pointer-cursor md:hidden block">
-                <svg className="fill-current text-gray-900"
-                xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20">
-                <title>menu</title>
-                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
-                </svg>
-            </label>
-            <input className="hidden" type="checkbox" id="menu-toggle" />
+    {/* Company Name (always left) */}
+    <div className="text-white-200  text-sm font-bold">Company</div>
 
-            <div className="hidden md:flex md:items-center md:w-auto w-full" id="menu">
-                <nav>
-                    <ul className="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0">
-                        <li><a className="md:p-4 py-2 px-0 block" href="#">About Us</a></li>
-                        <li><a className="md:p-4 py-2 px-0 block" href="#">Review</a></li>
-                        <li><a className="md:p-4 py-2 px-0 block" href="#">Contact</a></li>
-                        {
-                            logged?<li onClick={()=> changeStatus(false)}><a className="md:p-4 py-3 px-0 block md:mb-0 mb-2" href="#">Log out</a></li>:
-                            <li onClick={()=> open_modal()}><a className="md:p-4 py-3 px-0 block md:mb-0 mb-2" href="#">Log in</a></li>
-                        }
-                        
-                    
-                    </ul>
-                </nav>
-            </div>
-        </header>
-        </>
+    {/* Nav Items (always horizontal) */}
+    <nav className="w-full  md:w-auto p-1">
+      <ul className="flex justify-end items-center text-gray-200 text-sm text-white-200 space-x-2 md:space-x-4">
+        <li><a className="block py-1 px-2 md:px-3 " href="#">About Us</a></li>
+        <li><a className="block py-1 px-2 md:px-3 " href="/ReviewPage">Review</a></li>
+        <li><a className="block py-1 px-2 md:px-3 " href="#">Contact</a></li>
+        {logged ? 
+          <li onClick={() => changeStatus(false)}>
+            <a className="block py-1 px-2 md:px-3" href="#">Log out</a>
+          </li> :
+          <li onClick={() => open_modal()}>
+            <a className="block py-1 px-2 md:px-3" href="#">Log in</a>
+          </li>
+        }
+      </ul>
+    </nav>
+
+  </header>
+</>
+
+
+
+       
         
     )
 }

@@ -108,7 +108,7 @@ function Products({showModal,setShowModal}) {
     
 
     return (
-      <div className="min-h-screen justify-start items-start "> 
+      <div className="min-h-screen justify-start items-start bg-cover bg-center bg-fixed bg-fit" style={{backgroundImage:"url('images/bg_image.jpg')"}}> 
         {checkout && logged ? (
           <Order
             cartitem={cartitem}
@@ -119,7 +119,7 @@ function Products({showModal,setShowModal}) {
         ) : show_products? (
           <div className=" justify-start items-start ">
             <div>
-            <div className="flex justify-center items-center mt-2">
+            <div className="flex justify-center items-center mt-0">
               <ul className="menu menu-horizontal bg-green-200 text-black rounded-box items-center font-semibold">
                 <li onClick={()=> setType('Cake')}> <a> Cake 🎂 </a></li>
                 
