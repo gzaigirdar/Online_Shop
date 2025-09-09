@@ -1,13 +1,15 @@
 function Review_Card() {
   return (
     <div className="bg-gray-200 rounded-lg m-4 p-6 text-center shadow-2xl 
-                    w-full sm:w-3/4 md:w-2/3 lg:w-1/2 mx-auto 
+                    w-full sm:w-3/4 md:w-full lg:w-full mx-auto 
                     transition-all duration-300">
       
       <p className="font-bold uppercase text-lg mb-2">Jane Smith</p>
       
-      <p className="text-md font-light italic text-gray-700 mb-4">
+      <p className="text-sm font-light italic text-gray-700 mb-4">
         This podcast kept me on the edge of my seat. It's a must-listen for true crime enthusiasts!
+        
+
       </p>
       
       <div className="flex items-center justify-center space-x-2 mt-2">
