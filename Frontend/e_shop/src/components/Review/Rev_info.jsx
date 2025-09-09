@@ -1,12 +1,12 @@
 import Ratings from "./Ratings";
 
-function Rev_info({fill}) {
+function Rev_info({fill, num_rating}) {
     return (  
        <div className="flex flex-col items-center justify-center w-full space-x-0 sm:space-x-0 ">
           
         {/*   Rating component  */}
         <div className="p-2">
-        <Ratings class_value="" />
+        <Ratings class_value="" num_of_ratings={num_rating} />
 
         </div>
         
@@ -19,7 +19,7 @@ function Rev_info({fill}) {
           
 
           <div className="text-sm sm:text-xs  flex-shrink mt-2">
-            100%
+            {fill}
           </div>
         </div>
     );

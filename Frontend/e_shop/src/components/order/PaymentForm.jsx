@@ -1,7 +1,7 @@
 
 'use client'
-import { useState } from "react";
-import { useContext } from "react";
+import { useState, useContext } from "react";
+
 import { Order_info } from "../context/Order_context";
 
 

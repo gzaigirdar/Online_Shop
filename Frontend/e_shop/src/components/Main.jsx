@@ -5,7 +5,7 @@ import Navbar from "./navbar/Navbar";
 import Modal from "./modals/Modal";
 import Loginform from "./Login/Loginform";
 import { LoginProvider } from "./context/login_context";
-import { Order_provider } from "./context/order_context";
+import { Order_provider } from "./context/Order_context";
 function Main() {
     
     const [showModal,setShowModal] = useState(false);
