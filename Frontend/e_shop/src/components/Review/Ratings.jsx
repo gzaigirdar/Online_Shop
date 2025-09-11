@@ -19,18 +19,16 @@ function Ratings({class_value,num_of_ratings}) {
 
             {/* Make stars smaller on small screens */}
             <div className="flex flex-shrink items-center w-full ">
-                {
-                    ratings.map((item) => (
-                        <div>
-                            {item}
-                        </div>
-                    ))
-                }
+            
+                {ratings.map((item, index) => (
+                <div key={index}>{item}</div>
+                ))}
+            </div>
                 
                
                
               
-            </div>
+            
         </div>
     );
 }

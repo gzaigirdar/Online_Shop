@@ -6,6 +6,7 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
      "./src/components/order/*.{js,ts,jsx,tsx,mdx}",
      "./src/components/order/Summary.jsx",
+     "./src/components/order/confirmation.js",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
    
   ],
@@ -18,5 +19,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
 };

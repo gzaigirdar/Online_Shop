@@ -15,7 +15,7 @@ import { product_data } from "./Productsdata.js";
 
 function Products({showModal,setShowModal}) {
   const {logged} = useContext(Login)
-  console.log(Login)
+  
     
     
     // items array of bjects
@@ -138,9 +138,9 @@ function Products({showModal,setShowModal}) {
                 <div className="grid grid-cols-3 gap-2 ">
                   { product_data.map((product)=>
                     product.type == type ? (
-                      <div className="" >
+                      <div className=""  key={product.id} >
                        <Product
-                         key={product.id}
+                        
                          data={product}
                          addItems={addItems}
                          updateTotal={updateTotal}

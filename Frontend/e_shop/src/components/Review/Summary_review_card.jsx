@@ -30,7 +30,7 @@ function Summary_review_card() {
             <Rev_info fill={'10%'} num_rating={2} />
            <Rev_info fill={'5%'} num_rating={1} />
       </div>
-      <hr class="border-t border-black-300 my-2" />
+      <hr className="border-t border-black-300 my-2" />
 
       <div className="text-sm sm:text-base m-2 text-center">
   Tell us what you think!!
