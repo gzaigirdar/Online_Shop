@@ -17,14 +17,14 @@ function Summary_review_card() {
     <>
     <div className=" flex flex-col m-2 bg-white items-center justify-center shadow-2xl rounded-lg ">
       {show_form ? (
-        <Review_form />
+        <Review_form submit_review={submit_review} />
       ):
       <div>
       <p className="text-center"> Overall Rating</p>
       
    
-       <div className="flex flex-wrap justify-between ml-2 sm:ml-2 ">
-          
+       <div className="flex flex-wrap justify-between  sm:ml-2 ">
+            <Rev_info fill={'60%'} num_rating={5}/>
             <Rev_info fill={'60%'} num_rating={4}/>
             <Rev_info fill={'25%'} num_rating={3}/>
             <Rev_info fill={'10%'} num_rating={2} />
