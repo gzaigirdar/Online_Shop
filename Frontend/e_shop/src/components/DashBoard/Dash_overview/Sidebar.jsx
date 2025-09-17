@@ -1,10 +1,16 @@
 import SideItem from "./SideItem";
-function SideBar() {
+import { inv_svg,order_svg,overView_svg } from "./sidebar_svg";
+function SideBar({switch_comp}) {
+  
+
+
+
+
     return ( 
         <>
 
           {/* Sidebar content */}
-<div className="flex flex-col items-center w-full h-full overflow-hidden text-gray-700 bg-gray-100 rounded">
+<div className="flex flex-col items-center w-full h-full overflow-y-auto text-gray-700 bg-gray-100 rounded" >
   <a className="flex items-center w-full px-3 mt-3" href="#">
     <svg
       className="w-8 h-8 fill-current"
@@ -16,14 +22,23 @@ function SideBar() {
     <span className="ml-2 text-sm font-bold">The App</span>
   </a>
 
-    <SideItem title={'Over View'} />
-    <SideItem  title={'Inventory'} />
-    <SideItem  title={'Orders'}/>
-    
+    <SideItem title={'Overview'} svg={overView_svg} switch_comp={switch_comp} />
+    <SideItem  title={'Inventory'} svg={inv_svg} switch_comp={switch_comp} />
+    <SideItem  title={'Order'} svg={order_svg} switch_comp={switch_comp} />
+    <SideItem  title={'Msg'}  switch_comp={switch_comp}/>
+    <SideItem  title={'Reviews'} switch_comp={switch_comp} />
+    <SideItem  title={'Admin'} switch_comp={switch_comp}/>
+    <button
+    type="button"
+    className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+  >
+    Logout
+  </button>
+
     
 
- 
 </div>
+
 
         
         
