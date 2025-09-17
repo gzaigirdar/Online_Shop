@@ -5,12 +5,13 @@ import SideBar from "./Dash_overview/Sidebar";
 import { FcBullish, FcMoneyTransfer } from "react-icons/fc";
 import DashChart from "./OverView/DashChart";
 import DashBarChart from "./OverView/BarChart";
+import Inventory from "./Inventory/Inventory";
 
 
 
 function DashBoard() {
 
-    const [comp,setComp] = useState('Overview')
+    const [comp,setComp] = useState('Inventory')
 
     function switch_comp(val){
         setComp(val)
@@ -54,7 +55,7 @@ function DashBoard() {
            
             ): comp == 'Inventory'? (
                 <div>
-                    <p> inventory </p>
+                   <Inventory />
                 </div>
             ): comp == 'Order' ? (
                 <div>
