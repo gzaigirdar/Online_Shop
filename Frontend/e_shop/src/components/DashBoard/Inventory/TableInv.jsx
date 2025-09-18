@@ -1,3 +1,5 @@
+
+
 import InvRow from "./InvRow";
 
 function InvTable() {

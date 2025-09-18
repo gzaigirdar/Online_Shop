@@ -1,71 +1,105 @@
 'use client'
 
-import { useContext,useRef } from "react";
+import { useContext, useRef, useState } from "react";
 import { Login } from "../context/login_context";
+import AccForm from "./CreateAcc";
 
+function Loginform({ closeIt }) {
+  const { logged, changeStatus, userInfo,signin } = useContext(Login);
+  const { username, password } = userInfo;
 
-function Loginform({closeIt}) {
-  const {logged,changeStatus,userInfo} = useContext(Login)
-  const {username,password} = userInfo
+  const emailRef = useRef(null);
+  const passRef = useRef(null);
+  const [error,setError] = useState(false)
+  const [AccFormVisible, setAcc] = useState(false);
 
-  const emailRef = useRef(null)
-  const passRef = useRef(null)
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const email = emailRef.current.value;
+    const password = passRef.current.value;
+    const res = await signin(email,password)
+    if (res == 'success') {
+      
+      closeIt();
+    }
+    else{
+      setError(true)
 
-  function handleSubmit(e){
-    e.preventDefault()
-    if(emailRef.current.value === userInfo.username && passRef.current.value === userInfo.password){
-      changeStatus(true)
-      close()
-  
     }
   }
-  function close(){
-   closeIt()
-  }
-  
-    
-  
-  function logout(){
 
-  }
-    return (
-      
-      <div className="relative bg-gray-900 h-screen-full overflow-auto w-screen-full p-10 mr-5">
-         <button 
-            onClick={close} 
-            className="absolute top-5 right-5 text-white text-2xl font-bold bg-red-700 hover:text-gray-300 px-2 py-1 rounded"
-          >
-            X
+  return !AccFormVisible  ? (
+    <>
+      <div className="relative bg-gray-900 h-screen overflow-auto w-screen p-10 mr-5">
+        <button
+          onClick={closeIt}
+          className="absolute top-5 right-5 text-white text-2xl font-bold bg-red-700 hover:text-gray-300 px-2 py-1 rounded"
+        >
+          X
         </button>
-      <h1 className="pt-5 text-4xl text-center mb-5">Login to Your Account</h1>
-      <form className="max-w-md mx-auto p-5 bg-gray-900 shadow-lg rounded-md">
-        <div className="mb-5">
-          <label for="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-          <input type="email" ref={emailRef} id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required />
-        </div>
-        <div className="mb-5">
-          <label for="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
-          <input type="password" ref={passRef} id="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
-        </div>
-        <div className="flex items-start mb-5">
-          <div className="flex items-center h-5">
-            <input id="remember" type="checkbox" value="" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required />
-          </div>
-          <label for="remember" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Remember me</label>
-        </div>
-        <button onClick={handleSubmit} type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
-      </form>
-    
-      <div className="mt-10">
-        <p className="text-gray-500 mb-3">Forgot your password?</p>
-        <p className="text-gray-500 mb-5">Don't have an account? <a href="#" className="underline text-blue-600 hover:text-blue-900 transition duration-150 ease-in-out">Sign up now</a></p>
-      </div>
-     
-    </div>
-    
-    
-      );
-}
 
+        <h1 className="pt-5 text-4xl text-center mb-5 text-white">Login to Your Account</h1>
+
+        <form onSubmit={handleSubmit} className="max-w-md mx-auto p-5 bg-gray-900 shadow-lg rounded-md">
+          <div className="mb-5">
+            <label htmlFor="email" className="block mb-2 text-sm font-medium text-white">Your email</label>
+            <input
+              type="email"
+              ref={emailRef}
+              id="email"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              placeholder="name@flowbite.com"
+              required
+            />
+          </div>
+
+          <div className="mb-5">
+            <label htmlFor="password" className="block mb-2 text-sm font-medium text-white">Your password</label>
+            <input
+              type="password"
+              ref={passRef}
+              id="password"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              required
+            />
+          </div>
+
+          <div className="flex items-start mb-5">
+            <div className="flex items-center h-5">
+              <input
+                id="remember"
+                type="checkbox"
+                className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300"
+              />
+            </div>
+            <label htmlFor="remember" className="ml-2 text-sm font-medium text-white">Remember me</label>
+          </div>
+
+          <button
+            type="submit"
+            className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5"
+          >
+            Submit
+          </button>
+        </form>
+
+        <div className="mt-10 text-white">
+          <p className="text-gray-400 mb-3">Forgot your password?</p>
+          <p className="text-gray-400 mb-5">
+            Don't have an account?{" "}
+            <a
+              onClick={() => setAcc(true)}
+              className="underline text-blue-600 hover:text-blue-900 cursor-pointer"
+            >
+              Sign up now
+            </a>
+          </p>
+        </div>
+      </div>
+    </>
+  ) : (
+    <AccForm />
+  );
+}
 
 export default Loginform;

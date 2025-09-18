@@ -15,6 +15,10 @@ const userSchema = mongoose.Schema({
 
         }}
         ,
+    UserName:{
+        type:String,
+        unique: true
+    },
     email:{
         type:String,
         required:[true,'please provide an email'],
@@ -29,8 +33,26 @@ const userSchema = mongoose.Schema({
         minLength:[6,'password must be six character long '],
         maxLength:[20,'password has to be lower than 50'],
 
+    },
+    admin:{
+        
+        type: Boolean,
+        default: false,  // default value
+          
+        
+    },
+    createdAt:{
+        type:Date,
+        default:Date.now
+    },
+
+
+
+
     }
-},
+    ,
+   
+
     {
         collection: "users",
         timestamps:true

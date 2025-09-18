@@ -23,7 +23,8 @@ app.use(mongoSantitize())
 // cookie parser allows extracting cookeis from res or req from user
 app.use(cookieParser())
 // protects routes and restricts access to the server 
-app.use(cors())
+app.use(cors({
+    origin: "http://localhost:3000", credentials: true}))
 app.use(mainRouter)
 initdb()
 app.listen(port,() => {

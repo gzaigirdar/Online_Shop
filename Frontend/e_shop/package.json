@@ -11,6 +11,7 @@
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.13",
     "apexcharts": "^5.3.5",
+    "axios": "^1.12.2",
     "daisyui": "^5.1.9",
     "next": "14.1.4",
     "react": "^18",
