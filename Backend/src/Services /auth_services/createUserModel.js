@@ -7,10 +7,10 @@ import userModal from "../../Models/userModel.js";
             fname:fname,
             lname:lname,
         },
-        UserName: username,
+        username: username,
         email:email,
-        password:password,
-        UserName:username,
+        password:password
+        
 
 
 
@@ -18,16 +18,10 @@ import userModal from "../../Models/userModel.js";
    
   
 
-    try{
-        await user.save()
-        return user
-       
-    }
-    catch(error){
-       
-        return error
-    }
-
+    
+    await user.save()
+    return user
+    
     
 }
 export default createUserModel;

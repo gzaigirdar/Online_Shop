@@ -15,7 +15,7 @@ const userSchema = mongoose.Schema({
 
         }}
         ,
-    UserName:{
+    username:{
         type:String,
         unique: true
     },
