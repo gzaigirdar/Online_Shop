@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
     "@tailwindcss/postcss": "^4.1.13",
     "apexcharts": "^5.3.5",
     "axios": "^1.12.2",
@@ -20,7 +21,8 @@
     "react-hook-form": "^7.62.0",
     "react-icons": "^5.5.0",
     "react-modal": "^3.16.1",
-    "recharts": "^3.2.1"
+    "recharts": "^3.2.1",
+    "zod": "^4.1.9"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.21",

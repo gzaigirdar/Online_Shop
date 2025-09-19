@@ -10,6 +10,26 @@ export function LoginProvider ({children}) {
         setStatus(bool_value);
 
     }
+    async function createAccount(username,fname,lname,email,password){
+        try{
+            const res = await axios.post('http://localhost:5000/log/createacc',
+                {
+                    'username':username,
+                    'fname':fname,
+                    'lname': lname,
+                    'email':email,
+                    'password':password
+
+
+                }
+            )
+            console.log('function has triggered')
+            console.log(res.data)
+        } catch(e){
+            console.log(e)
+            return e.message;
+        }
+    }
 
     async function signin(email,password){
         try{
@@ -38,7 +58,7 @@ export function LoginProvider ({children}) {
         
     })
     return ( 
-        <Login.Provider value={{logged,changeStatus,userInfo,signin}}>
+        <Login.Provider value={{logged,changeStatus,userInfo,signin,createAccount}}>
             {children}
         </Login.Provider>
      );
