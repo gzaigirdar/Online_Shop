@@ -23,10 +23,10 @@ export function LoginProvider ({children}) {
 
                 }
             )
-            console.log('function has triggered')
+            
             console.log(res.data)
         } catch(e){
-            console.log(e)
+           
             return e.message;
         }
     }

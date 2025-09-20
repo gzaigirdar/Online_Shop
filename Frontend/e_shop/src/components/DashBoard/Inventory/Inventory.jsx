@@ -1,8 +1,10 @@
+import { useState } from "react";
 import InvStat from "./InvStat";
 import InvTable from "./TableInv";
 
 
 function Inventory() {
+
     return (
             <div className=" flex flex-col h-full w-full">
 

@@ -6,10 +6,14 @@ import { FcBullish, FcMoneyTransfer } from "react-icons/fc";
 import DashChart from "./OverView/DashChart";
 import DashBarChart from "./OverView/BarChart";
 import Inventory from "./Inventory/Inventory";
+import dynamic from "next/dynamic";
 
 
 
 function DashBoard() {
+    const DashChart = dynamic(() => import("./OverView/DashChart"), { ssr: false });
+    const DashBarChart = dynamic(() => import("./OverView/BarChart"), { ssr: false });
+
 
     const [comp,setComp] = useState('Inventory')
 

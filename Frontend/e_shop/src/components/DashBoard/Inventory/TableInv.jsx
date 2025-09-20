@@ -1,8 +1,39 @@
-
+'use client'
 
 import InvRow from "./InvRow";
+import { useState } from "react";
+import EditProd from "./EditProd";
+
 
 function InvTable() {
+        const [inv_list,setInvList] =useState([{
+          "id" : "1",
+          "Name": "Strawberry",
+          "Type": "Cake",
+          "Price": "10.99", 
+          "Quanitity": "10"
+      },
+      {
+          "id" : "2",
+          "Name": "Mango",
+          "Type": "Cake",
+          "Price": "12.99", 
+          "Quanitity": "10"
+      }
+      ])
+      const[edit,setEdit] = useState(false)
+
+      const show_edit = () => setEdit(true);
+      const close_edit = () => setEdit(false)
+      
+
+      function add_prod(new_prod){
+        setInvList(prev_list => [...prev_list,new_prod])
+
+      }
+      function delete_prod(prod_id){
+        setInvList( prevItems => prevItems.filter(item=> item.id !== prod_id));
+      }
   return (
     <>
       {/* Title + Search */}
@@ -35,26 +66,53 @@ function InvTable() {
       </div>
 
       {/* Table */}
-      <div className="px-4 md:px-8 py-8 w-full max-w-full mx-auto ">
-        <div className="shadow overflow-x-auto rounded border border-gray-200">
+      <div className="px-4 md:px-8 py-4 w-full max-w-full mx-auto ">
+        { edit ? ( 
+          <EditProd />
+
+        ) : (
+          <div className="shadow overflow-x-auto rounded border border-gray-200">
           <table className="min-w-full bg-white table-auto">
             <thead className="bg-gray-800 text-white">
               <tr>
                 <th className="text-left py-3 px-4 uppercase font-semibold text-sm">ID</th>
                 <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Name</th>
                 <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Type</th>
-                <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Quantity</th>
+                <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Price</th>
+                <th className="text-left py-3 px-4 uppercase font-semibold text-xs">quanitity</th>
                 <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Actions</th>
               </tr>
             </thead>
             <tbody className="text-gray-700">
-              <InvRow />
+              
+              {
+                inv_list.map( 
+                  item => (
+                    <InvRow key={item.id} id={item.id} name={item.Name} cake_type={item.Type} price={item.Price} delete_item={delete_prod} show_edit={show_edit} quanitity={item.Quanitity} />
+                  )
+
+                  
+
+                  
+                )
+              }
+             
              
               {/* more rows... */}
             </tbody>
           </table>
+         
         </div>
+ 
+        
+        
+        
+        
+        )
+        }
       </div>
+      
+     
     </>
   );
 }
