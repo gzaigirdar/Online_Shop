@@ -5,6 +5,7 @@ import express from 'express'
 import cookieParser from 'cookie-parser'
 import mongoSantitize from 'express-mongo-sanitize'
 import { urlencoded } from 'express';
+import errorHandler from './Middlewares/errorMiddleware.js';
 import cors from 'cors'
 
 import mainRouter from './Routes/main.router.js';
@@ -26,6 +27,7 @@ app.use(cookieParser())
 app.use(cors({
     origin: "http://localhost:3000", credentials: true}))
 app.use(mainRouter)
+app.use(errorHandler)
 initdb()
 app.listen(port,() => {
         console.log(`listening on port ${port}`)
