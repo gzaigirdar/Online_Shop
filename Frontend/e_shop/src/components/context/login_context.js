@@ -37,7 +37,7 @@ export function LoginProvider ({children}) {
          {
              'email':email,
              'password':password,
-         },{withCredentials:true});
+         }, );
 
 
          const {message,token} = res.data;
