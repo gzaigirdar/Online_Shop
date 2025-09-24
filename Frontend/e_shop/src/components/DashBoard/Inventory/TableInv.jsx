@@ -1,31 +1,23 @@
 'use client'
 
 import InvRow from "./InvRow";
-import { useState,useRef,useEffect} from "react";
+import { useState,useRef,useEffect, useContext} from "react";
 import Edit_item from "./Edit_item";
 import AddProd from "./AddProd";
 import axios from "axios";
+import { Inventory_context } from "@/components/context/products_context";
 
 
 
 function InvTable() {
 
-        const [inv_list,setInvList] =useState([{
-          "id" : "1",
-          "Name": "Strawberry",
-          "Type": "Cake",
-          "Price": "10.99", 
-          "Quanitity": "10"
-      },
-      {
-          "id" : "2",
-          "Name": "Mango",
-          "Type": "Cake",
-          "Price": "12.99", 
-          "Quanitity": "10"
-      }
-      ])
+      const {prod_data} = useContext(Inventory_context)
+      
+
+      
       const dialogRef = useRef(null);
+
+   
       // details of item that will redner with the edit form
       const [details,setDetails] =useState('');
       // state to show which form to render the dialog with
@@ -41,31 +33,23 @@ function InvTable() {
           }
         },[formchoice])
 
-        
+      // holds either edit or add based on this the type form is decided 
       function set_form_info(data){
         setChoice(data)
       }
 
       const set_item_details = (info) => setDetails(info); 
 
-      // Open modal
-      const show_edit = () => {
-        if (dialogRef.current) dialogRef.current.showModal();
-      };
     
       // Close modal
       const close_edit = () => {
         if (dialogRef.current) dialogRef.current.close();
+        // have reset form bool otherwise edit form will not open the second attempt of opening it
+        setChoice('')
       };
      
 
-      function add_prod(new_prod){
-        setInvList(prev_list => [...prev_list,new_prod])
-
-      }
-      function delete_prod(prod_id){
-        setInvList( prevItems => prevItems.filter(item=> item.id !== prod_id));
-      }
+      
   return (
     <>
       <div className="flex items-center justify-between w-2/3 px-4 md:px-8 max-w-full mx-auto bg-gradient-to-r from-slate-500 to-neutral-400 rounded-2xl shadow-2xl">
@@ -116,7 +100,7 @@ function InvTable() {
           className="p-2 rounded shadow-lg max-w-xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 fixed bg-transparent"
         >
           {formchoice === 'add' ? (
-            <AddProd />
+            <AddProd closeit={close_edit} />
           ) : formchoice === 'edit' && details ? (
             <Edit_item closeit={close_edit} details={details} />
           ) : null}
@@ -142,11 +126,11 @@ function InvTable() {
             <tbody className="text-gray-700">
               
               {
-                inv_list.map( 
+                prod_data.map( 
                   item => (
-                    <InvRow key={item.id} id={item.id} name={item.Name} cake_type={item.Type} 
-                    price={item.Price} delete_item={delete_prod} show_edit={show_edit} 
-                    quantity={item.Quanitity} set_form_info={set_form_info} set_item_details={set_item_details} />
+                    <InvRow key={item._id} id={item._id} name={item.name} cake_type={item.type} 
+                    price={item.price}  
+                    quantity={item.quantity} set_form_info={set_form_info} set_item_details={set_item_details} />
                   )
 
                   

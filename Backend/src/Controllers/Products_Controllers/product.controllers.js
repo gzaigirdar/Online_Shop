@@ -2,11 +2,12 @@ import ProductModel from "../../Models/Products/productModel.js";
 import AsyncHandler from "express-async-handler";
 
 const addProductController = AsyncHandler(async(req,res) =>{
-    const{name,type,quantity,img_link} = req.body;
+    const{name,type,price,quantity,img_link} = req.body;
 
     
     const  product = await ProductModel.create({
         'name': name,
+        'price':price,
         'quantity':  quantity,
         'type': type,
         'img_link':  img_link
@@ -19,11 +20,11 @@ const addProductController = AsyncHandler(async(req,res) =>{
 
 })
 const editProductController = AsyncHandler(async(req,res)=>{
-    const {name,type,quantity,img_link} = req.body;
+    const {_id,name,type,price,quantity,img_link} = req.body;
     const product = await ProductModel.findOneAndUpdate(
 
-        {name},
-        {$set: {name:name,type:type,quantity:quantity,img_link:img_link}},
+        {_id},
+        {$set: {name:name,price:price,type:type,quantity:quantity,img_link:img_link}},
         {new:true,runValidators:true}
     );
     if(!product){

@@ -1,17 +1,21 @@
 'use client'
-import { useState } from "react";
+import { useContext, useState } from "react";
 import EditProd from "./AddProd";
 import Modal from "@/components/modals/Modal";
-
+import { Inventory_context } from "@/components/context/products_context";
 function InvRow({id,name,cake_type,price,quantity,delete_item,show_edit,set_form_info,set_item_details}) {
+
+    const {delete_product} = useContext(Inventory_context);
  
     const data = {
+      "_id":id,
       'name': name,
       'type': cake_type,
       'price': price,
-      'qt':quantity
+      'quantity':quantity
 
     }
+   
     function handleClick(){
       
 
@@ -19,6 +23,16 @@ function InvRow({id,name,cake_type,price,quantity,delete_item,show_edit,set_form
       set_form_info('edit')
      
       
+    }
+    async function del_item(){
+      try {
+        await delete_product(name);
+        
+      } catch (error) {
+        console.log(error)
+        
+      }
+
     }
   
   return ( 
@@ -36,7 +50,7 @@ function InvRow({id,name,cake_type,price,quantity,delete_item,show_edit,set_form
                 <td className="py-3 px-4">{quantity}</td>
                 <td className="py-3 px-4 space-x-2">
                   <button onClick={handleClick} className="px-3 py-1 bg-yellow-500 hover:bg-yellow-600 text-white text-xs rounded">Edit</button>
-                  <button onClick={() => delete_item(id)} className="px-3 py-1 bg-red-500 hover:bg-red-600 text-white text-xs rounded">Delete</button>
+                  <button onClick={del_item} className="px-3 py-1 bg-red-500 hover:bg-red-600 text-white text-xs rounded">Delete</button>
                 </td>
               </tr>
         

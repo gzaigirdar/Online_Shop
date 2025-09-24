@@ -6,7 +6,7 @@ export const product_data = [
         img_link:'https://i2.wp.com/www.livewellbakeoften.com/wp-content/uploads/2018/05/Chocolate-Layer-Cake-3.jpg?resize=1360%2C2040&ssl=1'
         },
         {id:8, name:"Strawberry Cake",price:'14.99', type:"Cake",img_link:'https://thetinyfairy.com/wp-content/uploads/2021/03/img_3202-scaled.jpg'}, 
-        {id:12, name:"Classic Cheese Cake",price:'15.99', type:"Cake",img_link:'https://rakaminstudent.com/wp-content/uploads/2023/03/strawberry-cheesecake-11-1-1024x1024.jpg'}  
+        {id:12, name:"Cheese Cake",price:'15.99', type:"Cake",img_link:'https://rakaminstudent.com/wp-content/uploads/2023/03/strawberry-cheesecake-11-1-1024x1024.jpg'}  
        ,
         
         {id: 1,

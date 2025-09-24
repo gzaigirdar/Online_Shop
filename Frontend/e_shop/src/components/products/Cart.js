@@ -18,9 +18,9 @@ function Cart({ key,data, removeItem, updateTotal, subtotal, total,checkout,upda
 
       <div className="max-w-auto max-h-auto mr-5 px-10 py-5 bg-gray-700 text-white">
       <div className="flex flex-col h-auto justify-end">
-        <div>
+        <div className="flex flex-col justify-center items-center overflow-y-scroll">
           
-          <h1 className="text-lg text-center justify-center items-center font-bold mb-6"> Shopping Cart </h1>
+          <h1 className=" text-lg text-center justify-center items-center font-bold mb-6 "> Shopping Cart </h1>
           {/* rendering all the cart items */}
           {data.length > 0 ? (
             data.map((item) => (

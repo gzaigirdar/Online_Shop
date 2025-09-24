@@ -1,5 +1,32 @@
+import { useRef, useState,useContext } from "react";
+import { Inventory_context } from "@/components/context/products_context";
+
+
 function Edit_item({ closeit,details}) {
-    return (
+  const {edit_product} = useContext(Inventory_context)
+  
+  const [data,updateData] = useState(details)
+  console.log(data)
+  
+
+  function handler(e){
+    const{name,value} = e.target;
+    updateData((prev)=> ({...prev,[name]:value}));
+
+  }
+  async function submit(){
+
+    try {
+      await edit_product(data);
+    } catch (e) {
+      console.log(e)
+    }
+  
+    closeit()
+
+  }
+
+  return (
       <div className="flex flex-col items-center gap-4 p-4 w-full">
         <div className="mx-auto w-full rounded-box border border-base-content/5 bg-base-100 overflow-x-auto">
           <table className="table w-full text-center"> 
@@ -15,8 +42,10 @@ function Edit_item({ closeit,details}) {
                 <td className="font-semibold">Product Name</td>
                 <td>
                   <input
+                    onChange={handler}
                     type="text"
-                    defaultValue={details.name}
+                    name="name"
+                    defaultValue={data.name}
                     className="input input-bordered w-full h-12 text-lg"
                   />
                 </td>
@@ -25,19 +54,19 @@ function Edit_item({ closeit,details}) {
                 <td className="font-semibold">Type</td>
                 <td className="flex gap-4 justify-center">
                   <label className="flex items-center gap-1">
-                    <input type="radio" name="type" value="cake" className="radio" defaultChecked={details.type == 'Cake'} />
+                    <input  onChange={handler} type="radio" name="type" value="cake" className="radio" checked={data.type.toLowerCase() == 'cake'} />
                     Cake
                   </label>
                   <label className="flex items-center gap-1">
-                    <input type="radio" name="type" value="pastries" className="radio" defaultChecked={details.type == 'Pastries'} />
+                    <input onChange={handler} type="radio" name="type" value="pastries" className="radio" checked={data.type.toLowerCase() == 'pastries'} />
                     Pastries
                   </label>
                   <label className="flex items-center gap-1">
-                    <input type="radio" name="type" value="drinks" className="radio" defaultChecked={details.type == 'Drinks'} />
+                    <input onChange={handler} type="radio" name="type" value="drinks" className="radio" checked={data.type.toLowerCase() == 'drinks'} />
                     Drinks
                   </label>
                   <label className="flex items-center gap-1">
-                    <input type="radio" name="type" value="other" className="radio" defaultChecked={details.type == 'Other'}/>
+                    <input onChange={handler} type="radio" name="type" value="other" className="radio" checked={data.type.toLowerCase() == 'other'}/>
                     Other
                   </label>
                 </td>
@@ -46,8 +75,10 @@ function Edit_item({ closeit,details}) {
                 <td className="font-semibold">Price</td>
                 <td>
                   <input
+                  onChange={handler}
                     type="text"
-                    defaultValue={details.price}
+                    name="price"
+                    defaultValue={data.price}
                     className="input input-bordered w-full h-12 text-lg"
                   />
                 </td>
@@ -56,8 +87,10 @@ function Edit_item({ closeit,details}) {
                 <td className="font-semibold">Quanity</td>
                 <td>
                   <input
+                    onChange={handler}
                     type="text"
-                    defaultValue={details.qt}
+                    name="quantity"
+                    defaultValue={data.quantity}
                     className="input input-bordered w-full h-12 text-lg"
                   />
                 </td>
@@ -67,7 +100,7 @@ function Edit_item({ closeit,details}) {
         </div>
   
         <button
-          onClick={() => closeit()}
+          onClick={submit}
           className="bg-green-950 text-white font-bold py-2 px-6 rounded hover:bg-green-800 transition"
         >
           Save

@@ -7,12 +7,15 @@ import mongoSantitize from 'express-mongo-sanitize'
 import { urlencoded } from 'express';
 import errorHandler from './Middlewares/errorMiddleware.js';
 import cors from 'cors'
-
+import morgan from 'morgan';
 import mainRouter from './Routes/main.router.js';
 import initdb from './db.js';
 dotenv.config()
 
 const port = process.env.PORT || 5000;
+
+// loger of the app 
+app.use(morgan('dev'))
 // expres json convers req body to json object
 app.use(express.json())
 // url encoded parse url encoded data to json object

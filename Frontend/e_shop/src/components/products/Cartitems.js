@@ -66,7 +66,7 @@ function CartItems({data,removefunc,updateTotal,updateQuantityById,update_finalT
     return (  
         <div className="flex justify-between items-center mx-auto mb-4">
         <div className="flex items-center">
-          <img src={data.img_link} alt="Product Image" className="max-w-20 max-h-sm mr-4" />
+          <img src={data.img_link} alt="Product Image" className="max-w-20 max-h-sm mr-4 object-cover" />
           <div>
             <h2 className="font-bold text-white">{data.name}</h2>
             <p className="text-gray-400">{data.num}</p>

@@ -1,14 +1,17 @@
 import {useForm} from 'react-hook-form'
 import {z} from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Inventory_context } from '@/components/context/products_context';
+import { useContext } from 'react';
 
 
 function AddProd({closeit}) {
+  const {add_product} = useContext(Inventory_context)
 
   const schema = z.object({
-       Product_name: z.string().nonempty('please enter a product name'),
+       name: z.string().nonempty('please enter a product name'),
        type: z.string().nonempty('please select type of product'),
-       quantity: z.number().min(6,'please add the quantity of the product'),
+       quantity: z.number().min(1,'please add the quantity of the product'),
        img_link: z.url().nonempty('please provide a link for the image of the product'),
        price: z.number().min(1,'pleae add price of the product')
 
@@ -17,10 +20,12 @@ function AddProd({closeit}) {
   
    const {register,handleSubmit,formState:{errors} }= useForm({resolver:zodResolver(schema)});
 
-   function handleSub(data){
-    console.log('the submit funtion has been triggered')
-
-    console.log(data)
+   async function handleSub(data){
+    try {
+      await add_product(data)
+    } catch (error) {
+      console.log(error.message)
+    }
     closeit();
 
 
@@ -43,9 +48,9 @@ function AddProd({closeit}) {
               </label>
 
               <input
-              {...register('Product_name')}
+              {...register('name')}
                 type="text"
-                id="Product_name"
+                id="name"
               
                 placeholder="Enter product name"
                 className="flex-1 px-2 py-1.5 border rounded-md border-black text-black focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -115,6 +120,7 @@ function AddProd({closeit}) {
               {...register('img_link')}
 
                 type="text"
+                defaultValue={'https://'}
                 id="price"
                 name="img_link"
                 placeholder="Enter price"
@@ -126,7 +132,7 @@ function AddProd({closeit}) {
 
             {/* Submit Button */}
             <div className="flex justify-end">
-              <button
+              <button type='submit'
                
                 className="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition"
               >
