@@ -75,6 +75,7 @@ function AddProd({closeit}) {
                 <option value="cake">Cake</option>
                 <option value="pastries">Pastries</option>
                 <option value="drinks">Drinks</option>
+                <option value="sandwiches">sandwiches</option>
                 <option value="other">Other</option>
               </select>
               {errors.type && <p className='text-red-500 '> {errors.type.message }</p>}

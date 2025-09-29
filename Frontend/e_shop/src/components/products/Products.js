@@ -11,12 +11,16 @@ import { useEffect } from "react";
 import MenuBar from "./Menubar";
 import { Login } from "../context/login_context.js";
 import { product_data } from "./Productsdata.js";
+import { Inventory_context } from "../context/products_context.js";
 
 
 function Products({showModal,setShowModal}) {
-  const {logged} = useContext(Login)
   
-    
+  const {logged} = useContext(Login)
+  const {prod_data} = useContext(Inventory_context)
+
+  
+ 
     
     // items array of bjects
     const [cartitem,setItems] = useState([]);
@@ -32,7 +36,7 @@ function Products({showModal,setShowModal}) {
     // state for showing products
     const [show_products,setProd] = useState(true)
     // state for the product type
-    const [type,setType] = useState('Cake')
+    const [type,setType] = useState('cake')
     
 
     function show_cart_page(){
@@ -121,11 +125,11 @@ function Products({showModal,setShowModal}) {
             <div>
             <div className="flex justify-center items-center mt-0">
               <ul className="menu menu-horizontal bg-green-200 text-black rounded-box items-center font-semibold">
-                <li onClick={()=> setType('Cake')}> <a> Cake 🎂 </a></li>
+                <li onClick={()=> setType('cake')}> <a> Cake 🎂 </a></li>
                 
-                <li onClick={()=> setType('Sandwich')}> <a> Sandwiches 🥪 </a></li>
-                <li onClick={()=> setType('Pastries')}> <a> Pastries 🍩  </a></li>
-                <li onClick={()=> setType('Drink')}> <a> Drinks 🥤</a></li>
+                <li onClick={()=> setType('sandwiches')}> <a> Sandwiches 🥪 </a></li>
+                <li onClick={()=> setType('pastries')}> <a> Pastries 🍩  </a></li>
+                <li onClick={()=> setType('drinks')}> <a> Drinks 🥤</a></li>
                 <li onClick={show_cart_page}> <a> Cart 🛒</a></li>
 
 
@@ -136,9 +140,9 @@ function Products({showModal,setShowModal}) {
               <div className=" container my-2 mx-auto w-full ">
                {/* <div className="h-96 overflow-y-auto border rounded p-2"> */}
                 <div className="grid grid-cols-3 gap-2 ">
-                  { product_data.map((product)=>
+                  { prod_data.map((product)=>
                     product.type == type ? (
-                      <div className=""  key={product.id} >
+                      <div className=""  key={product._id} >
                        <Product
                         
                          data={product}
