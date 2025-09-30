@@ -5,7 +5,8 @@ export const Login = createContext()
 
 
 export function LoginProvider ({children}) {
-    const [logged,setStatus] = useState(true);
+    
+    const [logged,setStatus] = useState(false);
     const [userInfo,setInfo] = useState({
         "user_id":" ",
         "email": " ",
@@ -37,16 +38,18 @@ export function LoginProvider ({children}) {
         }
     }
 
-    async function signin(email,password){
+    async function signin(emailz,password){
         try{
         const res = await axios.post('http://localhost:5000/log/login',
          {
-             'email':email,
+             'email':emailz,
              'password':password,
          }, );
 
 
          const {message,token,user_id,email} = res.data;
+         console.log(message)
+         console.log(user_id)
          setInfo({
                  auth_token:token,
                  user_id: user_id,

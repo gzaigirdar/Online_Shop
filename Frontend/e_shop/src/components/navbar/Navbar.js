@@ -20,6 +20,11 @@ export default function Navbar({open_modal}){
     {/* Nav Items (always horizontal) */}
     <nav className="w-full  md:w-auto p-1">
     <ul className="flex justify-end items-center text-gray-200 text-sm space-x-2 md:space-x-4">
+    <li>
+    <Link href="/" className="block py-1 px-2 md:px-3">
+      Home
+    </Link>
+  </li>
   <li>
     <Link href="/About" className="block py-1 px-2 md:px-3">
       About us 

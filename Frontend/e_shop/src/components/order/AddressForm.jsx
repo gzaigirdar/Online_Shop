@@ -6,7 +6,7 @@ import * as z from "zod";
 import { Order_info } from "../context/Order_context";
 
 const addressSchema = z.object({
-  street_address: z.string().min(1, "Required"),
+  street: z.string().min(1, "Required"),
   city: z.string().min(1, "Required"),
   state: z.string().min(1, "Required"),
   zipcode: z.string().min(5, "Invalid zipcode"),
@@ -19,7 +19,7 @@ function AddressForm({ update }) {
   const { register, handleSubmit, formState: { errors }, reset } = useForm({
     resolver: zodResolver(addressSchema),
     defaultValues: {
-      street_address: " Enter street address",
+      street: " Enter street address",
       city: "Enter city address",
       state: "ct",
       zipcode: "08806",
@@ -29,8 +29,10 @@ function AddressForm({ update }) {
  // built in reset function to fill the form with defualt values
 
   function onSubmit(data) {
-    change_address_info(data); 
-    update(data);              
+    const formattedData = { ...data, zipcode: Number(data.zipcode) }; 
+    console.log(formattedData);
+    change_address_info(formattedData); 
+    update();              
   }
 
   return (
@@ -41,7 +43,7 @@ function AddressForm({ update }) {
         className="max-w-sm mx-auto p-5 bg-gray-800 shadow-sm rounded-sm"
       >
         {[
-          { label: "Street address", name: "street_address", type: "text" },
+          { label: "Street address", name: "street", type: "text" },
           { label: "City", name: "city", type: "text" },
           { label: "State", name: "state", type: "text" },
           { label: "Zipcode", name: "zipcode", type: "text" },

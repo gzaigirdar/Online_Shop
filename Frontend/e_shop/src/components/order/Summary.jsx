@@ -1,19 +1,21 @@
 import { useContext } from "react";
 import { Order_info } from "../context/Order_context";
+import { Login } from "../context/login_context";
 
 
 
 function Summary({items,total, subtotal,taxes,show_confirm}) {
     const items_with_ids_qt = items.map(item => ({
-        item_id: item._id,
+        product: item._id,
         quantity: item.quantity
       }));
       const{add_items_id,SubmitOrder} = useContext(Order_info)
 
 function submit_order(){
+   
     show_confirm()
     add_items_id(items_with_ids_qt)
-    SubmitOrder(items_with_ids_qt)
+    SubmitOrder(items_with_ids_qt,total)
 }
 
     
