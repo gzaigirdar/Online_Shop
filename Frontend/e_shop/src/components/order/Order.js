@@ -39,7 +39,7 @@ function Order ({cartitem,total,subtotal,taxes})  {
               </div>
               <div className="mt-4">
               
-              <Summary total={total} subtotal={subtotal} taxes={taxes} show_confirm={show_confirm}/>
+              <Summary items={cartitem} total={total} subtotal={subtotal} taxes={taxes} show_confirm={show_confirm}/>
               </div>
                 </div>
                   <div className="flex flex-col mx-1 my-1">

@@ -16,26 +16,22 @@ import { Inventory_context } from "../context/products_context.js";
 
 function Products({showModal,setShowModal}) {
   
-  const {logged} = useContext(Login)
-  const {prod_data} = useContext(Inventory_context)
-
-  
- 
-    
-    // items array of bjects
+   const {logged} = useContext(Login)
+   const {prod_data} = useContext(Inventory_context)
+    // items array of objects
     const [cartitem,setItems] = useState([]);
     // subtoal before taxes are added
     const[subtotal,setsubTotal] = useState(0);
     const taxes = 1.00;
     // total after taxes added
     const [total,setTotal] = useState(0);
-    // checkout bollean
+    // checkout bool 
     const [checkout,setCheckout] = useState(false)
     // cart component show state
     const [show_cart,setCart] = useState(false)
     // state for showing products
     const [show_products,setProd] = useState(true)
-    // state for the product type
+    // state for the product type for the menu
     const [type,setType] = useState('cake')
     
 
@@ -44,73 +40,57 @@ function Products({showModal,setShowModal}) {
       setCart(true)
     }
 
-    function update_finalTotal(){
-      
-      setTotal(taxes+subtotal);
-
-
+  
+      // updates quantity in the cart 
+    function updateQuantityById(id, quantity) {
+      setItems(prevItems => {
+          return prevItems.map(prod =>
+              prod._id === id ? { ...prod, quantity: quantity } : prod
+          );
+      });
     }
+     
+      // add items to cart
+      function addItems(item){
+        setItems(prevItems => [...prevItems, { ...item, quantity: 1 }]);
+        
+      }
+      // remove items from the cart
+      function removeItem(name){
+          setItems(prevItems => prevItems.filter(item => item.name !== name));
+      }
+      // show checkout if logged else render log in form
+      function set_checkout(){
+     
+        setCheckout(true)
+        if(!logged){
+          setShowModal(true)
+        }
+        
+  
+      }
 
 
-
-   
-
+  
+    
+    // useEffect to update subtotal anytime cart item changes
+    useEffect(()=>{
+      const newSubtotal = cartitem.reduce((sum,item)=> sum + item.price * item.quantity,0);
+      setsubTotal(newSubtotal);
+    },[cartitem])
     // using useffect to update total, total will be udpated anytime subtotal or taxes changes
     useEffect(() => {
       setTotal(subtotal > 0 ? taxes + subtotal : 0);
     }, [subtotal, taxes]);
-  
-  // updates quantity in the cart 
+   
+
  
-  function updateQuantityById(id, quantity) {
-    setItems(prevItems => {
-        return prevItems.map(prod =>
-            prod.id === id ? { ...prod, quantity: quantity } : prod
-        );
-    });
-}
 
 
 
-    function set_checkout(){
-     
-      setCheckout(true)
-      if(!logged){
-        setShowModal(true)
-      }
-      
-
-    }
-     
-    function updateTotal(bool,price){
-    
-    if(bool === 'add'){
-        setsubTotal(prev => prev + price)
-
-    }
-    else if (bool !== 'add' && subtotal > price )
-    
-    {
-      setsubTotal(prev => prev - price)
-       
-       
-    }
-    else{
-      setsubTotal(0);
-    }
-  }
+   
   
- // add items to cart
-    function addItems(item){
-      setItems(prevItems => [...prevItems, { ...item, quantity: 1 }]);
-       
-    }
-
-    function removeItem(name){
-        setItems(prevItems => prevItems.filter(item => item.name !== name));
-    }
-    
-
+ 
     return (
       <div className="min-h-screen justify-start items-start bg-cover bg-center bg-fixed bg-fit" style={{backgroundImage:"url('images/bg_image.jpg')"}}> 
         {checkout && logged ? (
@@ -147,8 +127,7 @@ function Products({showModal,setShowModal}) {
                         
                          data={product}
                          addItems={addItems}
-                         updateTotal={updateTotal}
-                         update_finalTotal={update_finalTotal}
+                         
                        />
                      </div>
 
@@ -171,12 +150,12 @@ function Products({showModal,setShowModal}) {
             <Cart
               data={cartitem}
               removeItem={removeItem}
-              updateTotal={updateTotal}
+             
               subtotal={subtotal}
               total={total}
               checkout={set_checkout}
               updateQuantityById={updateQuantityById}
-              update_finalTotal={update_finalTotal}
+              
               setShowModal={setShowModal}
             />
             <button onClick={()=> {{setCart(false); setProd(true)}}}> close</button>

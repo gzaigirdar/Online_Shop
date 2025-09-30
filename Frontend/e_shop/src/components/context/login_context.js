@@ -5,7 +5,13 @@ export const Login = createContext()
 
 
 export function LoginProvider ({children}) {
-    const [logged,setStatus] = useState(true)
+    const [logged,setStatus] = useState(true);
+    const [userInfo,setInfo] = useState({
+        "user_id":" ",
+        "email": " ",
+        "auth_token":" "
+})
+    
     function changeStatus(bool_value){
         setStatus(bool_value);
 
@@ -40,7 +46,12 @@ export function LoginProvider ({children}) {
          }, );
 
 
-         const {message,token} = res.data;
+         const {message,token,user_id,email} = res.data;
+         setInfo({
+                 auth_token:token,
+                 user_id: user_id,
+                 email: email
+         })
          if (message == 'success'){
             
             setStatus(true)
@@ -53,10 +64,7 @@ export function LoginProvider ({children}) {
         
 
     }
-    const [userInfo,setInfo] = useState({
-        username:'fzaigirdar@yahoo.com',
-        
-    })
+  
     return ( 
         <Login.Provider value={{logged,changeStatus,userInfo,signin,createAccount}}>
             {children}

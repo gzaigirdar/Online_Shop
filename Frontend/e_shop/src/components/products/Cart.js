@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import CartItems from "./Cartitems";
 
-function Cart({ key,data, removeItem, updateTotal, subtotal, total,checkout,updateQuantityById,update_finalTotal,setShowModal}) {
+function Cart({ key,data, removeItem,subtotal, total,checkout,updateQuantityById,setShowModal}) {
   function checkout_handler(){
     checkout();
     
@@ -28,9 +28,8 @@ function Cart({ key,data, removeItem, updateTotal, subtotal, total,checkout,upda
                 key={item.id}
                 data={item}
                 removefunc={removeItem}
-                updateTotal={updateTotal}
                 updateQuantityById={updateQuantityById}
-                update_finalTotal={update_finalTotal}
+               
               />
             ))
           ) : (

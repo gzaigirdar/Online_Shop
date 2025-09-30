@@ -1,25 +1,20 @@
 'use client'
-import { useState } from "react";
+import { useState,useContext} from "react";
 import PaymentForm from "./PaymentForm";
+import { Order_info } from "../context/Order_context";
+
 function Bill_Order() {
 
     const [form,setForm] = useState(false);
-    const [info,setInfo] = useState({
-        name:' None ',
-        cardNumber: ' None ',
-        card_exp:'None ',
-        card_csv: ' None',
-        
+    const { payment_info } = useContext(Order_info);
 
-    })
-
-    console.log(info.card_exp)
+    
     function HandleClick(){
         setForm(true);
     }
     function closeform(data){
         
-        setInfo(data);
+        
         
         setForm(false);
     }
@@ -40,10 +35,10 @@ function Bill_Order() {
                     <dl className="text-center">
                         <dt className="text-base font-medium text-white">Individual</dt>
                         <dd className="mt-1 text-base font-normal text-gray-400">
-                            {info.name}
+                            {payment_info.name}
                         </dd>
                         <dd className="mt-1 text-base font-normal text-gray-400">
-                           <span className="items-center"> card exp: {info.card_exp}</span> 
+                           <span className="items-center"> card exp: {payment_info.card_exp}</span> 
                             
                         </dd>
                     </dl>

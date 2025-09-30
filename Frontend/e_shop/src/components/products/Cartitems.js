@@ -1,65 +1,36 @@
 'use client'
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
-function CartItems({data,removefunc,updateTotal,updateQuantityById,update_finalTotal}) {
+function CartItems({data,removefunc,updateQuantityById}) {
    const [quantity,setQuantity] = useState(1);
-   const prod_price = parseFloat(data.price)
-
-
-   function update_quanity_global(id,quant){
-    updateQuantityById(id,quant)
-
-   }
-
-
    function removeItem(){
        // calling removefunction from the parent component 
-       removefunc(data.name);
-       updateTotal('decrese',data.price)
-       update_finalTotal()
        
-   }
+        removefunc(data.name);
+
+       
+      }
    
 
   
     // function to handle increase quantiy button 
-    function adjust_quan(value) {
-        let new_quantity;
-       
-      
-        if (value === 'increase') {
-          new_quantity = quantity + 1
-          setQuantity(new_quantity);
-          updateTotal('add', prod_price);
-          update_quanity_global(data.id,new_quantity)
-          update_finalTotal()
-         
-        } 
-        else if (quantity > 1 && value === 'decrease'){
-            new_quantity = quantity - 1
-            setQuantity(new_quantity);
-            
-            updateTotal('none', prod_price);
-            update_quanity_global(data.id,new_quantity)
-            update_finalTotal()
-           
-        
-            
-           
-         
-        }
-        else{
-               
-              
-               
-                updateTotal('none', 0);
-                removeItem();
-                update_finalTotal()
-                
-            }
-          
-        }
-      
+
+    function increase_quan(){
+      setQuantity(prev => prev+1);
+    }
+    function decrease_quan(){
+      setQuantity(prev=>  prev == 1? 0: prev-1)
+     
+    }
+    useEffect(()=>{
+      updateQuantityById(data._id,quantity);
+      if (quantity === 0) {
+        removefunc(data.name); 
+      }
+    
+
+
+    },[quantity])
        
       
       
@@ -74,7 +45,7 @@ function CartItems({data,removefunc,updateTotal,updateQuantityById,update_finalT
               <div className="relative flex items-center max-w-[8rem]">
                 <button
                   type="button"
-                  onClick={() => adjust_quan('decrease')}
+                  onClick={decrease_quan}
                   id="decrement-button"
                   data-input-counter-decrement="bedrooms-input"
                   className="bg-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-600 border border-gray-600 rounded-s-lg p-3 h-11 focus:ring-gray-700 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"
@@ -98,7 +69,7 @@ function CartItems({data,removefunc,updateTotal,updateQuantityById,update_finalT
                 />
                 <button
                   type="button"
-                  onClick={() => adjust_quan('increase')}
+                  onClick={increase_quan}
                   id="increment-button"
                   data-input-counter-increment="bedrooms-input"
                   className="bg-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-600 border border-gray-600 rounded-e-lg p-3 h-11 focus:ring-gray-700 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"

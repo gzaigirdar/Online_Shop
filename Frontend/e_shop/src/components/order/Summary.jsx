@@ -1,4 +1,20 @@
-function Summary({total, subtotal,taxes,show_confirm}) {
+import { useContext } from "react";
+import { Order_info } from "../context/Order_context";
+
+
+
+function Summary({items,total, subtotal,taxes,show_confirm}) {
+    const items_with_ids_qt = items.map(item => ({
+        item_id: item._id,
+        quantity: item.quantity
+      }));
+      const{add_items_id,SubmitOrder} = useContext(Order_info)
+
+function submit_order(){
+    show_confirm()
+    add_items_id(items_with_ids_qt)
+    SubmitOrder(items_with_ids_qt)
+}
 
     
   return (
@@ -26,7 +42,7 @@ function Summary({total, subtotal,taxes,show_confirm}) {
 
               <div className="flex items-center justify-center border-t border-gray-700 pt-2">
                   <button
-                      type="button" onClick={() => show_confirm()}
+                      type="button" onClick={submit_order}
                       className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5"
                   >
                       Submit

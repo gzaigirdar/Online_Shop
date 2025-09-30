@@ -2,14 +2,14 @@ import { data } from "autoprefixer";
 import Image from "next/image";
 import { useState } from "react";
 
-export default function Product({data , addItems, updateTotal, update_finalTotal} ) {
+export default function Product({data , addItems} ) {
   
   const prod = data;
   const Item_price = parseFloat(data.price)
   
 function OnclickHandle(){
   addItems(prod);
-  updateTotal('add',Item_price);
+  
  
 
   
