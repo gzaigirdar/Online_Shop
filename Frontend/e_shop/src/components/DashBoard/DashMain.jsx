@@ -7,7 +7,7 @@ import DashChart from "./OverView/DashChart";
 import DashBarChart from "./OverView/BarChart";
 import Inventory from "./Inventory/Inventory";
 import dynamic from "next/dynamic";
-
+import DashOrder from "./Dash_order/DashOrder";
 
 
 function DashBoard() {
@@ -15,7 +15,7 @@ function DashBoard() {
     const DashBarChart = dynamic(() => import("./OverView/BarChart"), { ssr: false });
 
 
-    const [comp,setComp] = useState('Inventory')
+    const [comp,setComp] = useState('Order')
 
     function switch_comp(val){
         setComp(val)
@@ -63,7 +63,7 @@ function DashBoard() {
                 </div>
             ): comp == 'Order' ? (
                 <div>
-                    <p> inventory </p>
+                    <DashOrder/>
                 </div>
             ): comp == 'Msg'? (
                 <div>

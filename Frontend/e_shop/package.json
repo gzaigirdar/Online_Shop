@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.9",
     "@hookform/resolvers": "^5.2.2",
     "@tailwindcss/postcss": "^4.1.13",
     "apexcharts": "^5.3.5",

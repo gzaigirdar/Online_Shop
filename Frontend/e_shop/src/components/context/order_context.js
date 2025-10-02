@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Login } from "./login_context";
 
@@ -8,10 +8,7 @@ export function Order_provider({ children }) {
     const DB_API_ORDER = process.env.NEXT_PUBLIC_DB_API_ORDER;
     const loginContext = useContext(Login);
 
-    
-    
-   
-
+    const [order_Items,setOrderItems] = useState([])
 
     const [payment_info, set_payment] = useState({
         name: "None",
@@ -26,7 +23,7 @@ export function Order_provider({ children }) {
         state: "",
         zipcode: "",
         phone_number: "",
-        email: "", // consider removing this if redundant
+        email: "",
     });
 
     const [product_ids, setProdIds] = useState([]);
@@ -40,36 +37,86 @@ export function Order_provider({ children }) {
     }
 
     function add_items_id(items) {
-        setProdIds((prev) => [...prev, ...items]); // append instead of replace
+        setProdIds((prev) => [...prev, ...items]);
     }
 
-    async function SubmitOrder(items, total) {
+    async function createOrder(items, total) {
         try {
-            const user_id = loginContext?.userInfo?.user_id; 
-            console.log(address_info, items, user_id,total);
+            const user_id = loginContext?.userInfo?.user_id;
             if (!user_id) throw new Error("User not logged in");
 
             const res = await axios.post(`${DB_API_ORDER}/orders`, {
                 user_id,
-               
                 address: address_info,
-                
                 items,
                 total,
             });
 
-            console.log("Order created:", res.data);
-            return res.data;
+            return res.data.message;
         } catch (err) {
-            console.error("Error creating order:", err);
-            return { error: err.message || "Something went wrong" };
+            return { success: false, error: err.message || "Failed to create order" };
+        }
+    }
+     
+     async function getAllOrders() {
+        try {
+            
+            const res = await axios.get(`${DB_API_ORDER}/GetAllOrders`);
+            
+            setOrderItems(res.data)
+
+            
+            ;
+        } catch (err) {
+            return {  error: err.message || "Failed to fetch all orders" };
+        }
+    }
+
+    useEffect(()=>{
+        getAllOrders()
+        
+    },[]) 
+   
+
+
+
+    async function editOrder(order_id, updated_fields) {
+
+        try {
+            if (!order_id) throw new Error("Order ID is required");
+
+            await axios.patch(`${DB_API_ORDER}/Edit`, {
+                order_id:order_id,
+                status:updated_fields
+            });
+
+            return { success: true, message: "Order successfully updated" };
+        } catch (err) {
+            return { success: false, error: err.message || "Failed to update order" };
+        }
+    }
+
+    async function deleteOrder(order_id) {
+        try {
+            if (!order_id) throw new Error("Order ID is required");
+
+            await axios.delete(`${DB_API_ORDER}/Delete/${order_id}`);
+
+            return { success: true, message: "Order successfully deleted" };
+        } catch (err) {
+            return { success: false, error: err.message || "Failed to delete order" };
         }
     }
 
     return (
         <Order_info.Provider
             value={{
-                SubmitOrder,
+                createOrder,
+            
+                editOrder,
+                deleteOrder,
+                order_Items,
+                
                 payment_info,
                 address_info,
                 change_address_info,

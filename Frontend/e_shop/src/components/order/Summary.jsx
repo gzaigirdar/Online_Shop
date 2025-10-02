@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Order_info } from "../context/Order_context";
 import { Login } from "../context/login_context";
 
@@ -10,12 +10,27 @@ function Summary({items,total, subtotal,taxes,show_confirm}) {
         quantity: item.quantity
       }));
       const{add_items_id,SubmitOrder} = useContext(Order_info)
+      const[error,setError] =useState(false)
 
-function submit_order(){
+async function submit_order(){
    
-    show_confirm()
+    
     add_items_id(items_with_ids_qt)
-    SubmitOrder(items_with_ids_qt,total)
+    try{
+       res = await SubmitOrder(items_with_ids_qt,total)
+       if (res === 'success'){
+
+        show_confirm()
+
+       }
+       
+
+    } catch(error){
+        setError(true)
+
+    }
+    
+   
 }
 
     
@@ -49,6 +64,7 @@ function submit_order(){
                   >
                       Submit
                   </button>
+                  {error && <p> order unsuccesfull</p>}
               </div>
           </div>
       </div>
