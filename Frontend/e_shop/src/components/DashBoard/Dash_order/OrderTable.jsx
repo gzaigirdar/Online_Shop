@@ -7,7 +7,7 @@ import { Order_info } from "@/components/context/Order_context";
 function OrderTable() {
 
   const {order_Items} = useContext(Order_info)
-  console.log("render:", order_Items);
+  
 
  
     return ( 
@@ -48,7 +48,7 @@ function OrderTable() {
               <tr>
                 <th className="text-left py-3 px-4 uppercase font-semibold text-sm">ID</th>
                 <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Name</th>
-                <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Type</th>
+                <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Status</th>
                 <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Price</th>
                
                 <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Actions</th>
@@ -64,7 +64,10 @@ function OrderTable() {
                   lname={order.lname} 
                   status={order.orderStatus}
                   total={order.total}
-                  items={order.items} /> 
+                  items={order.items} 
+                  address={order.address}
+                  date={order.date}
+                  /> 
               
 
                 ))

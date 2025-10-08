@@ -21,6 +21,7 @@ function OnclickHandle(){
   return (
 
 
+    <div className="container max-w-sm max-h-sm">
     
 <div className="flex flex-col h-sm w-full justify-center items-center text-center bg-slate-200 rounded-md">
           
@@ -47,7 +48,7 @@ function OnclickHandle(){
     </div>
   
 </div>
-
+</div>
 
   );
 }
