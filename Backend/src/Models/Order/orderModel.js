@@ -16,7 +16,7 @@ const Items = new mongoose.Schema({
 const orderSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        ref: "UserModel",
         required: true,
     },
     total: {
@@ -25,14 +25,15 @@ const orderSchema = new mongoose.Schema({
         required: true
     },
     address: {
-        zipcode: { type: Number, required: true },
+        zipcode: { type: String, required: true },
         city: { type: String, required: true },
         street: { type: String, required: true },
-        state: { type: String, required: true }
+        state: { type: String, required: true },
+        phone_number:{type:String, required: true}
     },
     orderStatus: {
         type: String,
-        enum: ["Pending", "Fulfilled", "Cancelled"],
+        enum: ["Pending", "Fulfilled", "Canceled"],
         default: "Pending"
     },
     paymentStatus: {

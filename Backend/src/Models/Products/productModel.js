@@ -4,6 +4,7 @@ const productSchema = mongoose.Schema({
 
     name:{type:String,required:[true,'Please add prduct name'],unique:true},
     type:{type:String,required:[true,'please add type of product']},
+    description:{type:String,default:"None"},
     price:{type:Number,required:[true,'please add the price of the item']},
     quantity:{type:Number,required:[true,'please add number products']},
     img_link:{type:String,required:[true,'please provide link for image']}

@@ -1,4 +1,4 @@
-import userModal from "../../Models/userModel.js";
+import userModel from "../../Models/userModel.js";
 import createHttpError from "http-errors";
 import brypt from 'bcrypt'
 
@@ -6,7 +6,7 @@ import brypt from 'bcrypt'
 
 async function signin(email,password) {
      // lean() functions converts mongo object to json object
-      const user = await userModal.findOne({email:email.toLowerCase()}).lean()
+      const user = await userModel.findOne({email:email.toLowerCase()}).lean()
 
       if (!user){
         throw createHttpError.NotFound('invaild email addresss')

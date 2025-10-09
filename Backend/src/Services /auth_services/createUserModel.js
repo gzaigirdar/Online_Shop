@@ -1,8 +1,8 @@
-import userModal from "../../Models/userModel.js";
+import userModel from "../../Models/userModel.js";
 
 
  async function createUserModel ({username,fname,lname,email,password}){
-    const user =  new userModal({
+    const user =  new userModel({
         name:{
             fname:fname,
             lname:lname,

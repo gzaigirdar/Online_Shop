@@ -11,7 +11,7 @@ async function login (req,res,next){
     const {email,password} = req.body;
     
     try{
-        const user = signin(email,password)
+        const user = await signin(email,password)
         
         const authtoken = await get_token({user_id:user._id},secret,"1d")
         const refreshtoken = await get_token({user_id:user._id},secret,"10d")
@@ -22,7 +22,9 @@ async function login (req,res,next){
         })
         res.send({
             "message":"success",
-            "token":authtoken
+            "token":authtoken,
+            "user_id":user._id,
+            "email":user.email
         })
         
             

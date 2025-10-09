@@ -1,10 +1,11 @@
 import express from 'express';
 import trimRequest from 'trim-request';
-import { AddOrder, DeleteOrder, EditStatus,FindOrder } from '../Controllers/Orders_controllers';
+import { AddOrder, GetAllOrders, DeleteOrder, EditStatus,FindOrder } from '../Controllers/Orders_controllers.js';
 
 export const orderRouter = express.Router();
 
 orderRouter.route("/orders").post(trimRequest.all, AddOrder);
-orderRouter.route("/orders/:order_id").get(FindOrder);
-orderRouter.route("/orders/:order_id").patch(trimRequest.all, EditStatus);
-orderRouter.route("/orders/:order_id").delete(DeleteOrder);
+orderRouter.route("/order_get/:order_id").get(FindOrder);
+orderRouter.route("/Edit").patch(trimRequest.all, EditStatus);
+orderRouter.route("/Delete/:order_id").delete(DeleteOrder);
+orderRouter.route("/GetallOrders").get(GetAllOrders);
