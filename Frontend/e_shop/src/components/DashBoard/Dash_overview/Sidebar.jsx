@@ -10,7 +10,7 @@ function SideBar({switch_comp}) {
         <>
 
           {/* Sidebar content */}
-<div className="flex flex-col items-center w-full h-full overflow-y-auto text-gray-700 bg-gray-100 rounded" >
+<div className="flex flex-col items-center w-full h-full overflow-y-auto text-gray-700 bg-pink-200 rounded" >
   <a className="flex items-center w-full px-3 mt-3" href="#">
     <svg
       className="w-8 h-8 fill-current"

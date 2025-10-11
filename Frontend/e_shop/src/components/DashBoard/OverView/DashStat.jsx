@@ -1,9 +1,9 @@
 function DashStat({ icon: Icon, text, amount }) {
     return (  
-        <div className="m-6">
+        <div className="m-2 w-2/3 sm:w-full">
  
-      <div className="flex items-center px-5 py-6 shadow-sm rounded-md bg-slate-100">
-        <div className="p-3 rounded-full bg-amber-100 bg-opacity-75">
+      <div className="flex items-center p-2  shadow-sm rounded-md bg-pink-200">
+        <div className="p-2 rounded-full bg-amber-100 bg-opacity-75">
         {Icon && <Icon className="h-5 w-5 text-white" />}
           
         </div>

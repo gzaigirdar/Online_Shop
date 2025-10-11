@@ -10,6 +10,7 @@ import cors from 'cors'
 import morgan from 'morgan';
 import mainRouter from './Routes/main.router.js';
 import initdb from './db.js';
+import { get_days_total } from './Services /dash_services/getOrderstat.js';
 dotenv.config()
 
 const port = process.env.PORT || 5000;
@@ -27,6 +28,7 @@ app.use(mongoSantitize())
 // cookie parser allows extracting cookeis from res or req from user
 app.use(cookieParser())
 // protects routes and restricts access to the server 
+
 app.use(cors({
     origin: "http://localhost:3000", credentials: true}))
 app.use(mainRouter)

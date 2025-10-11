@@ -3,16 +3,15 @@ import DashStat from "./OverView/DashStat";
 import { useState } from "react";
 import SideBar from "./Dash_overview/Sidebar";
 import { FcBullish, FcMoneyTransfer } from "react-icons/fc";
-import DashChart from "./OverView/DashChart";
-import DashBarChart from "./OverView/BarChart";
+
 import Inventory from "./Inventory/Inventory";
 import dynamic from "next/dynamic";
 import DashOrder from "./Dash_order/DashOrder";
 
 
 function DashBoard() {
-    const DashChart = dynamic(() => import("./OverView/DashChart"), { ssr: false });
-    const DashBarChart = dynamic(() => import("./OverView/BarChart"), { ssr: false });
+    const WeeklyBarChart = dynamic(() => import("./OverView/Weekly_chart"), { ssr: false });
+   
 
 
     const [comp,setComp] = useState('Order')
@@ -40,13 +39,14 @@ function DashBoard() {
             ( 
                 <div className="flex flex-col  h-full w-full overscroll-y-auto">
                     <div className="mt-4">
-                    <div className="flex flex-row mx-6">
+                    <div className="flex flex-col sm:flex-row space-x-5  items-center justify-center">
                      <DashStat icon={FcBullish} text='Revenue' amount='$5000'/>  
+                     <DashStat icon={FcMoneyTransfer} text='Profit' amount='$2000'/>
                      <DashStat icon={FcMoneyTransfer} text='Profit' amount='$2000'/>
                      </div>
                      <div className=" flex flex-col m-2 ">
-                        <DashChart />
-                        <DashBarChart />
+                        <WeeklyBarChart />
+                       
                         
                     </div>
               

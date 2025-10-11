@@ -1,4 +1,4 @@
-import { useRef, useState,useContext } from "react";
+  import { useRef, useState,useContext } from "react";
 import { Inventory_context } from "@/components/context/products_context";
 
 
@@ -98,13 +98,28 @@ function Edit_item({ closeit,details}) {
             </tbody>
           </table>
         </div>
-  
+      <div className="inline-block space-x-2 ">
+
+
         <button
           onClick={submit}
-          className="bg-green-950 text-white font-bold py-2 px-6 rounded hover:bg-green-800 transition"
+          className="bg-green-700 text-white font-bold py-2 px-6 rounded hover:bg-green-800 transition"
         >
-          Save
+          Update
         </button>
+
+        <button
+          onClick={() => closeit()}
+          className="bg-yellow-500 text-black font-bold py-2 px-6 rounded hover:bg-green-800 transition"
+        >
+          Close
+        </button>
+        
+      </div>
+
+
+
+
       </div>
     );
   }

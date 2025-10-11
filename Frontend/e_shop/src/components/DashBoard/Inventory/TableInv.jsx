@@ -94,10 +94,10 @@ function InvTable() {
 
     
       {/* Table */}
-      <div className="px-4 w-sm sm:w-full md:px-8 py-4  max-w-full mx-auto ">
+      <div className="px-4 w-sm sm:w-full md:px-8 py-4  max-w-full mx-auto  ">
       <dialog
           ref={dialogRef}
-          className="p-2 rounded shadow-lg max-w-xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 fixed bg-transparent"
+          className="p-2  shadow-lg max-w-xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 fixed bg-gray-400 rounded-2xl"
         >
           {formchoice === 'add' ? (
             <AddProd closeit={close_edit} />
@@ -111,9 +111,9 @@ function InvTable() {
 
 
         
-          <div className="shadow overflow-x-auto rounded border border-gray-200">
+          <div className="shadow overflow-x-auto rounded border border-gray-200 overflow-y-auto max-h-[300px]">
           <table className="min-w-full bg-white table-auto">
-            <thead className="bg-gray-800 text-white">
+            <thead className="bg-gray-800 text-white sticky top-0 z-10">
               <tr>
                 <th className="text-left py-3 px-4 uppercase font-semibold text-sm">ID</th>
                 <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Name</th>
@@ -123,7 +123,7 @@ function InvTable() {
                 <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Actions</th>
               </tr>
             </thead>
-            <tbody className="text-gray-700">
+            <tbody className="text-gray-700 ">
               
               {
                 prod_data.map( 

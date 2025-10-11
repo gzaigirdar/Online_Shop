@@ -1,6 +1,7 @@
 import { OrderModel } from "../Models/Order/orderModel.js";
 import AsyncHandler from "express-async-handler";
 import mongoose from "mongoose";
+import { get_days_total } from "../Services /dash_services/getOrderstat.js";
 const AddOrder = AsyncHandler(async (req, res) => {
     // paymentStatus, orderStatus can will be added later, there default values for it
     const { user_id, items, address, total } = req.body;
@@ -98,4 +99,12 @@ const DeleteOrder = AsyncHandler(async (req, res) => {
     res.status(200).json({ message: "Successfully deleted" });
 });
 
-export { AddOrder, GetAllOrders, FindOrder, EditStatus, DeleteOrder };
+const getOrderStat = AsyncHandler(async(req,res)=>{
+
+    const data = await get_days_total();
+
+    res.send(data);
+
+})
+
+export { AddOrder, GetAllOrders, FindOrder, EditStatus, DeleteOrder,getOrderStat };

@@ -81,32 +81,42 @@ export function Order_provider({ children }) {
 
 
     async function editOrder(order_id, updated_fields) {
-
         try {
             if (!order_id) throw new Error("Order ID is required");
-
+    
             await axios.patch(`${DB_API_ORDER}/Edit`, {
-                order_id:order_id,
-                status:updated_fields
+                order_id,
+                status: updated_fields,
             });
-
+    
+            // Update local state 
+            setOrderItems((prev) =>
+                prev.map((order) =>
+                    order.id === order_id ? { ...order, status: updated_fields } : order
+                )
+            );
+    
             return { success: true, message: "Order successfully updated" };
         } catch (err) {
             return { success: false, error: err.message || "Failed to update order" };
         }
     }
-
+    
     async function deleteOrder(order_id) {
         try {
             if (!order_id) throw new Error("Order ID is required");
-
+    
             await axios.delete(`${DB_API_ORDER}/Delete/${order_id}`);
-
+    
+            // deleting order from local state
+            setOrderItems((prev) => prev.filter((order) => order.id !== order_id));
+    
             return { success: true, message: "Order successfully deleted" };
         } catch (err) {
             return { success: false, error: err.message || "Failed to delete order" };
         }
     }
+    
 
     return (
         <Order_info.Provider
@@ -122,6 +132,7 @@ export function Order_provider({ children }) {
                 change_address_info,
                 change_payment_info,
                 add_items_id,
+                getAllOrders
             }}
         >
             {children}

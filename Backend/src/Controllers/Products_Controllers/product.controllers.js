@@ -1,5 +1,6 @@
 import ProductModel from "../../Models/Products/productModel.js";
 import AsyncHandler from "express-async-handler";
+import { get_product_count } from "../../Services /dash_services/getstats.js";
 
 const addProductController = AsyncHandler(async(req,res) =>{
     const{name,type,price,quantity,img_link} = req.body;
@@ -56,4 +57,18 @@ const getProductsConstroller = AsyncHandler(async(req,res)=>{
 
 })
 
-export {addProductController,editProductController,deleteProductController,getProductsConstroller};
+const get_type_count = AsyncHandler(async(req,res)=>{
+
+    const type_count = await get_product_count();
+
+    if(type_count){
+        res.json(type_count)
+    }
+
+    if(!type_count){
+        res.status(400);
+    }
+
+})
+
+export {addProductController,editProductController,deleteProductController,getProductsConstroller,get_type_count};
