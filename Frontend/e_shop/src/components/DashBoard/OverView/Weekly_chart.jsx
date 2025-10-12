@@ -2,9 +2,12 @@
 import React from "react";
 import Chart from "react-apexcharts";
 
-function WeeklyBarChart({ data = Array(7).fill(0), title = "Weekly Revenue" }) {
+function WeeklyBarChart({ data, title = "Weekly Revenue" }) {
   const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-  const maxVal = Math.max(...data);
+  // mock datas if no data is receivd from the backend
+  const mockData = [0, 0, 0, 50, 0, 145, 0];
+  const chartData = data && data.length === days.length ? data : mockData;
+  const maxVal = Math.max(...chartData);
 
   const chartOptions = {
     chart: { type: "bar", height: 300, toolbar: { show: false } },
@@ -21,7 +24,7 @@ function WeeklyBarChart({ data = Array(7).fill(0), title = "Weekly Revenue" }) {
     legend: { show: true },
   };
 
-  const series = [{ name: "Revenue", data }];
+  const series = [{ name: "Revenue", data: chartData }];
 
   return (
     <div className="p-4 bg-gray-800 rounded-lg shadow my-3">
