@@ -17,7 +17,9 @@ const userSchema = mongoose.Schema({
         ,
     username:{
         type:String,
-        unique: true
+        required:[true,'please provide an email'],
+        unique: [true, 'Username already exists'],
+        index: true
     },
     email:{
         type:String,

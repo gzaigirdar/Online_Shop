@@ -8,14 +8,16 @@ async function createUser(req,res,next){
 
  
     try{
+        
         const user = await createUserModel({username,fname,lname,email,password})
         console.log("Created user:", user);
         res.status(201).json({ message: "success", user });
     }
     catch(error){
         //res.send(error)
-        console.log(error)
-        res.status(500).json({ message: error.message });
+        console.log(error.message)
+        res.status(500).json({ message: error.message
+         });
         
     }
 }

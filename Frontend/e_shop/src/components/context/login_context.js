@@ -34,7 +34,8 @@ export function LoginProvider ({children}) {
             console.log(res.data)
         } catch(e){
            
-            return e.message;
+            const serverMessage = e.response?.data?.message || e.message;
+            throw new Error(serverMessage);
         }
     }
 

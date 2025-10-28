@@ -28,6 +28,8 @@ function Loginform({ closeIt }) {
     }
   }
 
+  const createAcc = (bool)=> setAcc(bool);
+
   return !AccFormVisible  ? (
     <>
       <div className="relative bg-gray-900 h-screen overflow-auto w-screen p-10 mr-5">
@@ -68,6 +70,8 @@ function Loginform({ closeIt }) {
             <div className="flex items-center h-5">
               <input
                 id="remember"
+       
+       
                 type="checkbox"
                 className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300"
               />
@@ -98,7 +102,7 @@ function Loginform({ closeIt }) {
       </div>
     </>
   ) : (
-    <AccForm />
+    <AccForm setform={showcreateAcc}/>
   );
 }
 
