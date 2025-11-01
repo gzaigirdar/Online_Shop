@@ -11,10 +11,23 @@ import morgan from 'morgan';
 import mainRouter from './Routes/main.router.js';
 import initdb from './db.js';
 import { get_days_total } from './Services /dash_services/getOrderstat.js';
+import {emailer} from './Services /Mail_services/sendMail.js';
 dotenv.config()
 
 const port = process.env.PORT || 5000;
+console.log(process.env.GMAIL)
+console.log(process.env.GMAIL_PASS)
+/*emailer.verify((error,success)=>{
+    if (error){
+        console.log(error)
+    }
 
+    if(success){
+        console.log(success)
+        console.log('connected')
+    }
+})
+*/
 // loger of the app 
 app.use(morgan('dev'))
 // expres json convers req body to json object

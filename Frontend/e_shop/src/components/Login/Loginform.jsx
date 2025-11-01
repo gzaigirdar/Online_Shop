@@ -102,7 +102,7 @@ function Loginform({ closeIt }) {
       </div>
     </>
   ) : (
-    <AccForm setform={showcreateAcc}/>
+    <AccForm />
   );
 }
 

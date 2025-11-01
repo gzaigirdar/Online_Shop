@@ -1,6 +1,42 @@
 
+import userModel from "../../Models/userModel.js";
 import signin from "../../Services /auth_services/signin.services.js";
 import get_token from "../../Services /auth_services/token.service.js";
+import { sendToken_email } from "../../Services /Mail_services/sendMail.js";
+
+async function forgetPassword(req,res,next){
+        const secret = process.env.SECRET_KEY;
+        
+
+        const{email} = req.body;
+
+        const user = await userModel.findOne({email:email})
+
+        if(!user){
+            return res.status(404).send({message:"user not found"})
+
+
+        }
+        const meta_data = {
+            email:email
+        }
+        const token = await get_token(meta_data,secret,"10m");
+        try{
+
+            const response = await sendToken_email(token,email)
+            console.log(response)
+            res.status(200).send('success')
+        }
+        catch(error){
+            console.log(error.message)
+            next(error)
+
+        }
+    }
+
+async function resetPassword(req,res,next){
+    console.log(req)
+}
 
 
 
@@ -43,4 +79,4 @@ async function login (req,res,next){
 
 
 }
-export default login;
+export {login,forgetPassword};
