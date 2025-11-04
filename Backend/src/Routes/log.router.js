@@ -4,7 +4,7 @@ import createUser from '../Controllers/account_controllers/controller.createUser
 import trimRequest from 'trim-request'
 import {login} from '../Controllers/account_controllers/controller.login.js'
 import { GetallUsers } from '../Controllers/account_controllers/Getallusers.controller.js'
-import {forgetPassword} from '../Controllers/account_controllers/controller.login.js';
+import {forgetPassword,resetPassword} from '../Controllers/account_controllers/controller.login.js';
 const LogRouter = express.Router()
 
 LogRouter.route('/createacc').post(trimRequest.all,createUser)
@@ -17,6 +17,7 @@ LogRouter.route('/refreshtoken').get((req,res)=>{
     res.send('refresh token route has been visited')
 })
 LogRouter.route('/getallusers').get(GetallUsers)
-LogRouter.route('/forgetpassword').get(forgetPassword)
+LogRouter.route('/forgetpassword').post(trimRequest.all,forgetPassword)
+LogRouter.route('/resetpassword').post(trimRequest.all,resetPassword)
 
 export default LogRouter; 
