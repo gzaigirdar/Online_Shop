@@ -24,7 +24,7 @@ async function sendToken_email(token,sender_email){
         subject: 'reset password',
         html: `<h1> Reset Your Password </h1>
               <p> Click on the link to reset your password </p>
-              <a href= "http://localhost:3000/resetpassword/${token}"> http://localhost:3000/resetpassword/${token} </a>
+              <a href= "http://localhost:3000/ResetPassword/${token}"> http://localhost:3000/resetpassword/${token} </a>
               <p> the token will expire in 10 minutes </p>
               
               <p> if you didn't request a rest password then please ignore this email </p>

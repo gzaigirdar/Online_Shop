@@ -5,6 +5,7 @@ import signin from "../../Services /auth_services/signin.services.js";
 import get_token from "../../Services /auth_services/token.service.js";
 import { sendToken_email } from "../../Services /Mail_services/sendMail.js";
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt'
 async function forgetPassword(req,res,next){
         const secret = process.env.SECRET_KEY;
 
@@ -21,11 +22,12 @@ async function forgetPassword(req,res,next){
             email:email
         }
         const token = await get_token(meta_data,secret,"10m");
+        
         try{
 
             const response = await sendToken_email(token,email)
             console.log(response)
-            res.status(200).send('success')
+            res.status(200).json({message:'success',token})
         }
         catch(error){
             console.log(error.message)
@@ -37,11 +39,10 @@ async function forgetPassword(req,res,next){
     async function resetPassword(req, res, next) {
         try {
           const { password, token } = req.body;
+          const decoded = jwt.verify(token, process.env.SECRET_KEY);
+          const { email } = decoded;
       
-          const decoded_token = jwt.verify(token, process.env.SECRET_KEY);
-          const { email } = decoded_token;
-      
-          const user = await UserModel.findOne({ email });
+          const user = await userModel.findOne({ email });
           if (!user) {
             return next(createHttpError(404, "User not found"));
           }
@@ -49,24 +50,28 @@ async function forgetPassword(req,res,next){
           const salt = await bcrypt.genSalt(10);
           const hashedPass = await bcrypt.hash(password, salt);
       
-          await UserModel.findOneAndUpdate(
+          await userModel.findOneAndUpdate(
             { email },
-            { password: hashedPass }
+            { password: hashedPass },
+            { new: true }
           );
       
-          return res.status(200).json({ message: "new password has been set" });
-      
+          return res.status(200).json({ message: "New password has been set" });
         } catch (e) {
-          return next(createHttpError(401, "Invalid or expired token"));
+          if (e.name === "TokenExpiredError" || e.name === "JsonWebTokenError") {
+            return next(createHttpError(401, "Invalid or expired token"));
+          }
+          return next(e);
         }
       }
+      
       
 
 
 
 async function login (req,res,next){
     const secret = process.env.SECRET_KEY
-    
+        
     const {email,password} = req.body;
     
     try{

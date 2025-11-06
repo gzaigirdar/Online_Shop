@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { useParams } from "next/navigation";
 
 const schema = z.object({
   email: z.string().email({ message: "invalid email" })
@@ -13,12 +14,13 @@ function ForgotForm() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
+
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(schema)
   });
 
   async function req_reset(email) {
-    await axios.post('http://localhost:5000/log/forgetpassword', { email });
+    await axios.post('http://localhost:5000/log/forgetPassword', { email:email });
   }
 
   async function submit(data) {
