@@ -1,6 +1,6 @@
 import express from 'express';
 import trimRequest from 'trim-request';
-import { AddOrder, GetAllOrders, DeleteOrder, EditStatus,FindOrder,getOrderStat } from '../Controllers/Orders_controllers.js';
+import { AddOrder, GetAllOrders, DeleteOrder, EditStatus,FindOrder,getOrderStat } from '../Controllers/Order_controller/Orders_controllers.js';
 
 export const orderRouter = express.Router();
 

@@ -1,7 +1,7 @@
-import { OrderModel } from "../Models/Order/orderModel.js";
+import { OrderModel } from "../../Models/Order/orderModel.js";
 import AsyncHandler from "express-async-handler";
 import mongoose from "mongoose";
-import { get_days_total } from "../Services /dash_services/getOrderstat.js";
+import { get_days_total } from "../../Services /dash_services/getOrderstat.js";
 const AddOrder = AsyncHandler(async (req, res) => {
     // paymentStatus, orderStatus can will be added later, there default values for it
     const { user_id, items, address, total } = req.body;
