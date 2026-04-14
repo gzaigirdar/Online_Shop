@@ -82,5 +82,5 @@ userSchema.pre('save',async function(next){
 
 })
 
-const userModel = mongoose.models.userModel || mongoose.model("UserModel",userSchema)
+const userModel = mongoose.models.userModel || mongoose.model("User",userSchema)
 export default userModel;

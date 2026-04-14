@@ -1,12 +1,13 @@
 import { ReviewModel } from "../../Models/Reviews/reviewModel.js";
+import AsyncHandler from "express-async-handler";
 
 
-async function getreviews(req,res) {
+const getreviews = AsyncHandler(async (req,res) => {
     
     //const reviews = await ReviewModel.find()
     const reviews = await ReviewModel.aggregate([
       {  $lookup:{
-            from:"usermodels",
+            from:"users",
             localField:'UserId',
             foreignField:'_id',
             as: 'userdata'
@@ -33,10 +34,10 @@ async function getreviews(req,res) {
 
     
 }
+)
 
 
-
-async function submitReview(req,res){
+const submitReview = AsyncHandler(async (req,res) =>{
 
     const {user_id,review,rating} = req.body;
     if(!user_id || !review || !rating){
@@ -62,9 +63,8 @@ async function submitReview(req,res){
 
    }
 }
-
-
-async function deleteReview(req,res){
+)
+const deleteReview = AsyncHandler(async (req,res) =>{
     const {id} = req.body
     if(!id){
         res.status(400)
@@ -78,5 +78,5 @@ async function deleteReview(req,res){
         }
         return res.status(200).json('Review deleted')
 }
-
+)
 export {getreviews,submitReview,deleteReview}
