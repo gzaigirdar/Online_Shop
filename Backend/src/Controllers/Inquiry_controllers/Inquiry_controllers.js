@@ -1,6 +1,6 @@
 import AsyncHandler from "express-async-handler";
-import InquiryModel from "../../Models/Inquiry/InquiryModel";
-import userModel from "../../Models/userModel";
+import InquiryModel from "../../Models/Inquiry/InquiryModel.js";
+
 
 
 
@@ -49,3 +49,5 @@ const deleteInquiry = AsyncHandler(async (req,res,next)=> {
     res.send('Inquiry deleted')
 
 })
+
+export {GetInquiries,deleteInquiry,submitInquiry};

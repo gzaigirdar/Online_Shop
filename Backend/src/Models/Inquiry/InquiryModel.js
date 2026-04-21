@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
-import userModel from "../userModel";
-
+import userModel from "../../Models/userModel.js";
 
 const InquirySchema = mongoose.Schema({
     UserId:{
@@ -19,4 +18,5 @@ const InquirySchema = mongoose.Schema({
 
 
 
-export default InquiryModel = mongoose.model('Inquiry',InquirySchema)
+const InquiryModel = mongoose.model('Inquiry',InquirySchema)
+export default InquiryModel; 
