@@ -41,7 +41,7 @@ const deleteInquiry = AsyncHandler(async (req,res,next)=> {
         throw new Error('Id not submitted')
     }
 
-    const deleted = await InquiryModel.deleteOne({'UserId':id})
+    const deleted = await InquiryModel.deleteOne({_id:id})
     if (deleted.deletedCount === 0) {
         return res.status(404).send('Inquiry not found');
     }
