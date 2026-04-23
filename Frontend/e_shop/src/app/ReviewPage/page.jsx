@@ -22,7 +22,7 @@ export default function ReviewPage() {
       <div className="bg-gradient-to-r from-slate-100 to-slate-900 text-black min-h-screen flex flex-col md:flex-row">
         
       
-        <div className="w-full mt-0 md:w-2/5 p-2">
+        <div className="w-full mt-5 md:w-2/5 p-2">
           <Summary_review_card />
         </div>
 
