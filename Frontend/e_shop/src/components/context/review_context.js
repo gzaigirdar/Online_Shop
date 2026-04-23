@@ -17,7 +17,8 @@ export function ReviewProvider({children}){
 
         }
         catch(error){
-            console.error(error)
+            console.log(error.response?.data?.message || 'no msg')
+           // console.error(error)
 
         }
     }
@@ -42,7 +43,8 @@ export function ReviewProvider({children}){
             const submitted = await axios.post(`${review_url}/submitReview`,reviewData,{withCredentials:true})
             return submitted.data
         } catch (error) {
-            return error
+            const message = error.response?.data?.message || 'Something went wrong'
+            throw new Error(message)  
         }
     }
 
@@ -61,4 +63,3 @@ export function ReviewProvider({children}){
 
 }
 
-export {ReviewProvider,review_context};

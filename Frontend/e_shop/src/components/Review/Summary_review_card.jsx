@@ -1,11 +1,13 @@
 'use state'
-import { useState } from "react";
+import { useState} from "react";
 import Ratings from "./Ratings";
 import Rev_info from "./Rev_info";
 import Review_form from "./Forms/Review_form";
+
 function Summary_review_card() {
+  
   const [show_form,setForm] = useState(false)
-  function submit_review(){
+  function submit_rev(){
     if(show_form == true){
       setForm(false)
     }
@@ -17,7 +19,7 @@ function Summary_review_card() {
     <>
     <div className=" flex flex-col m-2 bg-white items-center justify-center shadow-2xl rounded-lg ">
       {show_form ? (
-        <Review_form submit_review={submit_review} />
+        <Review_form submit_rev={submit_rev} />
       ):
       <div>
       <p className="text-center"> Overall Rating</p>
@@ -37,7 +39,7 @@ function Summary_review_card() {
 </div>
 
 {/* Responsive button */}
-<button onClick={submit_review}  className="block items-center bg-green-400 hover:bg-red-300 text-white font-bold mb-2 mx-auto px-3 sm:px-4 py-1 sm:py-2 rounded-sm text-xs sm:text-sm w-1/2 max-w-md">
+<button onClick={submit_rev}  className="block items-center bg-green-400 hover:bg-red-300 text-white font-bold mb-2 mx-auto px-3 sm:px-4 py-1 sm:py-2 rounded-sm text-xs sm:text-sm w-1/2 max-w-md">
   Submit Review
 </button>
 

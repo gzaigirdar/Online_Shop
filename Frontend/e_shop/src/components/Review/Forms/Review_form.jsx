@@ -1,18 +1,35 @@
 'use client'
 
-import { useState } from "react";
+import { useState,useContext } from "react";
 import { useForm } from "react-hook-form";
 import RevRating from "../rev_rating";
 import Msg_confirm from "@/components/Msg_confirm";
+import { review_context } from '../../context/review_context';
 
-function Review_form({submit_review}) {
+function Review_form({submit_rev}) {
+    const {submitReview} = useContext(review_context); 
     const {register,handleSubmit,formState:{errors}} = useForm();
     const [number,setNUm] = useState(1)
+    const [error_msg,setError_msg] = useState(null)
     const ratings = [1,2,3,4,5]
     const [submitted,setSubmit] = useState(false)
-    function onSubmit(data){
-        console.log(data)
-        setSubmit(true)
+    async function onSubmit(data){
+        let review_data = {
+            //"user_id":"69003431b882ce41b6f3dadf",
+            "review": data['review'],
+            "rating":number
+        }
+        try{
+            await submitReview(review_data)
+            setSubmit(true)
+        }
+        catch(error){
+            setError_msg(error.message)
+            
+        }
+        console.log(data['review'])
+        console.log(number)
+       
     }
     function update_rating(val){
         setNUm(val)
@@ -20,7 +37,7 @@ function Review_form({submit_review}) {
     }
     // closes the confimation msg
     function close_confirm(){
-        submit_review()
+        submit_rev()
     }
     
     return (  
@@ -88,6 +105,7 @@ function Review_form({submit_review}) {
                     </button>
                     </div>
                 </form>
+                {error_msg && <p className="font-bold text-red-600">{error_msg}</p>}
             </div>)
             }
         </>

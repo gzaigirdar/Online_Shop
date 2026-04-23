@@ -4,6 +4,7 @@ import Navbar from "@/components/navbar/Navbar";
 import Modal from "@/components/modals/Modal";
 import Loginform from "@/components/Login/Loginform";
 import { LoginProvider } from "@/components/context/login_context";
+import { ReviewProvider } from "@/components/context/review_context";
 import Summary_review_card from "@/components/Review/Summary_review_card";
 import Review_card from "@/components/Review/Review_card";
 
@@ -16,6 +17,8 @@ export default function ReviewPage() {
 
   return (
     <LoginProvider>
+      <ReviewProvider>
+
       <Navbar open_modal={open_modal} />
 
       
@@ -51,6 +54,7 @@ export default function ReviewPage() {
           <Loginform closeIt={() => setShowModal(false)} />
         </Modal>
       )}
+      </ReviewProvider>
     </LoginProvider>
   );
 }

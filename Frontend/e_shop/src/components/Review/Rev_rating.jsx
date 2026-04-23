@@ -1,4 +1,4 @@
-function RevRating({number,id,update_rating}) {
+function    RevRating({number,id,update_rating}) {
     const name = 'star'+id
     return (  
 
