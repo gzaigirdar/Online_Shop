@@ -7,6 +7,7 @@ import Loginform from "./Login/Loginform";
 import { LoginProvider } from "./context/login_context";
 import { Order_provider } from "./context/Order_context";
 import { Inventory_provider } from "./context/products_context";
+import { ModalProvider } from "./context/Modal_context";
 function Main() {
     
     const [showModal,setShowModal] = useState(false);

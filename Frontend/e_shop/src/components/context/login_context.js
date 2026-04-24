@@ -49,8 +49,7 @@ export function LoginProvider ({children}) {
 
 
          const {message,token,user_id,email} = res.data;
-         console.log(message)
-         console.log(user_id)
+         
          setInfo({
                  auth_token:token,
                  user_id: user_id,

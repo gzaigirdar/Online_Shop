@@ -5,8 +5,11 @@ import { useForm } from "react-hook-form";
 import RevRating from "../rev_rating";
 import Msg_confirm from "@/components/Msg_confirm";
 import { review_context } from '../../context/review_context';
+import { Login } from "@/components/context/login_context";
+
 
 function Review_form({submit_rev}) {
+    const {userInfo} = useContext(Login)
     const {submitReview} = useContext(review_context); 
     const {register,handleSubmit,formState:{errors}} = useForm();
     const [number,setNUm] = useState(1)
@@ -14,8 +17,9 @@ function Review_form({submit_rev}) {
     const ratings = [1,2,3,4,5]
     const [submitted,setSubmit] = useState(false)
     async function onSubmit(data){
+        let userId = userInfo['user_id']
         let review_data = {
-            //"user_id":"69003431b882ce41b6f3dadf",
+            "user_id":userId,
             "review": data['review'],
             "rating":number
         }
@@ -101,7 +105,7 @@ function Review_form({submit_rev}) {
                     
                     <button type="submit" className="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-3"
                     >
-                        Login to Post Review
+                        submit Review
                     </button>
                     </div>
                 </form>

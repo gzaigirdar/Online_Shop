@@ -1,22 +1,39 @@
+import { useForm } from "react-hook-form";
+import {useState} from 'react';
+import {z} from 'zod';
+import { zodResolver } from "@hookform/resolvers/zod";
+const schema = z.object(
+  {email: z.string().email({message:"invalid email"})}
+  )
 function Contact() {
+
+  
+  const {register,handleSubmit,formState: { errors }  } = useForm(
+                                                  {resolver: zodResolver(schema)}
+                                                  );
+  function handlesubmit(data){
+    
+    console.log(data['email'])
+
+  }
   return (
-    <div className="bg-gray-50 dark:bg-gray-900 min-h-screen" id="contact">
+    <div className="min-h-screen w-full" id="contact">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 text-center">
-        <h2 className="text-4xl font-bold dark:text-gray-100">Contact</h2>
-        <p className="pt-6 pb-6 text-base max-w-2xl text-center m-auto dark:text-gray-400">
+        <h2 className="text-4xl font-bold text-gray-900">Contact</h2>
+        <p className="pt-6 pb-6 text-base max-w-full text-center m-auto text-black">
           Want to contact us? Choose an option below and we'll be happy to show you how we can transform
           company's web experience.
         </p>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16 grid md:grid-cols-2 lg:grid-cols-2 gap-y-8 md:gap-x-8 md:gap-y-8 lg:gap-x-8 lg:gap-y-16">
+      <div className="max-w-full mx-auto px-4 sm:px-4 lg:px-8 pt-8 pb-16 grid md:grid-cols-2 lg:grid-cols-2 gap-y-8 md:gap-x-8 md:gap-y-8 lg:gap-x-8 lg:gap-y-16">
         <div>
-          <h2 className="text-lg font-bold dark:text-gray-100">Contact Us</h2>
-          <p className="max-w-sm mt-4 mb-4 dark:text-gray-400">
+          <h2 className="text-lg font-bold text-gray-900">Contact Us</h2>
+          <p className="max-w-sm mt-4 mb-4 text-gray-900">
             Have something to say? We are here to help. Fill up the form or send email or call phone.
           </p>
 
-          <div className="flex items-center mt-8 space-x-2 text-dark-600 dark:text-gray-400">
+          <div className="flex items-center mt-8 space-x-2 text-gray-900">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -35,7 +52,7 @@ function Contact() {
             <span>14th avenue glory road</span>
           </div>
 
-          <div className="flex items-center mt-2 space-x-2 text-dark-600 dark:text-gray-400">
+          <div className="flex items-center mt-2 space-x-2 text-gray-900">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -54,7 +71,7 @@ function Contact() {
             <a href="mailto:hello@company.com">hello@company.com</a>
           </div>
 
-          <div className="flex items-center mt-2 space-x-2 text-dark-600 dark:text-gray-400">
+          <div className="flex items-center mt-2 space-x-2 text-gray-900">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -75,7 +92,7 @@ function Contact() {
         </div>
 
         <div>
-          <form>
+          <form onSubmit={handleSubmit(handlesubmit)}>
             <input type="checkbox" name="botcheck" className="hidden" />
 
             <div className="mb-5">
@@ -93,17 +110,20 @@ function Contact() {
                 Email Address
               </label>
               <input
+                {...register('email')}
                 id="email_address"
                 type="email"
-                name="email"
+                
                 placeholder="Email Address"
                 autoComplete="off"
                 className="w-full px-4 py-3 border-2 placeholder:text-gray-800 dark:text-white rounded-md outline-none dark:placeholder:text-gray-200 dark:bg-gray-900 focus:ring-4 border-gray-300 focus:border-gray-600 ring-gray-100 dark:border-gray-600 dark:focus:border-white dark:ring-0"
               />
+              {errors.email && <p className="text-red-500 mb-3"> {errors.email.message}</p>}
             </div>
 
             <div className="mb-3">
               <textarea
+                {...register('message')}
                 name="message"
                 placeholder="Your Message"
                 className="w-full px-4 py-3 border-2 placeholder:text-gray-800 dark:text-white dark:placeholder:text-gray-200 dark:bg-gray-900 rounded-md outline-none h-36 focus:ring-4 border-gray-300 focus:border-gray-600 ring-gray-100 dark:border-gray-600 dark:focus:border-white dark:ring-0"

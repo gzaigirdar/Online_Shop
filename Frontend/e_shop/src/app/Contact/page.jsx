@@ -18,7 +18,7 @@ export default function ContactPage() {
       <Navbar open_modal={open_modal} />
 
       {/* Main content */}
-      <div className="min-h-screen">
+      <div className="bg-gradient-to-r from-slate-100 to-slate-900 min-h-screen">
         <Contact />
       </div>
 
