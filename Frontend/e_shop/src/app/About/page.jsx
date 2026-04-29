@@ -14,7 +14,8 @@ export default function AboutPage() {
   }
 
   return (
-    <LoginProvider>
+   <>
+   
       <Navbar open_modal={open_modal} />
 
    
@@ -27,6 +28,7 @@ export default function AboutPage() {
           <Loginform closeIt={() => setShowModal(false)} />
         </Modal>
       )}
-    </LoginProvider>
+    </>
+    
   );
 }

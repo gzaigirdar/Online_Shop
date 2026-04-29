@@ -4,6 +4,7 @@ import Navbar from "@/components/navbar/Navbar";
 import Modal from "@/components/modals/Modal";
 import Loginform from "@/components/Login/Loginform";
 import { LoginProvider } from "@/components/context/login_context";
+import { Inquiry_Provider } from "@/components/context/inquiry_context";
 import Contact from "@/components/Contact_us/Contact";
 
 export default function ContactPage() {
@@ -14,13 +15,15 @@ export default function ContactPage() {
   }
 
   return (
-    <LoginProvider>
+    <>
       <Navbar open_modal={open_modal} />
 
       {/* Main content */}
+      <Inquiry_Provider>
       <div className="bg-gradient-to-r from-slate-100 to-slate-900 min-h-screen">
-        <Contact />
+        <Contact open_modal={open_modal} />
       </div>
+      </Inquiry_Provider>
 
       {/* Modal for login */}
       {showModal && (
@@ -28,6 +31,7 @@ export default function ContactPage() {
           <Loginform closeIt={() => setShowModal(false)} />
         </Modal>
       )}
-    </LoginProvider>
+      </>
+    
   );
 }

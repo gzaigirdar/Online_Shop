@@ -17,7 +17,7 @@ export default function ReviewPage() {
   }
 
   return (
-    <LoginProvider>
+  <>
       <ReviewProvider>
 
       <Navbar open_modal={open_modal} />
@@ -56,6 +56,6 @@ export default function ReviewPage() {
         </Modal>
       )}
       </ReviewProvider>
-    </LoginProvider>
+   </>
   );
 }

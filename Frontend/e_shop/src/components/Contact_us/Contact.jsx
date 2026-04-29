@@ -1,23 +1,58 @@
 import { useForm } from "react-hook-form";
-import {useState} from 'react';
+import {useState,useContext} from 'react';
 import {z} from 'zod';
 import { zodResolver } from "@hookform/resolvers/zod";
-const schema = z.object(
-  {email: z.string().email({message:"invalid email"})}
-  )
-function Contact() {
+import { Login } from "../context/login_context";
+import { InquiryContext } from "../context/inquiry_context";
 
-  
+
+const schema = z.object(
+  {
+  phone_num: z
+    .string()
+    .regex(
+      /^[0-9\s\-()]+$/,
+      { message: "invalid phone number" }
+    ),
+    message: z.string().optional()
+  }
+  )
+function Contact({open_modal}) { 
+  const [error,setError] = useState(null);
+  const [showForm,setShowform] = useState(true)
+  //const {logged,userInfo} = useContext(Login)
+  const {submitInquiry} = useContext(InquiryContext)
+  const {logged,userInfo} = useContext(Login)
   const {register,handleSubmit,formState: { errors }  } = useForm(
                                                   {resolver: zodResolver(schema)}
                                                   );
-  function handlesubmit(data){
-    
-    console.log(data['email'])
+  async function handlesubmit(data){
+    if(!logged){
+      open_modal()
+      return
+    }
+    const {phone_num,message} = data;
+    console.log(message)
+    let user_id = userInfo['user_id']
+    const details = {
+      id:user_id,
+      message:message,
+      PhoneNumber:phone_num
+    }
+
+    try {
+      const res = await submitInquiry(details)
+      setShowform(false)
+      
+    } catch (error) {
+      setError(error.message)
+      
+    }
 
   }
+  
   return (
-    <div className="min-h-screen w-full" id="contact">
+    <div className="min-h-screen w-full " id="contact">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 text-center">
         <h2 className="text-4xl font-bold text-gray-900">Contact</h2>
         <p className="pt-6 pb-6 text-base max-w-full text-center m-auto text-black">
@@ -84,60 +119,78 @@ function Contact() {
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
+                d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z "
               />
             </svg>
             <a href="tel:11111111111">+51 11111111111</a>
           </div>
         </div>
-
-        <div>
-          <form onSubmit={handleSubmit(handlesubmit)}>
+      { showForm ?
+        <div >
+          <form  className="bg-gray-700 rounded-2xl px-5 py-5" onSubmit={handleSubmit(handlesubmit)}>
             <input type="checkbox" name="botcheck" className="hidden" />
 
             <div className="mb-5">
               <input
+              {...register('phone_num')}
                 type="text"
-                name="name"
-                placeholder="Full Name"
+                
+                placeholder="Phone number"
                 autoComplete="off"
-                className="w-full px-4 py-3 border-2 placeholder:text-gray-800 dark:text-white rounded-md outline-none dark:placeholder:text-gray-200 dark:bg-gray-900 focus:ring-4 border-gray-300 focus:border-gray-600 ring-gray-100 dark:border-gray-600 dark:focus:border-white dark:ring-0"
+                className="w-full  px-4 py-3 border-2 placeholder:text-gray-800 dark:text-white rounded-lg  outline-none dark:placeholder:text-gray-200 dark:bg-gray-900 focus:ring-4 border-gray-300 focus:border-gray-600 ring-gray-100 dark:border-gray-600 dark:focus:border-white dark:ring-0"
               />
+               {errors.phone_num && <p className="text-red-500 mb-3"> {errors.phone_num.message}</p>}
             </div>
 
-            <div className="mb-5">
-              <label htmlFor="email_address" className="sr-only">
-                Email Address
-              </label>
-              <input
-                {...register('email')}
-                id="email_address"
-                type="email"
-                
-                placeholder="Email Address"
-                autoComplete="off"
-                className="w-full px-4 py-3 border-2 placeholder:text-gray-800 dark:text-white rounded-md outline-none dark:placeholder:text-gray-200 dark:bg-gray-900 focus:ring-4 border-gray-300 focus:border-gray-600 ring-gray-100 dark:border-gray-600 dark:focus:border-white dark:ring-0"
-              />
-              {errors.email && <p className="text-red-500 mb-3"> {errors.email.message}</p>}
-            </div>
+        
 
             <div className="mb-3">
               <textarea
                 {...register('message')}
-                name="message"
+                
                 placeholder="Your Message"
-                className="w-full px-4 py-3 border-2 placeholder:text-gray-800 dark:text-white dark:placeholder:text-gray-200 dark:bg-gray-900 rounded-md outline-none h-36 focus:ring-4 border-gray-300 focus:border-gray-600 ring-gray-100 dark:border-gray-600 dark:focus:border-white dark:ring-0"
+                className="w-full px-4 py-3 border-2 placeholder:text-gray-800 dark:text-white dark:placeholder:text-gray-200 dark:bg-gray-900 rounded-lg outline-none h-36 focus:ring-4 border-gray-300 focus:border-gray-600 ring-gray-100 dark:border-gray-600 dark:focus:border-white dark:ring-0"
               ></textarea>
             </div>
+            {error && <p className="text-red-700"> {error} </p>}
 
             <button
               type="submit"
-              className="w-full py-4 font-semibold text-white transition-colors bg-gray-900 rounded-md hover:bg-gray-800 focus:outline-none focus:ring-offset-2 focus:ring focus:ring-gray-200 px-7 dark:bg-white dark:text-black"
+              className="w-full py-4 font-semibold text-white transition-colors bg-gray-900 rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-offset-2 focus:ring focus:ring-gray-200 px-7 dark:bg-white dark:text-black"
             >
-              Send Message
+              {logged ? 'Send Message' : 'Log in to send a Message'}
             </button>
           </form>
-        </div>
+        </div>:
+        (<div class="min-h-sm flex items-center justify-center">
+            <div class="bg-white shadow-lg rounded-2xl p-6 max-w-sm text-center">
+              
+              
+              <div class="flex items-center justify-center w-12 h-12 mx-auto mb-4 bg-green-100 rounded-full">
+                <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+
+              
+              <h2 class="text-xl font-semibold text-gray-800">
+                Submission Successful
+              </h2>
+
+              <p class="text-gray-600 mt-2">
+                Your form has been submitted successfully. We’ll get back to you soon.
+              </p>
+
+             { /*<button class="mt-5 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+                Go Back
+              </button> */}
+
+              </div>
+            </div>
+        )
+        }
       </div>
     </div>
   );

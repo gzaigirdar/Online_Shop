@@ -1,6 +1,7 @@
 
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { LoginProvider } from "@/components/context/login_context";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,11 +19,13 @@ export default function RootLayout({ children }) {
     <body>
     
      
-      
+      <LoginProvider>
+
       <main>{children}</main>
         
       <div id="modal-root">  </div>
      
+      </LoginProvider>
     </body>
   </html>
   )

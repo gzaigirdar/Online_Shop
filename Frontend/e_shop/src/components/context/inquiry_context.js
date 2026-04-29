@@ -23,7 +23,8 @@ async function submitInquiry(inquiryData){
         const res = await axios.post(`${inquiry_url}/submitInquiry`,inquiryData,{withCredentials:true})
         return res.data
     } catch (error) {
-        return error
+         const message = error.response?.data?.message || 'Something went wrong'
+         throw new Error(message)  
     }
 }
 

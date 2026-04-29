@@ -1,5 +1,5 @@
 'use client'
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import Products from "./products/Products";
 import Navbar from "./navbar/Navbar";
 import Modal from "./modals/Modal";
@@ -15,9 +15,12 @@ function Main() {
     function open_modal(){
       setShowModal(true)
     }
+    useEffect(() => {
+  console.log("Main mounted");
+    }, []); 
     return (  
       <div>
-          <LoginProvider>
+         
         
         <Navbar open_modal={open_modal}/>
         <Inventory_provider>
@@ -28,7 +31,7 @@ function Main() {
           <Loginform closeIt={() => setShowModal(false)} />
         </Modal>
       )}
-      </LoginProvider>
+     
    </div>
    
     

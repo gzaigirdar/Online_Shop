@@ -26,6 +26,7 @@ function Review_form({submit_rev}) {
         try{
             await submitReview(review_data)
             setSubmit(true)
+            setError_msg(null)
         }
         catch(error){
             setError_msg(error.message)
