@@ -2,7 +2,7 @@
 import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
 import { useState } from 'react'
 
-function OrderModal({open,setOpen,children}) {
+function DashModal({open,setOpen,children}) {
 
 
   return (
@@ -33,4 +33,4 @@ function OrderModal({open,setOpen,children}) {
   )
 }
 
-export default OrderModal;
+export default DashModal;

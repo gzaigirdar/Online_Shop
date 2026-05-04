@@ -44,7 +44,7 @@ function InvTable() {
       // Close modal
       const close_edit = () => {
         if (dialogRef.current) dialogRef.current.close();
-        // have reset form bool otherwise edit form will not open the second attempt of opening it
+      
         setChoice('')
       };
      

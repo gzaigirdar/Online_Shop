@@ -8,6 +8,8 @@ import Inventory from "./Inventory/Inventory";
 import dynamic from "next/dynamic";
 import DashOrder from "./Dash_order/DashOrder";
 import axios from "axios";
+import MainReview from "./Dash_reviews/main_review";
+import { ReviewProvider } from "../context/review_context";
 
 
 function DashBoard() {
@@ -101,10 +103,14 @@ function DashBoard() {
                     <p> Messages </p>
                 </div>
             ): comp == 'Reviews'? (
-                <div>
-                    <p> Reviews </p>
-                </div>
-            ): 
+                <ReviewProvider>
+
+                    <div>
+                        
+                        <MainReview/>
+                    </div>
+                </ReviewProvider>
+                ): 
             (
                 <p> empty</p>
             )

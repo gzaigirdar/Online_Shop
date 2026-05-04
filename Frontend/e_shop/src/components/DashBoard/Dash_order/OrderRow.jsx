@@ -1,10 +1,10 @@
 'use client'
 import { useContext, useState } from "react";
-import OrderModal from "./OrderModal";
 import OrderDetails from "./OrderDetails";
 import OrderEdit from "@/components/order/OrderEdit";
+import DashModal from "../Dashboard modal/DashModal";
 
-import Modal from "@/components/modals/Modal";
+
 
 function OrderRow({ order_id, status, fname, lname, total, items, address, date }) {
 
@@ -51,13 +51,13 @@ function OrderRow({ order_id, status, fname, lname, total, items, address, date 
     <>
       {form ? (
         type_form === 'details' ? (
-          <OrderModal open={form} setOpen={closeForm}>
+          <DashModal open={form} setOpen={closeForm}>
             <OrderDetails order_id={order_id} status={stat} fname={fname} lname={lname} total={total} items={items} address={address} date={date} />
-          </OrderModal>
+          </DashModal>
         ) : type_form === 'edit' ? (
-          <OrderModal open={form} setOpen={closeForm}>
+          <DashModal open={form} setOpen={closeForm}>
             <OrderEdit  status={stat} order_id={order_id} updateStat={updateStat}/>
-          </OrderModal>
+          </DashModal>
 
         ) : null
       ) : null}

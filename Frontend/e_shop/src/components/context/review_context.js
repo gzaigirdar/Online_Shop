@@ -6,7 +6,7 @@ export const review_context = createContext();
 export function ReviewProvider({children}){
     const [reviews,setReview] = useState([])
     const review_url = process.env.NEXT_PUBLIC_DB_API_Review;
-
+    
 
     async function getReviews(){
         try{
@@ -24,14 +24,18 @@ export function ReviewProvider({children}){
     }
 
     async function deleteReview(id){
+        
 
         try{
-            const msg = await axios.delete(`${review_url}/deleteReview?id=${id}`,{withCredentials:true})
+            const msg = await axios.delete(`${review_url}/deleteReview/${id}`,{withCredentials:true})
+            setReview((prev) => prev.filter((rev) => rev._id !== id ))
+            
             return msg.data
 
         }
         catch(error){
-            return error.message 
+            console.log(error)
+            return error
         }
 
 
