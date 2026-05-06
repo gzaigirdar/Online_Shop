@@ -12,19 +12,20 @@ const AddOrder = AsyncHandler(async (req, res) => {
         address,
         
         
-    });
+    }); 
     res.status(201).json({ confirmation: "Submitted" });
 });
 const GetAllOrders = AsyncHandler(async (req, res) => {
     const orders = await OrderModel.find({})
-        .populate("user", "name.fname name.lname") 
+        .populate("user", "name") 
         .populate({
             path: "items.product",                   
             select: "name price type"               
         })
-        .select("_id total orderStatus items address createdAt")
+        .select("_id user total orderStatus items address createdAt")
         .lean();
-
+    
+    
     const formattedOrders = orders.map(order => {
         return {
             _id: order._id,
@@ -51,7 +52,7 @@ const GetAllOrders = AsyncHandler(async (req, res) => {
 const FindOrder = AsyncHandler(async (req, res) => {
     const { order_id } = req.params;
     const order = await OrderModel.findById(order_id)
-        .populate("user", "username")
+        .populate("user", "name username")
         .populate("items.product", "name type price");
     if (!order) {
         return res.status(404).json({ message: "Order doesn't exist" });

@@ -10,6 +10,10 @@ const contactSchema = mongoose.Schema(
         message:{
             type: String,
             required: true
+        },
+        PhoneNumber:{
+            type: String,
+            required: true
         }
     }
 )

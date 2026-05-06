@@ -18,7 +18,8 @@ const getreviews = AsyncHandler(async (req,res) => {
     {$project:{
         Review:1,
         Rating:1,
-        username:'$userdata.username'
+        username:'$userdata.username',
+        name: '$userdata.name'
     }}
 
 
@@ -42,7 +43,7 @@ const submitReview = AsyncHandler(async (req,res) =>{
     const {user_id,review,rating} = req.body;
     if(!user_id || !review || !rating){
         res.status(400)
-        throw new Error('review or rating missing')
+        throw new Error('review or rating or id missing')
     }
 
     try{
@@ -65,7 +66,8 @@ const submitReview = AsyncHandler(async (req,res) =>{
 }
 )
 const deleteReview = AsyncHandler(async (req,res) =>{
-    const {id} = req.body
+    const id = req.params.id
+    
     if(!id){
         res.status(400)
         throw new Error('id not found')

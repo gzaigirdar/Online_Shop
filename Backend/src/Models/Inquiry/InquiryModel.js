@@ -4,7 +4,7 @@ import userModel from "../../Models/userModel.js";
 const InquirySchema = mongoose.Schema({
     UserId:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'userModel',
+        ref: 'User',
         required:true
 
 
@@ -13,7 +13,11 @@ const InquirySchema = mongoose.Schema({
   message:{
     type: String,
     required:true
-  }
+  },
+   PhoneNumber:{
+            type: String,
+            required: true
+    }
 })
 
 

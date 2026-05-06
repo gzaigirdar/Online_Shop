@@ -7,6 +7,6 @@ const ReviewRouter = express.Router()
 
 ReviewRouter.route('/getReviews').get(getreviews)
 ReviewRouter.route('/submitReview').post(trimRequest.all,submitReview)
-ReviewRouter.route('/deleteReview').delete(deleteReview)
+ReviewRouter.route('/deleteReview/:id').delete(deleteReview)
 
 export default ReviewRouter;
