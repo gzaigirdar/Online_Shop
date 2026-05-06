@@ -5,7 +5,8 @@ const InquiryContext = createContext();
 
 function Inquiry_Provider({children}){
 const inquiry_url = process.env.NEXT_PUBLIC_DB_API_Inquiry;
-const [inquires,setInquiries] = useState([])
+const [inquiries,setInquiries] = useState([])
+ 
 
 
 async function getInquiries(){
@@ -44,7 +45,7 @@ useEffect(()=>{
 
 
 return(
-    <InquiryContext.Provider value={{inquires,getInquiries,deleteInquiry,submitInquiry}}>
+    <InquiryContext.Provider value={{inquiries,getInquiries,deleteInquiry,submitInquiry}}>
         {children}
     </InquiryContext.Provider>
 )

@@ -10,7 +10,8 @@ import DashOrder from "./Dash_order/DashOrder";
 import axios from "axios";
 import MainReview from "./Dash_reviews/main_review";
 import { ReviewProvider } from "../context/review_context";
-
+import { Inquiry_Provider } from "../context/inquiry_context";
+import ContactMain from "./Contact/contact_main";
 
 function DashBoard() {
     const WeeklyBarChart = dynamic(() => import("./OverView/Weekly_chart"), { ssr: false });
@@ -100,7 +101,10 @@ function DashBoard() {
                 </div>
             ): comp == 'Msg'? (
                 <div>
-                    <p> Messages </p>
+                    <Inquiry_Provider>
+                    <ContactMain/>
+                    </Inquiry_Provider>
+
                 </div>
             ): comp == 'Reviews'? (
                 <ReviewProvider>
