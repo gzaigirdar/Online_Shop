@@ -11,7 +11,10 @@ import axios from "axios";
 import MainReview from "./Dash_reviews/main_review";
 import { ReviewProvider } from "../context/review_context";
 import { Inquiry_Provider } from "../context/inquiry_context";
+import { UsersProvider } from "../context/user_context";
 import ContactMain from "./Contact/contact_main";
+import UsersMain from "./Dash_Users/UsersMain";
+
 
 function DashBoard() {
     const WeeklyBarChart = dynamic(() => import("./OverView/Weekly_chart"), { ssr: false });
@@ -115,9 +118,15 @@ function DashBoard() {
                     </div>
                 </ReviewProvider>
                 ): 
-            (
-                <p> empty</p>
-            )
+                (
+                    <UsersProvider>
+                        <div>
+
+                        <UsersMain/>
+                        </div>
+
+                    </UsersProvider>
+                )
 
 
             }

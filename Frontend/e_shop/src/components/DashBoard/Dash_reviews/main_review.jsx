@@ -8,6 +8,11 @@ function MainReview() {
  
     return (
         <>
+          <div className="flex flex-col justify-center items-center bg-gray-900 mx-2 mb-2 rounded-lg font-extrabold font-stretch-75%">
+            <h1 className="text-2lg text-red-500 text-shadow-2xs"> REVIEWS </h1>
+            
+
+          </div>
       
 
 

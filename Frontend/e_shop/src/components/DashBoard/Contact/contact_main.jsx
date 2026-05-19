@@ -3,11 +3,17 @@ import { InquiryContext } from "@/components/context/inquiry_context";
 import ContactRow from "./contact_row";
 function ContactMain() {
   const{inquiries} = useContext(InquiryContext);
+  console.log(inquiries)
 
   
 
     return ( 
         <>
+          <div className="flex flex-col justify-center items-center bg-gray-900 mx-2 mb-2 rounded-lg font-extrabold font-stretch-75%">
+            <h1 className="text-2lg text-red-500 text-shadow-2xs"> MESSAGES </h1>
+            
+
+          </div>
         <div className="shadow overflow-x-auto rounded border border-gray-200 overflow-y-auto max-h-[300px] mx-2">
           <table className="min-w-full bg-white table-auto">
             <thead className="bg-gray-800 text-white sticky top-0 z-10">
