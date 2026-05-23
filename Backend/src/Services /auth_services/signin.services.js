@@ -15,7 +15,7 @@ async function signin(email,password) {
       let check = await brypt.compare(password,user.password)
       
       if(!check){
-        throw createHttpError.NotFound('user not found')
+        throw createHttpError.NotFound('password doesnt match')
         
       }
 
