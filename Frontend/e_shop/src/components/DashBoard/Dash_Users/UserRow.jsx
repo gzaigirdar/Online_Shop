@@ -1,12 +1,13 @@
 import { useState } from "react";
 import DashModal from "../Dashboard modal/DashModal";
 import UserDetails from "./userDetails";
+import UserAction from "./UserAction";
 function UserRow({user}) {
     const status = user.admin? 'Admin':'User';
     const [details,setDetails] = useState(false);
-    function showDetails(){
-      setDetails(false)
-    }
+    const [actions,setActions] = useState(false)
+    const [error,setError] = useState(false)
+   
     
     return (  
 
@@ -19,12 +20,17 @@ function UserRow({user}) {
                 
                 <td className="py-3 px-4 space-x-2">
                   <button onClick={()=> setDetails(true)} className="px-3 py-1 bg-yellow-500 hover:bg-yellow-600 text-white text-xs rounded">Details</button>
-                  <button onClick={()=> console.log('clicked')} className="px-3 py-1 bg-red-500 hover:bg-red-600 text-white text-xs rounded">Delete</button>
+                  <button onClick={()=> setActions(true)} className="px-3 py-1 bg-red-500 hover:bg-red-600 text-white text-xs rounded">Delete</button>
                 </td>
             </tr>
               <div>
                 <DashModal open={details} setOpen={setDetails}>
                   <UserDetails name={user.name} email={user.email} status={status} creationDate={user.createdAt} />
+                </DashModal>
+              </div>
+              <div>
+                <DashModal open={actions} setOpen={setActions}>
+                  <UserAction/>
                 </DashModal>
               </div>
 
