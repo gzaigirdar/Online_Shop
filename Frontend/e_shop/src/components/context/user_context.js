@@ -21,6 +21,27 @@ export function UsersProvider({children}){
         }
 
     }
+
+    async function changeStatus(data){
+        try {
+            await axios.patch(`${users_api}/changeStatus`,data,{withCredentials:true})
+            await getusers()
+        } catch (error) {
+            return error;
+            
+        }
+    }
+
+    async function deleteuser(id){
+        try {
+            const res = await axios.delete(`${users_api}/deleteUser/${id}`)
+            await getusers();
+        } catch (error) {
+            return error 
+            
+        }
+
+    }
     useEffect(()=>{
         getusers()
         
@@ -31,7 +52,7 @@ export function UsersProvider({children}){
 
 
     return(
-        <users_context.Provider value={{users}} >
+        <users_context.Provider value={{users,deleteuser,changeStatus}} >
             {children}
         </users_context.Provider>
         

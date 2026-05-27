@@ -30,7 +30,7 @@ function UserRow({user}) {
               </div>
               <div>
                 <DashModal open={actions} setOpen={setActions}>
-                  <UserAction/>
+                  <UserAction user={user} closeFunc={setActions}/>
                 </DashModal>
               </div>
 
