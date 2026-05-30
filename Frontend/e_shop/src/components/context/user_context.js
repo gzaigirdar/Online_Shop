@@ -37,10 +37,20 @@ export function UsersProvider({children}){
             const res = await axios.delete(`${users_api}/deleteUser/${id}`)
             await getusers();
         } catch (error) {
-            return error 
+            return error;
             
         }
 
+    }
+
+    async function admin_change_password(data){
+        try {
+            const res = await axios.patch(`${users_api}/updatePassbyAdmin`,data,{withCredentials:true})
+            
+        } catch (error) {
+            return error;
+            
+        }
     }
     useEffect(()=>{
         getusers()
@@ -52,7 +62,7 @@ export function UsersProvider({children}){
 
 
     return(
-        <users_context.Provider value={{users,deleteuser,changeStatus}} >
+        <users_context.Provider value={{users,deleteuser,changeStatus,admin_change_password}} >
             {children}
         </users_context.Provider>
         

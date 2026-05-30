@@ -1,11 +1,12 @@
 import { users_context } from "@/components/context/user_context";
 import { useState,useContext, useRef } from "react";
-function ChangeStatus({acc_type,id}) {
+function ChangeStatus({acc_type,id,name}) {
     const {changeStatus} = useContext(users_context);
     const [msg,setMsg] = useState(null);
     const[error,setError] = useState(null);
     //const [status,setStatus] = useState(acc_type)
     const role = useRef(null);
+    const {fname,lname} = name;
 
     async function modifyStatus(){
       try {
@@ -30,7 +31,7 @@ function ChangeStatus({acc_type,id}) {
               <div class="w-72 rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
   <div class="flex items-center justify-between">
     <div>
-      <h3 class="text-sm font-semibold text-gray-900">John Doe</h3>
+      <h3 class="text-sm font-semibold text-gray-900">{fname + ' ' + lname}</h3>
       <p class="text-xs text-gray-500">{acc_type}</p>
     </div>
 

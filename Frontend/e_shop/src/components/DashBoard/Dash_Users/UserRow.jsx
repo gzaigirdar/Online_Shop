@@ -20,7 +20,7 @@ function UserRow({user}) {
                 
                 <td className="py-3 px-4 space-x-2">
                   <button onClick={()=> setDetails(true)} className="px-3 py-1 bg-yellow-500 hover:bg-yellow-600 text-white text-xs rounded">Details</button>
-                  <button onClick={()=> setActions(true)} className="px-3 py-1 bg-red-500 hover:bg-red-600 text-white text-xs rounded">Delete</button>
+                  <button onClick={()=> setActions(true)} className="px-3 py-1 bg-red-500 hover:bg-red-600 text-white text-xs rounded">Edit</button>
                 </td>
             </tr>
               <div>
