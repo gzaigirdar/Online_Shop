@@ -4,13 +4,13 @@ import { users_context } from "@/components/context/user_context";
 
 function UsersMain() {
   const {users} = useContext(users_context);
+  const[search,setSearch] = useState('')
   
     return (  
              <>
           <div className="mx-2 mb-4 rounded-2xl bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 shadow-xl border border-gray-700">
   <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-6 py-5">
-    
-    {/* Title */}
+
     <div className="text-center sm:text-left">
       <h1 className="text-2xl font-bold text-white tracking-wide">
         Users
@@ -20,12 +20,12 @@ function UsersMain() {
       </p>
     </div>
 
-    {/* Search */}
     <div className="flex items-center w-full sm:w-80 bg-white/10 backdrop-blur-md border border-gray-600 rounded-xl px-2 py-2 shadow-inner">
       <input
+        onChange={(e)=> setSearch(e.target.value)}
         type="search"
         name="search"
-        placeholder="Search users..."
+        placeholder="Search by User Name"
         className="flex-1 bg-transparent px-3 text-sm text-white placeholder-gray-400 focus:outline-none"
       />
 
@@ -66,8 +66,11 @@ function UsersMain() {
             <tbody className="text-gray-700 ">
               
               { 
-              users.map((user)=>(
-                <UserRow user={user} />
+              users.filter((user)=>{
+                return search.toLowerCase() === '' ? user : user.username.toLowerCase().includes(search);
+
+              }).map((user)=>(
+                <UserRow key={user._id} user={user} />
 
               ))
                
