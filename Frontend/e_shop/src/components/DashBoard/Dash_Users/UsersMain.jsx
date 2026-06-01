@@ -74,30 +74,7 @@ function UsersMain() {
 
               ))
                
-              
-
-              
-              /*
-              inquiries.map((inquiry) => (
-               
-                  <ContactRow inquiry={inquiry} />
-
-                ))
-              }
-              
-             
-          
-              
-              
-              
-              
-              
-              
-              
-              
-             
-             
-              {/* more rows... */}
+            }
             </tbody>
           </table>
          

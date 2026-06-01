@@ -18,6 +18,8 @@ function ContactConfirm({name,id,close}) {
     return (  
         <>
             <div>
+             
+     
             <span className=" items-center rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-gray-700 text-center">
                 {name.fname + ' ' + name.lname}
                 </span>

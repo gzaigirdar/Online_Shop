@@ -20,7 +20,7 @@ function ContactRow({inquiry}) {
         <>
         <tr className="bg-gray-50">
                 <td className="py-3 px-4">{inquiry.UserId.email}</td>
-                <td className="py-3 px-4">{inquiry.UserId.username}</td>
+                <td className="py-3 px-4">{inquiry.UserId.name.fname + ' ' +inquiry.UserId.name.lname}</td>
                
                 
                 <td className="py-3 px-4 space-x-2">
