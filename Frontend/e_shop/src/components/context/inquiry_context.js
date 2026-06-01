@@ -31,9 +31,11 @@ async function submitInquiry(inquiryData){
 
 
 async function deleteInquiry(id){
+   
     try {
         const res = await axios.delete(`${inquiry_url}/deleteInquiry?id=${id}`,{withCredentials:true})
-        return res.data
+        getInquiries()
+        
     } catch (error) {
         return error
     }

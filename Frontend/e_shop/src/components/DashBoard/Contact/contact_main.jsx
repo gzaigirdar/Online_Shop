@@ -3,7 +3,7 @@ import { InquiryContext } from "@/components/context/inquiry_context";
 import ContactRow from "./contact_row";
 function ContactMain() {
   const{inquiries} = useContext(InquiryContext);
-  console.log(inquiries)
+
 
   
 
