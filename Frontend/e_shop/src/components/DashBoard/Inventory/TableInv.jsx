@@ -1,117 +1,83 @@
 'use client'
 
 import InvRow from "./InvRow";
-import { useState,useRef,useEffect, useContext} from "react";
-import Edit_item from "./Edit_item";
+import { useState, useContext} from "react";
 import AddProd from "./AddProd";
-import axios from "axios";
 import { Inventory_context } from "@/components/context/products_context";
+import DashModal from "../Dashboard modal/DashModal";
 
 
 
 function InvTable() {
 
-      const {prod_data} = useContext(Inventory_context)
-      
+  const {prod_data} = useContext(Inventory_context)
+  const [search, setSearch] = useState('');
+  const [showAddModal, setShowAddModal] = useState(false);
 
-      
-      const dialogRef = useRef(null);
-
-   
-      // details of item that will redner with the edit form
-      const [details,setDetails] =useState('');
-      // state to show which form to render the dialog with
-      const [formchoice,setChoice] = useState('')
-      function set_form(val){
-        setChoice(val)
-
-      }
-      
-      useEffect(()=>{
-          if(formchoice  && dialogRef.current){
-            dialogRef.current.showModal()
-          }
-        },[formchoice])
-
-      // holds either edit or add based on this the type form is decided 
-      function set_form_info(data){
-        setChoice(data)
-      }
-
-      const set_item_details = (info) => setDetails(info); 
-
-    
-      // Close modal
-      const close_edit = () => {
-        if (dialogRef.current) dialogRef.current.close();
-      
-        setChoice('')
-      };
-     
-
-      
   return (
     <>
-      <div className="flex items-center justify-between w-2/3 px-4 md:px-8 max-w-full mx-auto bg-gradient-to-r from-slate-500 to-neutral-400 rounded-2xl shadow-2xl">
-  {/* Title */}
-  <h2 className="text-xl font-semibold text-gray-800">Products</h2>
+      <div className="mx-2 mb-4 rounded-2xl bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 shadow-xl border border-gray-700">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-6 py-5">
 
-  
-  <button  className="bg-green-400 text-white text-xs font-bold px-2 py-2 hover:bg-red-600 rounded-full"
-  onClick={()=> {
-    setChoice('add')
-    setDetails('')
-  }}>
-    Add New Product
-  </button>
+          {/* Title */}
+          <div className="text-center sm:text-left">
+            <h1 className="text-2xl font-bold text-white tracking-wide">
+              Products
+            </h1>
+            <p className="text-sm text-gray-400 mt-1">
+              Search and manage products
+            </p>
+          </div>
 
-  {/* Search bar */}
-  <div className="flex items-center space-x-2 w-48 sm:w-60 p-1 rounded">
-    <input
-      type="search"
-      name="search"
-      placeholder="Search"
-      className="bg-white h-8 px-3 rounded-full text-sm text-black focus:outline-none border border-gray-300 shadow-sm w-full"
-    />
-    <button
-      type="submit"
-      className="flex items-center justify-center h-8 w-8 rounded-full bg-green-400 text-white shadow"
-    >
-      <svg
-        className="h-4 w-4"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 56.966 56.966"
-        fill="currentColor"
-      >
-        <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  
-          s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  
-          c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  
-          s-17-7.626-17-17S14.61,6,23.984,6z" />
-      </svg>
-    </button>
-  </div>
-</div>
+          {/* search button */}
+          <div className="flex items-center w-full sm:w-80 bg-white/10 backdrop-blur-md border border-gray-600 rounded-xl px-2 py-2 shadow-inner">
+            <input
+              onChange={(e) => setSearch(e.target.value)}
+              type="search"
+              name="search"
+              placeholder="Search Products by Name"
+              className="flex-1 bg-transparent px-3 text-sm text-white placeholder-gray-400 focus:outline-none"
+            />
 
-    
+            <button
+              type="submit"
+              className="flex items-center justify-center h-10 w-10 rounded-lg bg-green-500 hover:bg-green-400 transition-all duration-200 shadow-md"
+            >
+              <svg
+                className="h-4 w-4 text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 56.966 56.966"
+                fill="currentColor"
+              >
+                <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23
+                  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92
+                  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17
+                  s-7.626,17-17,17s-17-7.626-17-17S14.61,6,23.984,6z" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Add Product Button */}
+          <button
+            className="bg-green-500 hover:bg-green-400 text-white font-semibold px-5 py-3 rounded-xl shadow-md transition-all duration-200"
+            onClick={() => setShowAddModal(true)}
+          >
+            + Add New Product
+          </button>
+
+        </div>
+      </div>
+
+
       {/* Table */}
       <div className="px-4 w-sm sm:w-full md:px-8 py-4  max-w-full mx-auto  ">
-      <dialog
-          ref={dialogRef}
-          className="p-2  shadow-lg max-w-xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 fixed bg-gray-400 rounded-2xl"
-        >
-          {formchoice === 'add' ? (
-            <AddProd closeit={close_edit} />
-          ) : formchoice === 'edit' && details ? (
-            <Edit_item closeit={close_edit} details={details} />
-          ) : null}
-        </dialog>
-    
 
+        {/* Add Product Modal */}
+        <DashModal open={showAddModal} setOpen={setShowAddModal}>
+          <AddProd closeit={() => setShowAddModal(false)} />
+        </DashModal>
 
-
-
-        
-          <div className="shadow overflow-x-auto rounded border border-gray-200 overflow-y-auto max-h-[300px]">
+        <div className="shadow overflow-x-auto rounded border border-gray-200 overflow-y-auto max-h-[300px]">
           <table className="min-w-full bg-white table-auto">
             <thead className="bg-gray-800 text-white sticky top-0 z-10">
               <tr>
@@ -124,36 +90,29 @@ function InvTable() {
               </tr>
             </thead>
             <tbody className="text-gray-700 ">
-              
+
               {
-                prod_data.map( 
+                prod_data.filter((item) => {
+                  return search.toLowerCase() === '' ? item : item.name.toLowerCase().includes(search);
+                }).map(
                   item => (
-                    <InvRow key={item._id} id={item._id} name={item.name} cake_type={item.type} 
-                    price={item.price}  
-                    quantity={item.quantity} set_form_info={set_form_info} set_item_details={set_item_details} />
+                    <InvRow key={item._id} id={item._id} name={item.name} cake_type={item.type}
+                      price={item.price}
+                      quantity={item.quantity}
+                    />
                   )
-
-                  
-
-                  
                 )
               }
-             
-             
+
               {/* more rows... */}
             </tbody>
           </table>
-         
+
         </div>
- 
-        
-        
-        
-        
-        
+
       </div>
-      
-     
+
+
     </>
   );
 }

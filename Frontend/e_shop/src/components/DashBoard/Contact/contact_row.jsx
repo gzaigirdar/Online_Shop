@@ -4,7 +4,7 @@ import ContactDetails from "./contact_details";
 function ContactRow({inquiry}) {
     const[details,showDetails] = useState(false);
     
-    const{fname,lname} = inquiry.UserId.name;
+    const{fname,lname} = inquiry.UserId ? inquiry.UserId.name : 'Not found';
     function openForm(){
       showDetails(false)
     }

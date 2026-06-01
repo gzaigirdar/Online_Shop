@@ -1,10 +1,11 @@
 import { useContext, useState } from "react";
-import { Order_info } from "../context/Order_context";
+import { Order_info } from "../../context/Order_context";
 
 function OrderEdit({ status, order_id,updateStat}) {
   const [value, setValue] = useState(status);
   const [error,setError] = useState(null)
   const[success,setSuccess] = useState(null)
+  const[confirm,setConfirm] = useState(false)
   const {editOrder,deleteOrder,getAllOrders} = useContext(Order_info)
   function handleChange(e){
     const current_val = e.target.value;
@@ -102,15 +103,46 @@ function OrderEdit({ status, order_id,updateStat}) {
         </div>
 
         <hr className="w-full border-t border-black my-4" />
+      <div>
+       { 
+       confirm ? (
+          <div>
+              <span className="rounded-full bg-red-100 px-2 py-1 text-xs font-medium text-red-700">
+                Order Deletion
+                </span>
+            
 
-        <div className="flex justify-center items-center w-full">
-          <button  onClick={handleDelete} className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
-            Delete Order
-          </button>
-        </div>
-      </div>
+            <div className="mt-4 rounded-lg bg-red-50 p-3">
+                <p className="text-xs text-red-600">
+                Confirming this action will  permanently delete this order.
+                </p>
+            </div>
+
+            <button
+                onClick={handleDelete} className="mt-4 w-full rounded-lg bg-red-600 py-2 text-sm font-medium text-white transition hover:bg-red-700"
+                >
+                Delete
+            </button>
+            </div>
+          ) : (
+            <div className="flex justify-center items-center w-full">
+            <button  onClick={()=> setConfirm(true)}  className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+           Delete Order
+         </button>
+           </div>
+     
+      
+
+       )
+      
+
+      }
+       <div/>
+
       {error && <span className="text-red-700 text-lg"> {error} </span>}
       {success && <span className="text-green-700 text-lg"> {success} </span>}
+    </div>
+    </div>
     </div>
   );
 }

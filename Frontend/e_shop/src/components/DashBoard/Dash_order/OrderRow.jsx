@@ -1,7 +1,7 @@
 'use client'
 import { useContext, useState } from "react";
 import OrderDetails from "./OrderDetails";
-import OrderEdit from "@/components/order/OrderEdit";
+import OrderEdit from "@/components/DashBoard/Dash_order/OrderEdit";
 import DashModal from "../Dashboard modal/DashModal";
 
 
@@ -70,9 +70,9 @@ function OrderRow({ order_id, status, fname, lname, total, items, address, date 
       <tr className="bg-gray-50">
 
         <td className="py-3 px-2 text-xsm">{order_id.slice(0, 8)}</td>
-        <td className="py-3 px-2 text-xsm">{fname + ' ' + lname}</td>
+        <td className="py-3 px-2 text-xsm">{address.phone_number}</td>
+        <td className="py-3 px-2 text-xsm">{lname}</td>
         <td className="py-3 px-2 text-xsm">{stat}</td>
-        <td className="py-3 px-2 text-xsm">{total}</td>
         <td className="py-3 px-2 space-x-2">
           <button onClick={() => setForm(true)} className="px-3 py-1 bg-yellow-500 hover:bg-yellow-600 text-white text-xs rounded">Details</button>
           <button onClick={setEdit} className="px-3 py-1 bg-red-500 hover:bg-red-600 text-white text-xs rounded">Edit</button>
