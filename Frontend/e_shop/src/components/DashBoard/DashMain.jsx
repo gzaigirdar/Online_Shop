@@ -49,9 +49,9 @@ function DashBoard() {
     ,[])
    
     return (
-        <div className="flex h-screen ">
+        <div className="flex flex-col sm:flex-row h-screen">
 
-            <div className="w-1/6 h-full ">
+            <div className="w-full sm:w-1/6 h-auto sm:h-full">
               <>
                 <SideBar switch_comp={switch_comp} />
                 
@@ -59,10 +59,10 @@ function DashBoard() {
 
                 </>
 
-         
+          
 
             </div>
-            <div className="w-5/6 h-full overflow-y-auto bg-gray-700">
+            <div className="w-full sm:w-5/6 h-full overflow-y-auto bg-gray-700">
             {comp == 'Overview'?
             ( 
                 <div className="flex flex-col  h-full w-full overscroll-y-auto">

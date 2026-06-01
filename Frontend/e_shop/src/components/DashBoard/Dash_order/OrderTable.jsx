@@ -59,44 +59,39 @@ function OrderTable() {
 </div>
 
 
-      <div className="shadow overflow-x-auto rounded border border-gray-200">
-        <table className="min-w-full bg-white table-auto">
-          <thead className="bg-gray-800 text-white">
-            <tr>
-              <th className="text-left py-3 px-4 uppercase font-semibold text-sm">ID</th>
-              <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Phone Number</th>
-              <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Last Name</th>
-              <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Status</th>
-
-              <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Actions</th>
-            </tr>
-          </thead>
-          <tbody className="text-gray-700">
-            {
-              order_Items.filter((order) => {
-                
-                return searchterm.toLowerCase() === '' ? order : order.address.phone_number.includes(searchterm);
-              }).map((order) => (
-                <OrderRow
-                  key={order._id}
-                  order_id={order._id}
-                  fname={order.fname}
-                  lname={order.lname}
-                  status={order.orderStatus}
-                  total={order.total}
-                  items={order.items}
-                  address={order.address}
-                  date={order.date}
-                />
-
-
-              ))
-            }
-
-
-
-          </tbody>
-        </table>
+      <div className="mx-2 md:mx-auto md:max-w-5xl">
+        <div className="shadow overflow-x-auto rounded border border-gray-200">
+          <table className="min-w-full bg-white table-auto">
+            <thead className="bg-gray-800 text-white">
+              <tr>
+                <th className="text-left py-3 px-4 uppercase font-semibold text-sm">ID</th>
+                <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Phone Number</th>
+                <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Last Name</th>
+                <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Status</th>
+                <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Actions</th>
+              </tr>
+            </thead>
+            <tbody className="text-gray-700">
+              {
+                order_Items.filter((order) => {
+                  return searchterm.toLowerCase() === '' ? order : order.address.phone_number.includes(searchterm);
+                }).map((order) => (
+                  <OrderRow
+                    key={order._id}
+                    order_id={order._id}
+                    fname={order.fname}
+                    lname={order.lname}
+                    status={order.orderStatus}
+                    total={order.total}
+                    items={order.items}
+                    address={order.address}
+                    date={order.date}
+                  />
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
       </div>
 
 

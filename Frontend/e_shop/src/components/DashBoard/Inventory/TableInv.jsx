@@ -70,14 +70,14 @@ function InvTable() {
 
 
       {/* Table */}
-      <div className="px-4 w-sm sm:w-full md:px-8 py-4  max-w-full mx-auto  ">
+      <div className="mx-2 md:mx-auto md:max-w-5xl">
 
         {/* Add Product Modal */}
         <DashModal open={showAddModal} setOpen={setShowAddModal}>
           <AddProd closeit={() => setShowAddModal(false)} />
         </DashModal>
 
-        <div className="shadow overflow-x-auto rounded border border-gray-200 overflow-y-auto max-h-[300px]">
+        <div className="shadow overflow-x-auto rounded border border-gray-200">
           <table className="min-w-full bg-white table-auto">
             <thead className="bg-gray-800 text-white sticky top-0 z-10">
               <tr>
