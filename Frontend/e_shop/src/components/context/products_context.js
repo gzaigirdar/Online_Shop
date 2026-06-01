@@ -11,6 +11,7 @@ function Inventory_provider({ children }) {
   // Get all products
   async function get_products() {
     try {
+      console.log(process.env.NEXT_PUBLIC_DB_API_PRODUCT);
       const res = await axios.get(`${DB_API_PRODUCT}/getallproducts`, { withCredentials: true });
       setProddata(res.data);
     } catch (error) {

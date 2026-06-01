@@ -47,7 +47,7 @@ function ItemsChart({ data, total }) {
 
   return (
     <div className="p-6 bg-gray-800 rounded-lg shadow-lg">
-      <h2 className="text-white font-semibold mb-4">Sales by Category</h2>
+      <h2 className="text-white font-semibold mb-4">All time Sales by Category</h2>
       <Chart options={chartData.options} series={chartData.series} type="donut" height={300} />
     </div>
   );

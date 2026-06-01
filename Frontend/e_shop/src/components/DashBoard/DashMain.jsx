@@ -35,6 +35,7 @@ function DashBoard() {
             try{
                 const res = await axios.get(`${api_url}/getOrderStat`,{withCredentials:true})
                 setStats(res.data)
+                console.log(res.data)
                 console.log(res.data.total_products)
             
 
@@ -77,7 +78,7 @@ function DashBoard() {
                        
                      <DashStat icon={FcBullish} text='Revenue' amount={stats.overall_total}/>  
                      <DashStat icon={FcMoneyTransfer} text='Orders' amount={stats.total_num_Orders}/>
-                     <DashStat icon={FcMoneyTransfer} text='items sold' amount={stats.itemsSold[0].totalItems}/>
+                     <DashStat icon={FcMoneyTransfer} text='items sold' amount={stats.itemsSold}/>
                      </div>
                      </div>
                      <div className=" flex flex-col m-2 ">
