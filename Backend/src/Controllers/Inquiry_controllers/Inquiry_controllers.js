@@ -6,14 +6,25 @@ import InquiryModel from "../../Models/Inquiry/InquiryModel.js";
 
 const GetInquiries = AsyncHandler(async (req,res,next) => {
 
-    const inquiries = await InquiryModel.find().populate('UserId', 'name.fname name.lname email username').sort({createdAt:-1})
+    const inquiries = await InquiryModel.find().populate('UserId', 'name.fname name.lname email username').sort({createdAt:-1}).lean()
 
     if(inquiries.length === 0){
         res.status(404)
         throw new Error('No inquires found')
     }
 
-    res.send(inquiries);
+    const ModifiedInquiries = inquiries.map(inquiry => {
+        if (!inquiry.UserId) {
+            inquiry.UserId = {
+                name: { fname: 'not found', lname: 'not found' },
+                email: 'not found',
+                username: 'not found'
+            };
+        }
+        return inquiry;
+    });
+
+    res.send(ModifiedInquiries);
 
 
 })
