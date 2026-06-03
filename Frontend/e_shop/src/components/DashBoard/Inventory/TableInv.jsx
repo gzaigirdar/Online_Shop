@@ -70,7 +70,7 @@ function InvTable() {
 
 
       {/* Table */}
-      <div className="mx-2 md:mx-auto md:max-w-5xl">
+      <div className="mx-2 md:mx-6 lg:mx-auto lg:max-w-5xl">
 
         {/* Add Product Modal */}
         <DashModal open={showAddModal} setOpen={setShowAddModal}>

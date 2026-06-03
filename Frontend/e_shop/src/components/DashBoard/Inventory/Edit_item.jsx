@@ -1,4 +1,4 @@
-  import { useRef, useState,useContext } from "react";
+import { useRef, useState,useContext } from "react";
 import { Inventory_context } from "@/components/context/products_context";
 
 
@@ -27,102 +27,84 @@ function Edit_item({ closeit,details}) {
   }
 
   return (
-      <div className="flex flex-col items-center gap-4 p-4 w-full">
-        <div className="mx-auto w-full rounded-box border border-base-content/5 bg-base-100 overflow-x-auto">
-          <table className="table w-full text-center"> 
-            <thead>
-              <tr>
-                <th colSpan={2} className="text-xl py-2">
-                  Product Details
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className="font-semibold">Product Name</td>
-                <td>
-                  <input
-                    onChange={handler}
-                    type="text"
-                    name="name"
-                    defaultValue={data.name}
-                    className="input input-bordered w-full h-12 text-lg"
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td className="font-semibold">Type</td>
-                <td className="flex gap-4 justify-center">
-                  <label className="flex items-center gap-1">
-                    <input  onChange={handler} type="radio" name="type" value="cake" className="radio" checked={data.type.toLowerCase() == 'cake'} />
-                    Cake
-                  </label>
-                  <label className="flex items-center gap-1">
-                    <input onChange={handler} type="radio" name="type" value="pastries" className="radio" checked={data.type.toLowerCase() == 'pastries'} />
-                    Pastries
-                  </label>
-                  <label className="flex items-center gap-1">
-                    <input onChange={handler} type="radio" name="type" value="drinks" className="radio" checked={data.type.toLowerCase() == 'drinks'} />
-                    Drinks
-                  </label>
-                  <label className="flex items-center gap-1">
-                    <input onChange={handler} type="radio" name="type" value="other" className="radio" checked={data.type.toLowerCase() == 'other'}/>
-                    Other
-                  </label>
-                </td>
-              </tr>
-              <tr>
-                <td className="font-semibold">Price</td>
-                <td>
-                  <input
-                  onChange={handler}
-                    type="text"
-                    name="price"
-                    defaultValue={data.price}
-                    className="input input-bordered w-full h-12 text-lg"
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td className="font-semibold">Quanity</td>
-                <td>
-                  <input
-                    onChange={handler}
-                    type="text"
-                    name="quantity"
-                    defaultValue={data.quantity}
-                    className="input input-bordered w-full h-12 text-lg"
-                  />
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      <div className="inline-block space-x-2 ">
-
-
-        <button
-          onClick={submit}
-          className="bg-green-700 text-white font-bold py-2 px-6 rounded hover:bg-green-800 transition"
-        >
-          Update
-        </button>
-
-        <button
-          onClick={() => closeit()}
-          className="bg-yellow-500 text-black font-bold py-2 px-6 rounded hover:bg-green-800 transition"
-        >
-          Close
-        </button>
+    <div className="flex justify-center items-center bg-gray-200 text-gray-900">
+      <div className="rounded-md relative shadow-2xl p-3 bg-white w-full">
         
+        <div className="py-1">
+          <div className="text-center text-xl font-bold">PRODUCT</div>
+          <div className="text-center text-xs font-bold">Edit product details</div>
+        </div>
+        
+        <div className="text-center text-xs font-bold mb-1">~~~~~~~~~~~~~~~~~~~~~~~~~~~~</div>
+
+        <div className="text-xs pl-2 space-y-2">
+          <div className="flex items-center">
+            <span className="font-semibold w-1/4">Name:</span>
+            <input
+              onChange={handler}
+              type="text"
+              name="name"
+              defaultValue={data.name}
+              className="border border-black rounded p-1.5 w-3/4 text-gray-900 text-xs focus:outline-none"
+            />
+          </div>
+          <div className="flex items-center">
+            <span className="font-semibold w-1/4">Price:</span>
+            <input
+              onChange={handler}
+              type="text"
+              name="price"
+              defaultValue={data.price}
+              className="border border-black rounded p-1.5 w-3/4 text-gray-900 text-xs focus:outline-none"
+            />
+          </div>
+          <div className="flex items-center">
+            <span className="font-semibold w-1/4">Qty:</span>
+            <input
+              onChange={handler}
+              type="text"
+              name="quantity"
+              defaultValue={data.quantity}
+              className="border border-black rounded p-1.5 w-3/4 text-gray-900 text-xs focus:outline-none"
+            />
+          </div>
+        </div>
+
+        <div className="border-double border-t-4 border-b-4 border-gray-900 my-3">
+          <div className="text-xs pl-2 py-2">
+            <span className="font-semibold">Type:</span>
+            <div className="flex flex-wrap gap-2 mt-1">
+              <label className="flex items-center gap-1 cursor-pointer">
+                <input onChange={handler} type="radio" name="type" value="cake" checked={data.type.toLowerCase() == 'cake'} />
+                <span className="text-xs">Cake</span>
+              </label>
+              <label className="flex items-center gap-1 cursor-pointer">
+                <input onChange={handler} type="radio" name="type" value="pastries" checked={data.type.toLowerCase() == 'pastries'} />
+                <span className="text-xs">Pastries</span>
+              </label>
+              <label className="flex items-center gap-1 cursor-pointer">
+                <input onChange={handler} type="radio" name="type" value="drinks" checked={data.type.toLowerCase() == 'drinks'} />
+                <span className="text-xs">Drinks</span>
+              </label>
+              <label className="flex items-center gap-1 cursor-pointer">
+                <input onChange={handler} type="radio" name="type" value="other" checked={data.type.toLowerCase() == 'other'}/>
+                <span className="text-xs">Other</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div className="text-center">
+          <button
+            onClick={submit}
+            className="bg-green-600 hover:bg-green-700 text-white font-bold py-1.5 px-6 rounded transition duration-200 text-sm"
+          >
+            Update
+          </button>
+        </div>
       </div>
+    </div>
+  );
+}
 
-
-
-
-      </div>
-    );
-  }
-  
-  export default Edit_item;
-  
+export default Edit_item;

@@ -22,7 +22,7 @@ function DashBoard() {
     const api_url = process.env.NEXT_PUBLIC_DB_API_ORDER;
 
 
-    const [comp,setComp] = useState('Order');
+    const [comp,setComp] = useState('Overview');
     const [stats,setStats] = useState([])
   
     function switch_comp(val){
@@ -99,7 +99,7 @@ function DashBoard() {
                 <div>
                    <Inventory />
                 </div>
-            ): comp == 'Order' ? (
+            ): comp == 'Orders' ? (
                 <div>
                     <DashOrder/>
                 </div>

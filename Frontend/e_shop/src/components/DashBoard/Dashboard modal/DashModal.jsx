@@ -12,7 +12,7 @@ function DashModal({open,setOpen,children}) {
 
       <Dialog open={open} onClose={() => setOpen(false)} className="relative z-50">
         <div className=" fixed inset-0 flex items-center justify-center p-4">
-          <DialogPanel className="max-w-md space-y-2 border bg-white p-8 max-h-[80vh] rounded shadow-lg overflow-y-auto">
+          <DialogPanel className="max-w-md space-y-2 border bg-pink-200 p-8 max-h-[80vh] rounded-lg shadow-lg overflow-y-auto">
           <div className=" relative flex gap-4">
               <button
                 onClick={() => setOpen(false)}
