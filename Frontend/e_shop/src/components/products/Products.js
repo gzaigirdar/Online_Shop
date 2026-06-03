@@ -54,6 +54,7 @@ function Products({showModal,setShowModal}) {
       function addItems(item){
         setItems(prevItems => [...prevItems, { ...item, quantity: 1 }]);
         
+        
       }
       // remove items from the cart
       function removeItem(name){
@@ -69,6 +70,11 @@ function Products({showModal,setShowModal}) {
         
   
       }
+    function closeCart(){
+      setCart(false);
+      setProd(true);
+
+    }
 
 
   
@@ -77,6 +83,7 @@ function Products({showModal,setShowModal}) {
     useEffect(()=>{
       const newSubtotal = cartitem.reduce((sum,item)=> sum + item.price * item.quantity,0);
       setsubTotal(newSubtotal);
+     
     },[cartitem])
     // using useffect to update total, total will be udpated anytime subtotal or taxes changes
     useEffect(() => {
@@ -146,7 +153,7 @@ function Products({showModal,setShowModal}) {
             </div>
           </div>
         ) : show_cart ? (
-          <div className="ml-3">
+          <div className="flex flex-col justify-center ">
             <Cart
               data={cartitem}
               removeItem={removeItem}
@@ -157,8 +164,9 @@ function Products({showModal,setShowModal}) {
               updateQuantityById={updateQuantityById}
               
               setShowModal={setShowModal}
+              closeCart={closeCart}
             />
-            <button onClick={()=> {{setCart(false); setProd(true)}}}> close</button>
+          
           </div>
         ) :null
         }

@@ -4,51 +4,51 @@ import { useState,useEffect } from "react";
 function CartItems({data,removefunc,updateQuantityById}) {
    const [quantity,setQuantity] = useState(1);
    function removeItem(){
-       // calling removefunction from the parent component 
-       
+       // calling removefunction from the parent component
+
         removefunc(data.name);
 
-       
-      }
-   
 
-  
-    // function to handle increase quantiy button 
+      }
+
+
+    // function to handle increase quantiy button
 
     function increase_quan(){
       setQuantity(prev => prev+1);
     }
     function decrease_quan(){
       setQuantity(prev=>  prev == 1? 0: prev-1)
-     
+
     }
     useEffect(()=>{
       updateQuantityById(data._id,quantity);
       if (quantity === 0) {
-        removefunc(data.name); 
+        removefunc(data.name);
       }
-    
+
 
 
     },[quantity])
-       
-      
-      
-    return (  
-        <div className="flex justify-between items-center mx-auto mb-4">
-        <div className="flex items-center">
-          <img src={data.img_link} alt="Product Image" className="max-w-20 max-h-sm mr-4 object-cover" />
-          <div>
-            <h2 className="font-bold text-white">{data.name}</h2>
+
+
+
+    return (
+        <div className="flex justify-start items-center bg-slate-700 rounded-lg shadow-2xl shadow-slate-900/50 p-3 mt-2 max-w-2xl">
+        <div className="flex items-center ">
+          <img src={data.img_link} alt="Product Image" className="w-20 h-20 mr-4 object-cover rounded shrink-0" />
+          <div className="space-y-2 min-w-0">
+            <h2 className="font-bold text-white text-sm truncate" title={data.name}>{data.name}</h2>
+            <h2 className="font-bold text-white"> ${data.price}</h2>
             <p className="text-gray-400">{data.num}</p>
             <div className="max-h-xs max-w-xs">
-              <div className="relative flex items-center max-w-[8rem]">
+              <div className="relative flex items-center max-w-[8rem] space-y-2">
                 <button
                   type="button"
                   onClick={decrease_quan}
                   id="decrement-button"
                   data-input-counter-decrement="bedrooms-input"
-                  className="bg-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-600 border border-gray-600 rounded-s-lg p-3 h-11 focus:ring-gray-700 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"
+                  className="bg-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-600 border border-gray-600 rounded-s-lg p-2 h-10 focus:ring-gray-700 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"
                 >
                   <svg
                     className="w-3 h-3 text-white"
@@ -62,8 +62,7 @@ function CartItems({data,removefunc,updateQuantityById}) {
                 </button>
                 <input
                   type="text"
-                  className="bg-gray-700 border-x-5 border-gray-600 h-10 text-sm p-4 text-center text-white focus:ring-blue-500 focus:border-blue-500 block w-full pb-6 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder=""
+                  className="bg-gray-700 border-y border-gray-600 h-10 text-sm text-center text-white w-12"
                   value={quantity}
                   required
                 />
@@ -72,7 +71,7 @@ function CartItems({data,removefunc,updateQuantityById}) {
                   onClick={increase_quan}
                   id="increment-button"
                   data-input-counter-increment="bedrooms-input"
-                  className="bg-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-600 border border-gray-600 rounded-e-lg p-3 h-11 focus:ring-gray-700 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"
+                  className="bg-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-600 border border-gray-600 rounded-e-lg p-2 h-10 focus:ring-gray-700 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"
                 >
                   <svg
                     className="w-3 h-3 text-white"
@@ -88,7 +87,9 @@ function CartItems({data,removefunc,updateQuantityById}) {
               <button
                 type="button"
                 onClick={removeItem}
-                className="py-1 text-white bg-gray-800 border border-gray-600 focus:outline-none hover:bg-gray-700 focus:ring-4 focus:ring-gray-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                className="py-1 text-white bg-red-600  border border-gray-600 focus:outline-none hover:bg-gray-700 focus:ring-4 focus:ring-gray-700
+                font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+
               >
                 Remove
               </button>
@@ -96,7 +97,7 @@ function CartItems({data,removefunc,updateQuantityById}) {
           </div>
         </div>
       </div>
-      
+
     );
 }
 
