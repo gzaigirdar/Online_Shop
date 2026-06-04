@@ -7,6 +7,7 @@ import { LoginProvider } from "@/components/context/login_context";
 import { ReviewProvider } from "@/components/context/review_context";
 import Summary_review_card from "@/components/Review/Summary_review_card";
 import Review_card from "@/components/Review/Review_card";
+import ReviewsFrontend from "@/components/Review/ReviewsFrontend";
 
 export default function ReviewPage() {
   const [showModal, setShowModal] = useState(false);
@@ -32,20 +33,14 @@ export default function ReviewPage() {
 
         
         <div className="w-full md:w-3/5 p-2 overflow-y-auto">
-          <div className="bg-amber-100 rounded-lg m-2 p-2 text-center shadow-2xl 
+          <div className="bg-gray-900 rounded-lg m-2 p-2 text-center shadow-2xl 
                     w-full max-w-full sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto 
-                    transition-all duration-300">
+                    transition-all duration-300 text-green-900 font-bold font-sans italic">
             Customers Reviews
           </div>
 
           <div className = "w-full flex flex-wrap justify-center gap-2 overflow-y-auto max-h-[70vh] p-2">
-            <Review_card />
-            <Review_card />
-            <Review_card />
-            <Review_card />
-            <Review_card />
-            <Review_card />
-            <Review_card />
+            <ReviewsFrontend />
           </div>
         </div>
       </div>

@@ -1,12 +1,14 @@
-'use state'
-import { useState,useContext} from "react";
+'use client'
+import { useState,useContext, useEffect} from "react";
 import Ratings from "./Ratings";
 import Rev_info from "./Rev_info";
 import Review_form from "./Forms/Review_form";
 import { Login } from "../context/login_context";
+import { review_context } from "../context/review_context";
 function Summary_review_card({open_modal}) {
   const {logged,userInfo} = useContext(Login);
-  console.log(logged)
+  const{getreviewStat} = useContext(review_context);
+  const [stat,setStat] = useState({})
   const [show_form,setForm] = useState(false)
   function submit_rev(){
     if (!logged){
@@ -21,6 +23,22 @@ function Summary_review_card({open_modal}) {
       setForm(true)
     }
   }
+  useEffect(()=>{
+    async function fetchStats(){
+      try {
+        const data = await getreviewStat();
+       
+        setStat(data)
+        
+      } catch (error) {
+        console.error("Failed to fetch review stats:", error);
+        setStat([])
+      }
+    }
+    fetchStats()
+    console.log(stat)
+    
+  },[])
   return (
     <>
     <div className=" flex flex-col m-2 bg-white items-center justify-center shadow-2xl rounded-lg ">
@@ -32,11 +50,11 @@ function Summary_review_card({open_modal}) {
       
    
        <div className="flex flex-wrap justify-between  sm:ml-2 ">
-            <Rev_info fill={'60%'} num_rating={5}/>
-            <Rev_info fill={'60%'} num_rating={4}/>
-            <Rev_info fill={'25%'} num_rating={3}/>
-            <Rev_info fill={'10%'} num_rating={2} />
-           <Rev_info fill={'5%'} num_rating={1} />
+            <Rev_info fill={stat.five + '%'} num_rating={5}/>
+            <Rev_info fill={stat.four + '%'} num_rating={4}/>
+            <Rev_info fill={stat.three + '%'} num_rating={3}/>
+            <Rev_info fill={stat.two + '%'} num_rating={2} />
+           <Rev_info fill={stat.one + '%'} num_rating={1} />
       </div>
       <hr className="border-t border-black-300 my-2" />
 

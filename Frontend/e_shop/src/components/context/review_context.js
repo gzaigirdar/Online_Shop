@@ -52,13 +52,25 @@ export function ReviewProvider({children}){
         }
     }
 
+    async function getreviewStat(){
+        try {
+            const res = await axios.get(`${review_url}/reviewStats`,{withCredentials:true})
+            console.log(res.data.one)
+            return res.data;
+        } catch (error) {
+            const message = error.response?.data?.message || 'Something went wrong'
+            throw new Error(message)  
+            
+        }
+    }
+
     useEffect(()=>{
         getReviews()
     },[])
 
 
     return(
-        <review_context.Provider value={{reviews,submitReview,getReviews,deleteReview}} >
+        <review_context.Provider value={{reviews,submitReview,getReviews,deleteReview,getreviewStat}} >
             {children}
         </review_context.Provider>
 
