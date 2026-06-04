@@ -32,7 +32,9 @@ app.use(cookieParser())
 // protects routes and restricts access to the server 
 
 app.use(cors({
-    origin: "http://localhost:3000", credentials: true}))
+    origin: ["http://localhost:3000",
+        "http://192.168.5.156:3000"
+    ], credentials: true}))
 app.use(mainRouter)
 app.use(errorHandler)
 initdb()

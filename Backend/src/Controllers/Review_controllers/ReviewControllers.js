@@ -81,4 +81,41 @@ const deleteReview = AsyncHandler(async (req,res) =>{
         return res.status(200).json('Review deleted')
 }
 )
-export {getreviews,submitReview,deleteReview}
+
+
+const reviewStats = AsyncHandler(async (req,res)=>{
+
+    const stats = await ReviewModel.aggregate([
+        {
+            $facet: {
+                ratingsCount: [
+                    { $group: { _id: "$Rating", count: { $sum: 1 } } },
+                    { $project: { _id: 0, star: "$_id", count: 1 } }
+                ],
+                totalCount: [
+                    { $count: "total" }
+                ]
+            }
+        }
+    ]);
+
+    const ratingsCount = stats[0]?.ratingsCount || [];
+    const total = stats[0]?.totalCount[0]?.total || 0;
+
+    // number revies in each ratings
+    const countMap = {};
+    ratingsCount.forEach(item => {
+        countMap[item.star] = item.count;
+    });
+
+    // converting them into percentages
+    const result = [];
+    for (let star = 1; star <= 5; star++) {
+        const count = countMap[star] || 0;
+        const percentage = total > 0 ? Math.round((count / total) * 100) : 0;
+        result.push({ star, percentage });
+    }
+
+    return res.status(200).json(result);
+})
+export {getreviews,submitReview,deleteReview,reviewStats}

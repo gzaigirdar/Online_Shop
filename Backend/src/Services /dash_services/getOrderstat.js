@@ -1,7 +1,6 @@
 import { DateTime } from "luxon";
 import { OrderModel } from "../../Models/Order/orderModel.js";
 import ProductModel from "../../Models/Products/productModel.js";
-import createHttpError from "http-errors";
 
 export async function get_days_total() {
   const now = DateTime.local();
@@ -46,11 +45,12 @@ export async function get_days_total() {
 
   })
   const overall_total = total_per_day.reduce((acc,curr)=> acc + curr,0)
-  const itemsSold = await OrderModel.aggregate([
+  const itemsSoldResult = await OrderModel.aggregate([
     { $match: { createdAt: { $gte: start, $lte: end } } },
     { $unwind: "$items" },
     { $group: { _id: null, totalItems: { $sum: "$items.quantity" } } }
   ]);
+  const itemsSold = itemsSoldResult.length > 0 ? itemsSoldResult[0].totalItems : 0;
   const totalOrders = await OrderModel.countDocuments({ createdAt: { $gte: start, $lte: end } });
 
   const total_products = await ProductModel.countDocuments();
@@ -77,13 +77,7 @@ export async function get_days_total() {
     const found = product_by_type.find(item => item._id === type); // just _id
     return { _id: type, total: found ? found.total : 0 };
   });
-  if( total_per_day && overall_total){
-
-      return { total_per_day:total_per_day,overall_total:overall_total,total_num_Orders:totalOrders,itemsSold:itemsSold,total_products:total_products,product_by_type:Types};
-  }
-  else{
-    throw createHttpError(404,'not found');
-  }
+  return { total_per_day:total_per_day,overall_total:overall_total,total_num_Orders:totalOrders,itemsSold:itemsSold,total_products:total_products,product_by_type:Types};
 
 
 

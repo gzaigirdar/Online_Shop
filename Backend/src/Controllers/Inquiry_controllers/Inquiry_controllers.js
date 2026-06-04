@@ -47,7 +47,7 @@ const submitInquiry = AsyncHandler(async (req,res,next) => {
         })
 
 const deleteInquiry = AsyncHandler(async (req,res,next)=> {
-    const {id} = req.params.id;
+    const {id} = req.query;
 
     if(!id){
         res.status(400)
