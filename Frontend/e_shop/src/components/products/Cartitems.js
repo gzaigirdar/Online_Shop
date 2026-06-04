@@ -34,7 +34,7 @@ function CartItems({data,removefunc,updateQuantityById}) {
 
 
     return (
-        <div className="flex justify-start items-center bg-slate-700 rounded-lg shadow-2xl shadow-slate-900/50 p-3 mt-2 max-w-2xl">
+        <div className="flex justify-start items-center bg-slate-700 rounded-lg shadow-2xl shadow-slate-900/50 p-3 mt-2 mb-1 max-w-2xl">
         <div className="flex items-center ">
           <img src={data.img_link} alt="Product Image" className="w-20 h-20 mr-4 object-cover rounded shrink-0" />
           <div className="space-y-2 min-w-0">

@@ -12,7 +12,7 @@ export default function Navbar({open_modal}){
 
     return(
         <>
-  <header className=" bg-slate-900 text-gray-200  flex items-center justify-between py-2 px-2 md:px-4 lg:px-4 shadow-2xl rounded-md ring-3 ring-black">
+  <header className=" bg-slate-900 text-gray-200  flex items-center justify-between py-2 px-2 md:px-4 lg:px-4 shadow-2xl rounded-md ring-3 ring-black" style={{ paddingTop: 'env(safe-area-inset-top, 0px)', marginTop: 'calc(-1 * env(safe-area-inset-top, 0px))' }}>
 
     {/* Company Name (always left) */}
     <div className="text-white-200  text-sm font-bold">Company</div>

@@ -15,7 +15,7 @@ function Cart({ key,data, removeItem,subtotal, total,checkout,updateQuantityById
 
     return (
 
-      <div className="max-w-full max-h-auto   bg-gradient-to-r from-slate-400 to-slate-900 text-white rounded-2xl shadow-2xl">
+      <div className="max-w-full max-h-auto    text-white rounded-sm  ">
           
       <div className="flex flex-col h-auto justify-end items-center w-full">
         <div className="container mx-auto flex flex-col items-center bg-pink-200 w-full md:w-1/3   rounded overflow-x-hidden">
@@ -43,7 +43,13 @@ function Cart({ key,data, removeItem,subtotal, total,checkout,updateQuantityById
                 />
               ))
             ) : (
-              <p>No products added</p>
+              <div className="flex flex-col items-center justify-center h-48 w-full text-gray-400">
+                <svg className="w-16 h-16 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" />
+                </svg>
+                <p className="text-lg font-semibold">No products added</p>
+                <p className="text-sm mt-1">Your cart is empty</p>
+              </div>
             )}
             {/* End of cart items */}
           </div>

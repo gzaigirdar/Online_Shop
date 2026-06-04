@@ -1,14 +1,14 @@
-
 'use client';
 
 import Product from "./Product.js";
 import Cart from "./Cart";
-import Menu from "./Menu";
+
 import { useState,useContext } from "react";
+
 
 import Order from "../order/Order";
 import { useEffect } from "react";
-import MenuBar from "./Menubar";
+import MenuBar from "../Menu bar/MenuBar.jsx";
 import { Login } from "../context/login_context.js";
 import { product_data } from "./Productsdata.js";
 import { Inventory_context } from "../context/products_context.js";
@@ -33,6 +33,7 @@ function Products({showModal,setShowModal}) {
     const [show_products,setProd] = useState(true)
     // state for the product type for the menu
     const [type,setType] = useState('cake')
+    const [search,setSearch] = useState('');
     
 
     function show_cart_page(){
@@ -99,7 +100,7 @@ function Products({showModal,setShowModal}) {
   
  
     return (
-      <div className="min-h-screen justify-start items-start bg-cover bg-center bg-fixed bg-fit" style={{backgroundImage:"url('images/bg_image.jpg')"}}> 
+      <div className="min-h-screen justify-start items-start">
         {checkout && logged ? (
           <Order
             cartitem={cartitem}
@@ -110,23 +111,13 @@ function Products({showModal,setShowModal}) {
         ) : show_products? (
           <div className=" justify-start items-start ">
             <div>
-            <div className="flex justify-center items-center mt-0">
-              <ul className="menu menu-horizontal bg-green-200 text-black rounded-box items-center font-semibold">
-                <li onClick={()=> setType('cake')}> <a> Cake 🎂 </a></li>
-                
-                <li onClick={()=> setType('sandwiches')}> <a> Sandwiches 🥪 </a></li>
-                <li onClick={()=> setType('pastries')}> <a> Pastries 🍩  </a></li>
-                <li onClick={()=> setType('drinks')}> <a> Drinks 🥤</a></li>
-                <li onClick={show_cart_page}> <a> Cart 🛒</a></li>
-
-
-              </ul>
-            
-             
-            </div>
-              <div className=" container my-2 mx-auto w-full ">
-               {/* <div className="h-96 overflow-y-auto border rounded p-2"> */}
-                <div className="grid grid-cols-3 gap-2 ">
+              <div>
+                <MenuBar/>
+              </div>
+          
+              <div className=" container my-0 mx-auto w-full  ">
+               <div className="rounded-lg p-2 sm:p-4">
+                 <div className="grid grid-cols-3 gap-2 ">
                   { prod_data.map((product)=>
                     product.type == type ? (
                       <div className=""  key={product._id} >
@@ -148,7 +139,7 @@ function Products({showModal,setShowModal}) {
             
              
                 </div>
-              {/*</div>*/}
+               </div>
               </div>
             </div>
           </div>

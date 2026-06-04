@@ -1,0 +1,15 @@
+ <div>
+            <div className="flex justify-center items-center mt-1">
+              <ul className="menu menu-horizontal bg-green-200 text-black rounded-box items-center font-semibold">
+                <li onClick={()=> setType('cake')}> <a> Cake 🎂 </a></li>
+                
+                <li onClick={()=> setType('sandwiches')}> <a> Sandwiches 🥪 </a></li>
+                <li onClick={()=> setType('pastries')}> <a> Pastries 🍩  </a></li>
+                <li onClick={()=> setType('drinks')}> <a> Drinks 🥤</a></li>
+                <li onClick={show_cart_page}> <a> Cart 🛒</a></li>
+
+
+              </ul>
+            
+             
+            </div>
