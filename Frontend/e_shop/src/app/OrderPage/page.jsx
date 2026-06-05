@@ -12,7 +12,7 @@ function page() {
       <>
         <div>
       <button onClick={() => setShowModal(true)}>Login</button>
-      <p>Hello World</p>
+
       <div> <Navbar/></div>
       
     

@@ -22,9 +22,9 @@ function Address() {
       {showForm ? (
         <AddressForm update={handleFormClose} />
       ) : (
-        <div className="bg-gray-800 p-5 flex justify-center items-center min-h-screen">
+        <div className="bg-gray-800 rounded-lg p-4 flex justify-center items-center">
           <article className="w-full max-w-lg text-center text-white">
-            <h3 className="text-xl font-bold mb-4">Address details</h3>
+            <h3 className="text-xl font-bold mb-1">Address details</h3>
             <dl className="divide-y divide-gray-700">
               <div className="py-3">
                 <dt className="mb-1 text-gray-400 md:text-lg">Email address</dt>

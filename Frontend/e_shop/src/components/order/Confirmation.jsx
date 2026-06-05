@@ -8,34 +8,22 @@ function Confirmation() {
     let {cardNumber} = payment_info;
     let card_num = cardNumber.slice(-4)
 
-    
-
-
-
     return (  
-        <div className=" bg-white h-screen m-0.5 p-0.5">
-
+        <div className="bg-gray-800 rounded-lg p-8 min-h-screen flex items-center justify-center">
             <section>
-                <div className="border rounded-full border-s-violet-600 p-10  mt-20 ml-10 mr-10 mb-20 justify-center">
-                <p className=" text-black text-center text-20">
-                    Thank you for placing the order!! 
-                <p className="p-5"> Order Number:123124314221 </p>
-                <p className="p-5 text-lg"> <span> Information </span></p>
-                <p className="p-5"> Name: {payment_info.name}</p>
-                <p className="p-5"> you should receive a confirmatin email soon at {address_info.email}</p>
-                <p className="p-5"> order placed using card **********{card_num}</p>
-                <p></p>
-                    
-                </p>
-
+                <div className="border border-gray-700 rounded-lg p-10 max-w-lg mx-auto">
+                    <p className="text-white text-center text-2xl font-semibold">
+                        Thank you for placing the order!!
+                    </p>
+                    <p className="text-gray-400 text-center p-5">Order Number: 123124314221</p>
+                    <div className="text-gray-300 text-center space-y-3">
+                        <p><span className="text-gray-400">Name:</span> {payment_info.name}</p>
+                        <p>You should receive a confirmation email soon at <span className="text-blue-400">{address_info.email}</span></p>
+                        <p>Order placed using card **********{card_num}</p>
+                    </div>
                 </div>
             </section>
         </div>
-
-
-
-
-
     );
 }
 

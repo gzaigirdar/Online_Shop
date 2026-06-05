@@ -8,7 +8,7 @@ import Confirmation from "./Confirmation";
 import { useState } from "react";
 import { Order_provider } from "../context/Order_context";
 
-function Order ({cartitem,total,subtotal,taxes})  {
+function Order ({cartitem,total,subtotal,taxes,close})  {
 
   const [confirm,setConf] =useState(false);
   
@@ -25,30 +25,24 @@ function Order ({cartitem,total,subtotal,taxes})  {
           { confirm ? <Confirmation/>:
 
             <div>
-              <div className="grid grid-cols-2 h-screen ">
-              <div className="container mx-auto mt-4 ">
-              <div className="overflow-y-auto pr-4 mx-1 border border-blue-200 rounded-lg shadow-sm" 
-                    style={{ height: '50vh' }}>
-                      {cartitem.map((item)=>(
-                        <OrderItem item={item}/>
-                      ))}
-
-                      
-
-                
-              </div>
-              <div className="mt-4">
-              
-              <Summary items={cartitem} total={total} subtotal={subtotal} taxes={taxes} show_confirm={show_confirm}/>
-              </div>
-                </div>
-                  <div className="flex flex-col mx-1 my-1">
-                  
-                    <Bill_Order/>
-                    <Address/>
+              <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen gap-4 p-4">
+                <div className="order-1 lg:order-1">
+                  <div className="overflow-y-auto border border-gray-700 rounded-lg p-2 mb-4" 
+                        style={{ height: '50vh' }}>
+                          {cartitem.map((item)=>(
+                            <OrderItem item={item}/>
+                          ))}
                   </div>
                 </div>
+                <div className="order-2 lg:order-2 lg:row-span-2 lg:col-start-2 flex flex-col space-y-3">
+                  <Bill_Order/>
+                  <Address/>
                 </div>
+                <div className="order-3 lg:order-3 lg:col-start-1">
+                  <Summary items={cartitem} total={total} subtotal={subtotal} taxes={taxes} show_confirm={show_confirm} close={close}/>
+                </div>
+              </div>
+            </div>
     }
     </Order_provider>
     </div>

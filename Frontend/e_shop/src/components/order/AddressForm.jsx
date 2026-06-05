@@ -36,11 +36,11 @@ function AddressForm({ update }) {
   }
 
   return (
-    <div className="bg-gray-800 h-screen w-5/6 p-2">
+    <div className="bg-gray-800 rounded-lg p-4">
       <h1 className="text-sm text-center mb-2 text-white">Address information</h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="max-w-sm mx-auto p-5 bg-gray-800 shadow-sm rounded-sm"
+        className="max-w-sm mx-auto"
       >
         {[
           { label: "Street address", name: "street", type: "text" },
@@ -54,7 +54,7 @@ function AddressForm({ update }) {
             <input
               {...register(name)}
               type={type}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              className="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             />
             {errors[name] && (
               <p className="text-red-500 text-xs mt-1">{errors[name]?.message}</p>

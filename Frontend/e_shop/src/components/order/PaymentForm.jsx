@@ -32,11 +32,12 @@ function PaymentForm({ closeform }) {
 
   return (
     
+      <div className="bg-gray-800 rounded-lg p-4">
       <form 
         onSubmit={handleSubmit(onSubmit)} 
-        className="w-full max-w-md bg-gray-800 p-6 rounded-lg shadow-lg space-y-4"
+        className="max-w-sm mx-auto space-y-4"
       >
-        <h1 className="text-xl font-semibold text-white text-center mb-4">Payment Information</h1>
+        <h1 className="text-sm text-center mb-2 text-white">Payment Information</h1>
 
         {[
           { label: "Full Name", name: "name", type: "text" },
@@ -49,7 +50,7 @@ function PaymentForm({ closeform }) {
             <input
               type={field.type}
               {...register(field.name)}
-              className="p-2 rounded-md border border-gray-600 bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               placeholder={field.label}
             />
             {errors[field.name] && <p className="text-red-400 text-sm">{errors[field.name]?.message}</p>}
@@ -58,11 +59,12 @@ function PaymentForm({ closeform }) {
 
         <button 
           type="submit" 
-          className="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
         >
           Pay Now
         </button>
       </form>
+      </div>
   
   );
 }

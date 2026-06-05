@@ -41,6 +41,10 @@ export function Order_provider({ children }) {
     }
 
     async function createOrder(items, total) {
+        const requiredFields = ["street", "city", "state", "zipcode", "phone_number", "email"];
+        const emptyField = requiredFields.find(field => !address_info[field]?.trim());
+        if (emptyField) return { success: false, error: "Please fill in the address form" };
+
         try {
             const user_id = loginContext?.userInfo?.user_id;
             if (!user_id) throw new Error("User not logged in");
@@ -52,7 +56,7 @@ export function Order_provider({ children }) {
                 total,
             });
 
-            return res.data.message;
+            return { success: true, message: res.data.message };
         } catch (err) {
             return { success: false, error: err.message || "Failed to create order" };
         }

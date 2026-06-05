@@ -39,16 +39,18 @@ function Products({showModal,setShowModal}) {
     }
 
     function set_checkout(){
-      setCheckout(true)
       if(!logged){
         setShowModal(true)
       }
+      setCheckout(prev => !prev)
     }
 
     function closeCart(){
       setCart(false);
       setProd(true);
     }
+
+    
    
 
  
@@ -66,6 +68,7 @@ function Products({showModal,setShowModal}) {
             total={total}
             subtotal={subtotal}
             taxes={taxes}
+            close={set_checkout}
           />
         ) : show_products? (
           <div className=" justify-start items-start ">
