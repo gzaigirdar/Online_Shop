@@ -11,7 +11,7 @@ function Loginform({ closeIt }) {
 
   const emailRef = useRef(null);
   const passRef = useRef(null);
-  const [error,setError] = useState(false)
+  const [error,setError] = useState(null)
   const [AccFormVisible, setAcc] = useState(false);
   const [formType,setformType] = useState('login')
   const [loading,setloading] = useState(false)
@@ -25,14 +25,15 @@ function Loginform({ closeIt }) {
     const password = passRef.current.value;
     try {
       const res = await signin(email, password);
+      
   
       if (res === 'success') {
         closeIt();
       } else {
-        setError(true);
+        setError(res);
       }
     } catch (err) {
-      setError(true);
+      setError(err.message);
     } finally {
       setloading(false); 
     }
@@ -100,6 +101,7 @@ function Loginform({ closeIt }) {
                 Submit
               </button>
               {loading && <BeatLoader size={20} color='green' />}
+              {error && <p className="text-red-500 font-semibold"> {error}</p>}
             </form>
     
             <div className="mt-10 text-white">

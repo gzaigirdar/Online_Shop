@@ -1,13 +1,13 @@
 'use client'
 import { useState } from "react";
 
-export default function MenuBar() {
+export default function MenuBar({search,change,show_cart,items}) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedType, setSelectedType] = useState("");
-  
+  const [selectedType, setSelectedType] = useState("Cake 🎂");
+  let total_items = items.length == 0 ? null : `(${items.length})`;
 
   return (
-    <div className="flex justify-center items-center p-0 sm:px-0">
+    <div className="flex justify-center items-center mt-1 p-0 sm:px-0">
       <div className="flex flex-col sm:flex-row justify-center items-stretch sm:items-center mb-0 sm:mx-5 sm:my-0 gap-3 sm:gap-4 w-full sm:w-3/5 lg:w-2/4 p-3 sm:p-5 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/10 shadow-2xl shadow-indigo-500/10">
 
         {/* Dropdown */}
@@ -37,7 +37,9 @@ export default function MenuBar() {
                         : "text-white/70 hover:bg-white/10 hover:text-white"
                     }`}
                     onClick={() => {
+                      const cleanItem = item.split(' ')[0].toLowerCase();
                       setSelectedType(item);
+                      change(cleanItem);
                       setIsOpen(false);
                     }}
                   >
@@ -74,6 +76,7 @@ export default function MenuBar() {
             </g>
           </svg>
           <input
+           onChange={(e) => search(e.target.value)}
             type="search"
             required
             placeholder="Search items..."
@@ -83,12 +86,12 @@ export default function MenuBar() {
 
         {/* Cart */}
         <div className="group relative">
-          <div className="bg-gradient-to-br from-indigo-500 to-green-600 p-2.5 rounded-full text-center shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer">
+          <div onClick={show_cart} className="bg-gradient-to-br from-indigo-500 to-green-600 p-2.5 rounded-full text-center shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer">
             <a className="text-white text-sm sm:text-base whitespace-nowrap font-medium flex items-center gap-1.5 px-1">
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" />
               </svg>
-              Cart
+              Cart {total_items}
             </a>
           </div>
           {/* Cart badge dot */}

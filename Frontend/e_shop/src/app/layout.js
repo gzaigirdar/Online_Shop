@@ -2,6 +2,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { LoginProvider } from "@/components/context/login_context";
+import { CartProvider } from "@/components/context/cart_context";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,11 +20,13 @@ export default function RootLayout({ children }) {
     
      
       <LoginProvider>
+      <CartProvider>
 
       <main>{children}</main>
         
       <div id="modal-root">  </div>
      
+      </CartProvider>
       </LoginProvider>
     </body>
   </html>

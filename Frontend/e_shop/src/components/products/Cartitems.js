@@ -2,9 +2,8 @@
 import { useState,useEffect } from "react";
 
 function CartItems({data,removefunc,updateQuantityById}) {
-   const [quantity,setQuantity] = useState(1);
+   const [quantity,setQuantity] = useState(data.quantity);
    function removeItem(){
-       // calling removefunction from the parent component
 
         removefunc(data.name);
 
@@ -12,7 +11,6 @@ function CartItems({data,removefunc,updateQuantityById}) {
       }
 
 
-    // function to handle increase quantiy button
 
     function increase_quan(){
       setQuantity(prev => prev+1);
@@ -21,6 +19,10 @@ function CartItems({data,removefunc,updateQuantityById}) {
       setQuantity(prev=>  prev == 1? 0: prev-1)
 
     }
+    useEffect(() => {
+      setQuantity(data.quantity);
+    }, [data.quantity]);
+
     useEffect(()=>{
       updateQuantityById(data._id,quantity);
       if (quantity === 0) {

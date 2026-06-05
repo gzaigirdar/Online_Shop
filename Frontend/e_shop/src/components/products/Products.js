@@ -3,8 +3,7 @@
 import Product from "./Product.js";
 import Cart from "./Cart";
 
-import { useState,useContext } from "react";
-
+import { useState, useContext } from "react";
 
 import Order from "../order/Order";
 import { useEffect } from "react";
@@ -12,84 +11,44 @@ import MenuBar from "../Menu bar/MenuBar.jsx";
 import { Login } from "../context/login_context.js";
 import { product_data } from "./Productsdata.js";
 import { Inventory_context } from "../context/products_context.js";
+import { useCart } from "../context/cart_context.js";
 
 
 function Products({showModal,setShowModal}) {
   
    const {logged} = useContext(Login)
    const {prod_data} = useContext(Inventory_context)
-    // items array of objects
-    const [cartitem,setItems] = useState([]);
-    // subtoal before taxes are added
-    const[subtotal,setsubTotal] = useState(0);
-    const taxes = 1.00;
-    // total after taxes added
-    const [total,setTotal] = useState(0);
-    // checkout bool 
-    const [checkout,setCheckout] = useState(false)
-    // cart component show state
-    const [show_cart,setCart] = useState(false)
-    // state for showing products
-    const [show_products,setProd] = useState(true)
-    // state for the product type for the menu
-    const [type,setType] = useState('cake')
-    const [search,setSearch] = useState('');
-    
+   const { cartItems, addItem, removeItem, updateQuantityById, subtotal, total } = useCart();
+   const taxes = cartItems.length > 0 ? 1.00 : 0;
 
+    const [checkout,setCheckout] = useState(false)
+    const [show_cart,setCart] = useState(false)
+    const [show_products,setProd] = useState(true)
+    const [type,setType] = useState('cake')
+    const [search,setSearch] = useState('')
+    
+    function search_prod(value){
+      setSearch(value)
+    }
+    function changeType(type){
+      setType(type)
+    }
     function show_cart_page(){
       setProd(false)
       setCart(true)
     }
 
-  
-      // updates quantity in the cart 
-    function updateQuantityById(id, quantity) {
-      setItems(prevItems => {
-          return prevItems.map(prod =>
-              prod._id === id ? { ...prod, quantity: quantity } : prod
-          );
-      });
+    function set_checkout(){
+      setCheckout(true)
+      if(!logged){
+        setShowModal(true)
+      }
     }
-     
-      // add items to cart
-      function addItems(item){
-        setItems(prevItems => [...prevItems, { ...item, quantity: 1 }]);
-        
-        
-      }
-      // remove items from the cart
-      function removeItem(name){
-          setItems(prevItems => prevItems.filter(item => item.name !== name));
-      }
-      // show checkout if logged else render log in form
-      function set_checkout(){
-     
-        setCheckout(true)
-        if(!logged){
-          setShowModal(true)
-        }
-        
-  
-      }
+
     function closeCart(){
       setCart(false);
       setProd(true);
-
     }
-
-
-  
-    
-    // useEffect to update subtotal anytime cart item changes
-    useEffect(()=>{
-      const newSubtotal = cartitem.reduce((sum,item)=> sum + item.price * item.quantity,0);
-      setsubTotal(newSubtotal);
-     
-    },[cartitem])
-    // using useffect to update total, total will be udpated anytime subtotal or taxes changes
-    useEffect(() => {
-      setTotal(subtotal > 0 ? taxes + subtotal : 0);
-    }, [subtotal, taxes]);
    
 
  
@@ -103,7 +62,7 @@ function Products({showModal,setShowModal}) {
       <div className="min-h-screen justify-start items-start">
         {checkout && logged ? (
           <Order
-            cartitem={cartitem}
+            cartitem={cartItems}
             total={total}
             subtotal={subtotal}
             taxes={taxes}
@@ -112,19 +71,21 @@ function Products({showModal,setShowModal}) {
           <div className=" justify-start items-start ">
             <div>
               <div>
-                <MenuBar/>
+                <MenuBar search={search_prod} change={changeType} show_cart={show_cart_page} items={cartItems}/>
               </div>
           
               <div className=" container my-0 mx-auto w-full  ">
                <div className="rounded-lg p-2 sm:p-4">
                  <div className="grid grid-cols-3 gap-2 ">
-                  { prod_data.map((product)=>
+                  { prod_data.filter((product)=> {
+                    return search.toLowerCase() === '' ? product : product.name.toLowerCase().includes(search)
+                  }).map((product)=>
                     product.type == type ? (
                       <div className=""  key={product._id} >
                        <Product
                         
                          data={product}
-                         addItems={addItems}
+                         addItems={addItem}
                          
                        />
                      </div>
@@ -146,14 +107,12 @@ function Products({showModal,setShowModal}) {
         ) : show_cart ? (
           <div className="flex flex-col justify-center ">
             <Cart
-              data={cartitem}
+              data={cartItems}
               removeItem={removeItem}
-             
               subtotal={subtotal}
               total={total}
               checkout={set_checkout}
               updateQuantityById={updateQuantityById}
-              
               setShowModal={setShowModal}
               closeCart={closeCart}
             />

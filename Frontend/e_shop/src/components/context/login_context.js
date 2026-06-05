@@ -43,10 +43,11 @@ export function LoginProvider ({children}) {
     async function signin(emailz,password){
         try{
         const res = await axios.post('http://localhost:5000/log/login',
-         {
-             'email':emailz,
-             'password':password,
-         }, );
+            {
+                'email':emailz,
+                'password':password,
+            }, );
+            
 
 
          const {message,token,user_id,email} = res.data;
@@ -61,9 +62,13 @@ export function LoginProvider ({children}) {
             setStatus(true)
             return 'success';
          }
+         else{
+            return res.data.message;
+         }
         } catch(e){
             console.log(e)
-            return e.message;
+            const Message = e.response?.data?.message || e.message;
+            throw new Error(Message);
         }
         
 

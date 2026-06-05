@@ -6,7 +6,7 @@ function Edit_item({ closeit,details}) {
   const {edit_product} = useContext(Inventory_context)
   
   const [data,updateData] = useState(details)
-  console.log(data)
+ 
   
 
   function handler(e){
@@ -65,6 +65,16 @@ function Edit_item({ closeit,details}) {
               type="text"
               name="quantity"
               defaultValue={data.quantity}
+              className="border border-black rounded p-1.5 w-3/4 text-gray-900 text-xs focus:outline-none"
+            />
+          </div>
+          <div className="flex items-center">
+            <span className="font-semibold w-1/4">Img Link:</span>
+            <input
+              onChange={handler}
+              type="text"
+              name="img_link"
+              defaultValue={data.img_link}
               className="border border-black rounded p-1.5 w-3/4 text-gray-900 text-xs focus:outline-none"
             />
           </div>
