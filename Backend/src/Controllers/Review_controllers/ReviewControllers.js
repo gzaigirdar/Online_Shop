@@ -20,7 +20,8 @@ const getreviews = AsyncHandler(async (req,res) => {
         Rating:1,
         username:'$userdata.username',
         name: '$userdata.name'
-    }}
+    }},
+    {$sort:{_id:-1}}
 
 
     ])
@@ -108,12 +109,14 @@ const reviewStats = AsyncHandler(async (req,res)=>{
         countMap[item.star] = item.count;
     });
 
-    // converting them into percentages
-    const result = [];
-    for (let star = 1; star <= 5; star++) {
-        const count = countMap[star] || 0;
+    // converting them into percentages 
+    const starWords = ['one', 'two', 'three', 'four', 'five'];
+    const result = {};
+    for (let i = 0; i < 5; i++) {
+        const starNumber = i + 1;
+        const count = countMap[starNumber] || 0;
         const percentage = total > 0 ? Math.round((count / total) * 100) : 0;
-        result.push({ star, percentage });
+        result[starWords[i]] = percentage;
     }
 
     return res.status(200).json(result);
