@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Order_info } from "../context/Order_context";
+import { Login } from "../context/login_context";
 
 const addressSchema = z.object({
   street: z.string().min(1, "Required"),
@@ -11,28 +12,40 @@ const addressSchema = z.object({
   state: z.string().min(1, "Required"),
   zipcode: z.string().min(5, "Invalid zipcode"),
   phone_number: z.string().min(10, "Invalid phone number"),
+  email: z.string().email("Invalid email"),
 });
 
 function AddressForm({ update }) {
   const { address_info, change_address_info } = useContext(Order_info);
+  const { userInfo } = useContext(Login);
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm({
     resolver: zodResolver(addressSchema),
     defaultValues: {
-      street: " Enter street address",
-      city: "Enter city address",
-      state: "ct",
-      zipcode: "08806",
-      phone_number: "2031111111",
+      street: "",
+      city: "",
+      state: "",
+      zipcode: "",
+      phone_number: "",
+      email: "",
     },
   });
- // built in reset function to fill the form with defualt values
+
+  // Pre-fill form with existing address_info from context
+  useEffect(() => {
+    reset({
+      street: address_info.street || "",
+      city: address_info.city || "",
+      state: address_info.state || "",
+      zipcode: address_info.zipcode || "",
+      phone_number: address_info.phone_number || "",
+      email: userInfo?.email || "",
+    });
+  }, [address_info, userInfo, reset]);
 
   function onSubmit(data) {
-    const formattedData = { ...data, zipcode: Number(data.zipcode) }; 
-    console.log(formattedData);
-    change_address_info(formattedData); 
-    update();              
+    change_address_info(data);
+    update();
   }
 
   return (
@@ -48,6 +61,7 @@ function AddressForm({ update }) {
           { label: "State", name: "state", type: "text" },
           { label: "Zipcode", name: "zipcode", type: "text" },
           { label: "Phone Number", name: "phone_number", type: "tel" },
+          { label: "Email", name: "email", type: "email" },
         ].map(({ label, name, type }) => (
           <div className="mb-1" key={name}>
             <label className="block mb-2 text-sm font-medium text-gray-200">{label}</label>

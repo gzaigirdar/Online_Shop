@@ -33,7 +33,7 @@ function Address() {
               <div className="py-3">
                 <dt className="mb-1 text-gray-400 md:text-lg">Home address</dt>
                 <dd className="text-lg font-semibold">
-                  {address_info.street_address} {address_info.city} {address_info.zipcode} {address_info.state} 
+                  {address_info.street} {address_info.city} {address_info.zipcode} {address_info.state} 
                 </dd>
               </div>
               <div className="py-3">

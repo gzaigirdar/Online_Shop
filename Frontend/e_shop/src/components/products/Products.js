@@ -18,7 +18,7 @@ function Products({showModal,setShowModal}) {
   
    const {logged} = useContext(Login)
    const {prod_data} = useContext(Inventory_context)
-   const { cartItems, addItem, removeItem, updateQuantityById, subtotal, total } = useCart();
+   const { cartItems, addItem, removeItem, updateQuantityById, subtotal, total,clearCart } = useCart();
    const taxes = cartItems.length > 0 ? 1.00 : 0;
 
     const [checkout,setCheckout] = useState(false)
@@ -50,7 +50,15 @@ function Products({showModal,setShowModal}) {
       setProd(true);
     }
 
-    
+    function back_to_shop(){
+      
+      setCheckout(false)
+      clearCart()
+      setCart(false)
+      setType('cake')
+      setProd(true)
+      
+    }
    
 
  
@@ -69,6 +77,7 @@ function Products({showModal,setShowModal}) {
             subtotal={subtotal}
             taxes={taxes}
             close={set_checkout}
+            redirect={back_to_shop}
           />
         ) : show_products? (
           <div className=" justify-start items-start ">

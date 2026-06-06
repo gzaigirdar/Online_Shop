@@ -33,6 +33,7 @@ export function Order_provider({ children }) {
     }
 
     function change_address_info(data) {
+        console.log(data)
         setAddress(data);
     }
 
