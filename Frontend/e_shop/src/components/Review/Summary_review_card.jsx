@@ -13,7 +13,7 @@ function Summary_review_card({open_modal}) {
   function submit_rev(){
     if (!logged){
       open_modal()
-      return
+      
       
     }
     if(show_form == true){

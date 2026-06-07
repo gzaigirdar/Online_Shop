@@ -45,6 +45,8 @@ export function ReviewProvider({children}){
 
         try {
             const submitted = await axios.post(`${review_url}/submitReview`,reviewData,{withCredentials:true})
+            await getReviews();
+            await getreviewStat();
             return submitted.data
         } catch (error) {
             const message = error.response?.data?.message || 'Something went wrong'
@@ -55,7 +57,6 @@ export function ReviewProvider({children}){
     async function getreviewStat(){
         try {
             const res = await axios.get(`${review_url}/reviewStats`,{withCredentials:true})
-            console.log(res.data.one)
             return res.data;
         } catch (error) {
             const message = error.response?.data?.message || 'Something went wrong'

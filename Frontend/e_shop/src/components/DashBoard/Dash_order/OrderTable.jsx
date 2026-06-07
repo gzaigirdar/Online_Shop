@@ -60,9 +60,10 @@ function OrderTable() {
 
 
       <div className="mx-2 md:mx-6 lg:mx-auto lg:max-w-5xl">
-        <div className="shadow overflow-x-auto rounded border border-gray-200">
+        <div className="shadow rounded border border-gray-200">
+          <div className="max-h-[320px] overflow-y-auto overflow-x-auto">
           <table className="min-w-full bg-white table-auto">
-            <thead className="bg-gray-800 text-white">
+            <thead className="bg-gray-800 text-white sticky top-0 z-10">
               <tr>
                 <th className="text-left py-3 px-4 uppercase font-semibold text-sm">ID</th>
                 <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Phone Number</th>
@@ -91,6 +92,7 @@ function OrderTable() {
               }
             </tbody>
           </table>
+          </div>
         </div>
       </div>
 

@@ -103,7 +103,7 @@ function DashBoard() {
                 <div>
                     <DashOrder/>
                 </div>
-            ): comp == 'Msg'? (
+            ): comp == 'Messages'? (
                 <div>
                     <Inquiry_Provider>
                     <ContactMain/>
