@@ -1,4 +1,4 @@
-let mockUsers = [
+export let mockUsers = [
   {
     name: { fname: "Terry", lname: "Kennedy" },
     _id: "6a20ce2b5c5c79a86b2b2ec2",
@@ -144,4 +144,8 @@ export async function mockCreateUser(data) {
 
   const { password: _, ...userWithoutPassword } = newUser;
   return { message: "success", user: userWithoutPassword };
+}
+
+export async function mockForgetPassword(_data) {
+  throw createMockError("reseting password is not available in frontend demo only");
 }

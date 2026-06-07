@@ -10,7 +10,7 @@ const schema = z.object({
   email: z.string().email({ message: "invalid email" })
 });
 
-function ForgotForm() {
+function ForgotForm({close}) {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
@@ -37,6 +37,12 @@ function ForgotForm() {
 
   return (
     <div className="relative bg-gray-900 h-screen overflow-auto w-screen p-10">
+           <button
+              onClick={close}
+              className="absolute top-5 right-5 text-white text-2xl font-bold bg-red-700 hover:text-gray-300 px-2 py-1 rounded"
+            >
+              X
+            </button>
       <h1 className="pt-5 text-4xl text-center mb-5 text-white">Forgot Password</h1>
       <form onSubmit={handleSubmit(submit)}>
         <div className="max-w-md mx-auto p-5 bg-gray-900 shadow-lg rounded-md">

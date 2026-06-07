@@ -1,4 +1,4 @@
-    import { useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
     import { useContext,useState } from "react";
     import {z} from 'zod';
     import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,7 +10,7 @@
       email: z.string().email({message:"invalid email"}),
       password: z.string().min(5,'the password has to be 6 chracter long')
     })
-    function CreateAcc({setform}) {
+    function CreateAcc({back,close}) {
       const {createAccount} = useContext(Login)
       const [error, setError] = useState(null)
       const{register,handleSubmit,formState:{errors}} = useForm({resolver: zodResolver(schema)});
@@ -36,10 +36,15 @@
         return (
           <>
             <div className="relative bg-gray-900 h-screen overflow-auto w-screen p-10">
+            <button
+              onClick={close}
+              className="fixed top-4 right-4 sm:top-5 sm:right-5 z-50 text-white text-2xl font-bold bg-red-700 hover:text-gray-300 px-2 py-1 rounded"
+            >
+              X
+            </button>
               <h1 className="pt-5 text-4xl text-center mb-5 text-white">Create Your Account</h1>
-      
           <form  onSubmit={handleSubmit(onSubmit)} 
-          className="max-w-md mx-auto p-5 bg-gray-900 shadow-lg rounded-md" >
+          className="w-full max-w-md mx-auto p-5 bg-gray-900 shadow-lg rounded-md" >
               <div className="mb-5">
                   <label  className="block mb-2 text-sm font-medium text-white">
                     User Name
@@ -68,7 +73,7 @@
                   {errors.fname && <p className="text-red-700"> {errors.fname.message}</p>}
                 </div>
                 
-      
+
                 {/* Last Name */}
                 <div className="mb-5">
                   <label htmlFor="lastName" className="block mb-2 text-sm font-medium text-white">
@@ -84,7 +89,7 @@
                   {errors.lname && <p className="text-red-700"> {errors.lname.message}</p>}
                 </div>
                 
-      
+
                 {/* Email */}
                 <div className="mb-5">
                   <label htmlFor="email" className="block mb-2 text-sm font-medium text-white">
@@ -100,7 +105,7 @@
                     {errors.email && <p className="text-red-700"> {errors.email.message}</p>}
                 </div>
               
-      
+
                 {/* Password */}
                 <div className="mb-5">
                   <label htmlFor="password" className="block mb-2 text-sm font-medium text-white">
@@ -116,7 +121,7 @@
                   />
                       {errors.password && <p className="text-red-700"> {errors.password.message}</p>}
                 </div>
-      
+
                 {/* Confirm Password 
                 <div className="mb-5">
                   <label htmlFor="confirmPassword" className="block mb-2 text-sm font-medium text-white">
@@ -130,7 +135,7 @@
                   />
                 </div>
                 */}
-      
+
                 {/* Submit Button */}
                 <button
                   type="submit"
@@ -140,13 +145,13 @@
                 </button>
               
             </form>
-      
-              <div className="mt-10 text-white text-center">
+
+              <div className="mt-2 text-white text-center">
               <div>{error && <span className="text-red-500 text-2xl">{error}</span>}</div>
 
                 <p className="text-gray-400 mb-3">
                   Already have an account?{" "}
-                  <a href="#" className="underline text-blue-600 hover:text-blue-900">
+                  <a onClick={()=> back('login')} href="#" className="underline text-blue-600 hover:text-blue-900">
                     Login here
                   </a>
                 </p>
@@ -157,4 +162,3 @@
       }
       
       export default CreateAcc;
-      

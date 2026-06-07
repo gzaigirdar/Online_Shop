@@ -39,7 +39,9 @@ function Loginform({ closeIt }) {
     }
     }
   
-
+ function change_form_type(type){
+  setformType(type)
+ }
   const createAcc = (bool)=> setAcc(bool);
 
   return (
@@ -133,9 +135,9 @@ function Loginform({ closeIt }) {
       )
     
     ) : formType === 'acc' ? (
-      <AccForm />
+      <AccForm back={change_form_type} close={closeIt}  />
     ) : formType === 'forget' ? (
-      <ForgotForm/>
+      <ForgotForm close={closeIt} />
     ) : null
   );
 
