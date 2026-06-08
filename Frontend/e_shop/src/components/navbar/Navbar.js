@@ -66,7 +66,7 @@ export default function Navbar({open_modal}){
 
   {logged ? (
     <li onClick={() => changeStatus(false)}>
-      <a className="block py-0.5 px-1 md:px-3 font-sans  hover:bg-red-800 rounded-md" href="#">Log out</a>
+      <a className="block py-0.5 px-1 md:px-3 font-sans bg-green-800 hover:bg-red-800 rounded-md" href="#">Log out</a>
     </li>
   ) : (
     <li onClick={() => open_modal()}>
@@ -78,7 +78,7 @@ export default function Navbar({open_modal}){
     </nav>
   </header>
 
- <div className={`${isOpen ? 'block' : 'hidden'} md:hidden bg-slate-900 z-30 absolute top-full left-0 right-0  shadow-2xl p-2`}>
+ <div className={`${isOpen ? 'block' : 'hidden'} md:hidden bg-slate-90   z-30 absolute top-full left-0 right-0  shadow-2xl p-2`}>
   
 <ul className="flex flex-col items-center divide-y divide-gray-400 w-full">
   <li className="w-full py-3 flex justify-center">

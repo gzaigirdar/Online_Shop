@@ -1,10 +1,12 @@
 import { createContext,useState,useEffect, Children } from "react";
 import axios from "axios";
+import { mockGetInquiries, mockSubmitInquiry, mockDeleteInquiry } from "../Mockdata_services/ContactService/ContactService";
 
 const InquiryContext = createContext();
 
 function Inquiry_Provider({children}){
 const inquiry_url = process.env.NEXT_PUBLIC_DB_API_Inquiry;
+const mock_service = process.env.NEXT_PUBLIC_MOCK_SERVICE;
 const [inquiries,setInquiries] = useState([])
  
 
@@ -12,8 +14,14 @@ const [inquiries,setInquiries] = useState([])
 async function getInquiries(){
 
     try {
-        const res = await axios.get(`${inquiry_url}/getInquiries`,{withCredentials:true})
-        setInquiries(res.data)
+        if(mock_service === 'true'){
+            const res = await mockGetInquiries();
+            setInquiries(res);
+        }
+        else{
+            const res = await axios.get(`${inquiry_url}/getInquiries`,{withCredentials:true})
+            setInquiries(res.data)
+        }
     } catch (error) {
         return error
     }
@@ -21,8 +29,14 @@ async function getInquiries(){
 
 async function submitInquiry(inquiryData){
     try {
-        const res = await axios.post(`${inquiry_url}/submitInquiry`,inquiryData,{withCredentials:true})
-        return res.data
+        if(mock_service === 'true'){
+            const res = await mockSubmitInquiry(inquiryData);
+            return res;
+        }
+        else{
+            const res = await axios.post(`${inquiry_url}/submitInquiry`,inquiryData,{withCredentials:true})
+            return res.data
+        }
     } catch (error) {
          const message = error.response?.data?.message || 'Something went wrong'
          throw new Error(message)  
@@ -33,9 +47,14 @@ async function submitInquiry(inquiryData){
 async function deleteInquiry(id){
    
     try {
-        const res = await axios.delete(`${inquiry_url}/deleteInquiry?id=${id}`,{withCredentials:true})
-        getInquiries()
-        
+        if(mock_service === 'true'){
+            await mockDeleteInquiry(id);
+            getInquiries();
+        }
+        else{
+            const res = await axios.delete(`${inquiry_url}/deleteInquiry?id=${id}`,{withCredentials:true})
+            getInquiries()
+        }
     } catch (error) {
         return error
     }

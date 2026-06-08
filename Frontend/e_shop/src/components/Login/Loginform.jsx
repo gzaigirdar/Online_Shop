@@ -137,7 +137,7 @@ function Loginform({ closeIt }) {
     ) : formType === 'acc' ? (
       <AccForm back={change_form_type} close={closeIt}  />
     ) : formType === 'forget' ? (
-      <ForgotForm close={closeIt} />
+      <ForgotForm close={closeIt} back={change_form_type} />
     ) : null
   );
 

@@ -1,4 +1,4 @@
-import { mockUsers } from "../UserService/UserService/UserService.js";
+import { mockUsers } from "../UserService/UserService.js";
 
 let mockInquiries = [
     {

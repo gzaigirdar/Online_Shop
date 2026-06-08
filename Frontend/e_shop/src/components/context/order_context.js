@@ -1,11 +1,13 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Login } from "./login_context";
+import { mockGetAllOrders, mockCreateOrder, mockEditOrderStatus, mockDeleteOrder } from "../Mockdata_services/OrderService.js/OrderService";
 
 export const Order_info = createContext();
 
 export function Order_provider({ children }) {
     const DB_API_ORDER = process.env.NEXT_PUBLIC_DB_API_ORDER;
+    const mock_service = process.env.NEXT_PUBLIC_MOCK_SERVICE;
     const loginContext = useContext(Login);
 
     const [order_Items,setOrderItems] = useState([])
@@ -50,14 +52,20 @@ export function Order_provider({ children }) {
             const user_id = loginContext?.userInfo?.user_id;
             if (!user_id) throw new Error("User not logged in");
 
-            const res = await axios.post(`${DB_API_ORDER}/orders`, {
-                user_id,
-                address: address_info,
-                items,
-                total,
-            });
+            if(mock_service === 'true'){
+                const res = await mockCreateOrder({ user_id, address: address_info, items, total });
+                return { success: true, message: res.confirmation };
+            }
+            else{
+                const res = await axios.post(`${DB_API_ORDER}/orders`, {
+                    user_id,
+                    address: address_info,
+                    items,
+                    total,
+                });
 
-            return { success: true, message: res.data.message };
+                return { success: true, message: res.data.message };
+            }
         } catch (err) {
             return { success: false, error: err.message || "Failed to create order" };
         }
@@ -66,12 +74,15 @@ export function Order_provider({ children }) {
      async function getAllOrders() {
         try {
             
-            const res = await axios.get(`${DB_API_ORDER}/GetAllOrders`);
-            
-            setOrderItems(res.data)
-
-            
-            ;
+            if(mock_service === 'true'){
+                const res = await mockGetAllOrders();
+                setOrderItems(res);
+            }
+            else{
+                const res = await axios.get(`${DB_API_ORDER}/GetAllOrders`);
+                
+                setOrderItems(res.data);
+            }
         } catch (err) {
             return {  error: err.message || "Failed to fetch all orders" };
         }
@@ -89,10 +100,15 @@ export function Order_provider({ children }) {
         try {
             if (!order_id) throw new Error("Order ID is required");
     
-            await axios.patch(`${DB_API_ORDER}/Edit`, {
-                order_id,
-                status: updated_fields,
-            });
+            if(mock_service === 'true'){
+                await mockEditOrderStatus({ order_id, status: updated_fields });
+            }
+            else{
+                await axios.patch(`${DB_API_ORDER}/Edit`, {
+                    order_id,
+                    status: updated_fields,
+                });
+            }
     
             // Update local state 
             setOrderItems((prev) =>
@@ -111,7 +127,12 @@ export function Order_provider({ children }) {
         try {
             if (!order_id) throw new Error("Order ID is required");
     
-            await axios.delete(`${DB_API_ORDER}/Delete/${order_id}`);
+            if(mock_service === 'true'){
+                await mockDeleteOrder(order_id);
+            }
+            else{
+                await axios.delete(`${DB_API_ORDER}/Delete/${order_id}`);
+            }
     
             // deleting order from local state
             setOrderItems((prev) => prev.filter((order) => order.id !== order_id));

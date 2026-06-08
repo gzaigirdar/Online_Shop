@@ -1,19 +1,28 @@
 
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
+import { mockGetProducts,mockDeleteProduct,mockEditProduct,mockAddProduct } from "../Mockdata_services/ProductService/ProductService";
 
 const Inventory_context = createContext();
 
 function Inventory_provider({ children }) {
   const [prod_data, setProddata] = useState([]);
   const DB_API_PRODUCT = process.env.NEXT_PUBLIC_DB_API_PRODUCT;
+  const mock_service = process.env.NEXT_PUBLIC_MOCK_SERVICE;
 
   // Get all products
   async function get_products() {
     try {
-      console.log(process.env.NEXT_PUBLIC_DB_API_PRODUCT);
-      const res = await axios.get(`${DB_API_PRODUCT}/getallproducts`, { withCredentials: true });
-      setProddata(res.data);
+    
+      if(mock_service === 'true'){
+        const res = await mockGetProducts()
+        setProddata(res)
+      }
+      else{
+        const res = await axios.get(`${DB_API_PRODUCT}/getallproducts`, { withCredentials: true });
+        setProddata(res.data);
+
+      }
     } catch (error) {
       console.error(error);
     }
@@ -23,9 +32,16 @@ function Inventory_provider({ children }) {
   async function edit_product(prod_details) {
     
     try {
-      const res = await axios.post(`${DB_API_PRODUCT}editproduct`, prod_details, { withCredentials: true });
-      setProddata(prev => prev.map(item => item._id === res.data._id ? res.data : item));
-      return res.data;
+      if(mock_service === 'true'){
+        const res = await mockEditProduct(prod_details)
+        setProddata(prev => prev.map(item => item._id === res._id ? res : item));
+        return res;
+      }
+      else{
+        const res = await axios.post(`${DB_API_PRODUCT}editproduct`, prod_details, { withCredentials: true });
+        setProddata(prev => prev.map(item => item._id === res.data._id ? res.data : item));
+        return res.data;
+      }
     } catch (error) {
       console.error(error.message);
     }
@@ -34,9 +50,16 @@ function Inventory_provider({ children }) {
   // Add product
   async function add_product(item_data) {
     try {
-      const res = await axios.post(`${DB_API_PRODUCT}addproduct`, item_data, { withCredentials: true });
-      setProddata(prev => [...prev, res.data]);
-      return res.data;
+      if(mock_service === 'true'){
+        const res = await mockAddProduct(item_data)
+        setProddata(prev => [...prev, res]);
+        return res;
+      }
+      else{
+        const res = await axios.post(`${DB_API_PRODUCT}addproduct`, item_data, { withCredentials: true });
+        setProddata(prev => [...prev, res.data]);
+        return res.data;
+      }
     } catch (error) {
       console.error(error);
     }
@@ -45,8 +68,14 @@ function Inventory_provider({ children }) {
   // Delete product
   async function delete_product(name) {
     try {
-      const res = await axios.delete(`${DB_API_PRODUCT}deleteproduct`, { data: { name: name }, withCredentials: true });
-      setProddata(prev => prev.filter(item => item.name !== name));
+      if(mock_service === 'true'){
+        await mockDeleteProduct(name)
+        setProddata(prev => prev.filter(item => item.name !== name));
+      }
+      else{
+        const res = await axios.delete(`${DB_API_PRODUCT}deleteproduct`, { data: { name: name }, withCredentials: true });
+        setProddata(prev => prev.filter(item => item.name !== name));
+      }
     } catch (error) {
       console.error(error);
     }

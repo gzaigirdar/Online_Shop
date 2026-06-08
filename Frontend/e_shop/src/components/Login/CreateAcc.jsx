@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
     import { useContext,useState } from "react";
-    import {z} from 'zod';
+    import {success, z} from 'zod';
     import { zodResolver } from "@hookform/resolvers/zod";
     import { Login } from "../context/login_context";
       const schema = z.object({
@@ -14,13 +14,16 @@ import { useForm } from "react-hook-form";
       const {createAccount} = useContext(Login)
       const [error, setError] = useState(null)
       const{register,handleSubmit,formState:{errors}} = useForm({resolver: zodResolver(schema)});
+      const [success,setSucccess] = useState(null)
 
       async function onSubmit(data){
         const {username,fname,lname,email,password} = data;
         let res;
         try {
           res = await createAccount(username, fname, lname, email, password);
-          setform(false)
+          setSucccess('Account creation Succesfull!')
+          setTimeout(5)
+          back('login')
 
           
         } catch (error) {
@@ -148,6 +151,7 @@ import { useForm } from "react-hook-form";
 
               <div className="mt-2 text-white text-center">
               <div>{error && <span className="text-red-500 text-2xl">{error}</span>}</div>
+              <div>{success && <span className="text-green-500 text-2xl">{success}</span>}</div>
 
                 <p className="text-gray-400 mb-3">
                   Already have an account?{" "}

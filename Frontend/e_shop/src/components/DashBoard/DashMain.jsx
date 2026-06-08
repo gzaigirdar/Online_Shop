@@ -8,6 +8,7 @@ import Inventory from "./Inventory/Inventory";
 import dynamic from "next/dynamic";
 import DashOrder from "./Dash_order/DashOrder";
 import axios from "axios";
+import { mockGetOrderStat } from "../Mockdata_services/OrderService.js/OrderService";
 import MainReview from "./Dash_reviews/main_review";
 import { ReviewProvider } from "../context/review_context";
 import { Inquiry_Provider } from "../context/inquiry_context";
@@ -20,7 +21,7 @@ function DashBoard() {
     const WeeklyBarChart = dynamic(() => import("./OverView/Weekly_chart"), { ssr: false });
     const ItemsChart = dynamic(() => import("./OverView/ItemsChart"), { ssr: false });
     const api_url = process.env.NEXT_PUBLIC_DB_API_ORDER;
-
+    const mock_service = process.env.NEXT_PUBLIC_MOCK_SERVICE;
 
     const [comp,setComp] = useState('Overview');
     const [stats,setStats] = useState([])
@@ -33,11 +34,16 @@ function DashBoard() {
     useEffect(()=>{
         const getdata = async()=>{
             try{
-                const res = await axios.get(`${api_url}/getOrderStat`,{withCredentials:true})
-                setStats(res.data)
-                console.log(res.data)
-                console.log(res.data.total_products)
-            
+                if(mock_service === 'true'){
+                    const res = await mockGetOrderStat();
+                    setStats(res);
+                }
+                else{
+                    const res = await axios.get(`${api_url}/getOrderStat`,{withCredentials:true})
+                    setStats(res.data)
+                    console.log(res.data)
+                    console.log(res.data.total_products)
+                }
 
             } catch(error){
                 console.log(error.message)

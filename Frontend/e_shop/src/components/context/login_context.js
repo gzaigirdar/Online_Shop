@@ -1,6 +1,7 @@
 'use client'
 import { createContext,useState } from "react";
 import axios from "axios";
+import { mockCreateUser, mockLogin } from "../Mockdata_services/UserService/UserService";
 
 export const Login = createContext()
 
@@ -13,6 +14,7 @@ export function LoginProvider ({children}) {
         "email": " ",
         "auth_token":" "
 })
+    const mock_service = process.env.NEXT_PUBLIC_MOCK_SERVICE;
     
     function changeStatus(bool_value){
         setStatus(bool_value);
@@ -20,19 +22,31 @@ export function LoginProvider ({children}) {
     }
     async function createAccount(username,fname,lname,email,password){
         try{
-            const res = await axios.post('http://localhost:5000/log/createacc',
-                {
+            if(mock_service === 'true'){
+                const data =   {
                     'username':username,
                     'fname':fname,
                     'lname': lname,
                     'email':email,
-                    'password':password
+                    'password':password}
+            const res = await mockCreateUser(data);
+        }
+            else{
 
-
-                }
-            )
-            
-            console.log(res.data)
+                const res = await axios.post('http://localhost:5000/log/createacc',
+                    {
+                        'username':username,
+                        'fname':fname,
+                        'lname': lname,
+                        'email':email,
+                        'password':password
+    
+    
+                    }
+                )
+                
+                console.log(res.data)
+            }
         } catch(e){
            
             const serverMessage = e.response?.data?.message || e.message;
@@ -42,15 +56,25 @@ export function LoginProvider ({children}) {
 
     async function signin(emailz,password){
         try{
-        const res = await axios.post('http://localhost:5000/log/login',
+        let res;
+        if (mock_service === 'true'){ 
+            res = await mockLogin({
+                 'email':emailz,
+                'password':password,
+            })
+        }
+        else{
+             res = await axios.post('http://localhost:5000/log/login',
             {
                 'email':emailz,
                 'password':password,
             }, );
             
 
+        }
 
-         const {message,token,user_id,email} = res.data;
+    
+         const {message,token,user_id,email} = res.data || res;
          
          setInfo({
                  auth_token:token,
@@ -63,7 +87,7 @@ export function LoginProvider ({children}) {
             return 'success';
          }
          else{
-            return res.data.message;
+            return (res.data || res).message;
          }
         } catch(e){
             console.log(e)

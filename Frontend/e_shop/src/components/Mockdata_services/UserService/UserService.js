@@ -4,7 +4,7 @@ export let mockUsers = [
     _id: "6a20ce2b5c5c79a86b2b2ec2",
     username: "tkennedy",
     email: "tkennedy@gmail.com",
-    password: "password123",
+    password: "Tkennedy1",
     admin: false,
     createdAt: "2026-06-04T01:00:27.383Z",
     updatedAt: "2026-06-05T04:17:03.055Z",
@@ -15,7 +15,7 @@ export let mockUsers = [
     _id: "6a20cde35c5c79a86b2b2ec0",
     username: "Sarah",
     email: "sjohnson@gmail.com",
-    password: "password123",
+    password: "Sjohnson1",
     admin: false,
     createdAt: "2026-06-04T00:59:15.252Z",
     updatedAt: "2026-06-06T22:06:08.290Z",
@@ -26,7 +26,7 @@ export let mockUsers = [
     _id: "6a20cda85c5c79a86b2b2ebe",
     username: "jsmith",
     email: "jsmith@yahoo.com",
-    password: "password123",
+    password: "Jsmith1",
     admin: false,
     createdAt: "2026-06-04T00:58:16.866Z",
     updatedAt: "2026-06-04T01:06:24.927Z",
@@ -114,6 +114,7 @@ export async function mockLogin(data) {
     message: "success",
     user_id: user._id,
     email: user.email,
+    token: "mock-token",
   };
 }
 
@@ -147,5 +148,6 @@ export async function mockCreateUser(data) {
 }
 
 export async function mockForgetPassword(_data) {
-  throw createMockError("reseting password is not available in frontend demo only");
+  throw createMockError("resetting password is not available in frontend demo only");
 }
+  
