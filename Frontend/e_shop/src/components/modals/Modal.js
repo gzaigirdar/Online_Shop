@@ -32,7 +32,7 @@ function Modal({show, onClose, children}) {
     // creating the modal content in variable
     const modalContent = show ? (
             <div className="fixed inset-0 bg-black bg-opacity-50 z-50 overflow-auto flex flex-col items-center">
-            <div className="relative mt-10">  
+            <div className="relative ">  
                 {children}
             </div>
             </div>

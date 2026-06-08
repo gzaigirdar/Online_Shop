@@ -36,16 +36,16 @@ function ForgotForm({close}) {
   }
 
   return (
-    <div className="relative bg-gray-900 h-screen overflow-auto w-screen p-10">
+    <div className="relative bg-gradient-to-r from-slate-100 to-slate-900 h-screen overflow-auto w-screen p-20">
            <button
               onClick={close}
               className="absolute top-5 right-5 text-white text-2xl font-bold bg-red-700 hover:text-gray-300 px-2 py-1 rounded"
             >
               X
             </button>
-      <h1 className="pt-5 text-4xl text-center mb-5 text-white">Forgot Password</h1>
-      <form onSubmit={handleSubmit(submit)}>
-        <div className="max-w-md mx-auto p-5 bg-gray-900 shadow-lg rounded-md">
+      <h1 className="mt-10 pt-5 text-4xl text-center mb-5 text-white">Forgot Password</h1>
+      <form onSubmit={handleSubmit(submit)} className="max-w-lg lg:max-w-lg mx-auto p-5 bg-gray-900 shadow-lg rounded-2xl">
+        <div className="max-w-md mx-auto p-8 bg-gray-900 shadow-lg rounded-2xl ">
           <div className="mb-5">
             <label htmlFor="email" className="block mb-2 text-sm font-medium text-white">
               Email

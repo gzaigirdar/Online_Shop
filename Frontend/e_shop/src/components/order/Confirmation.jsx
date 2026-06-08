@@ -7,7 +7,7 @@ import { Order_info } from "../context/Order_context";
 function Confirmation({redirect}) {
     const{payment_info,address_info} = useContext(Order_info);
     let {cardNumber} = payment_info;
-    let card_num = cardNumber.slice(-4)
+    let card_num = cardNumber && cardNumber !== "None" ? cardNumber.slice(-4) : "1234";
     const router = useRouter()
 
    

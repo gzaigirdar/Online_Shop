@@ -41,6 +41,7 @@ function Products({showModal,setShowModal}) {
     function set_checkout(){
       if(!logged){
         setShowModal(true)
+        return;
       }
       setCheckout(prev => !prev)
     }

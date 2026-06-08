@@ -38,14 +38,14 @@ import { useForm } from "react-hook-form";
             <div className="relative bg-gray-900 h-screen overflow-auto w-screen p-10">
             <button
               onClick={close}
-              className="fixed top-4 right-4 sm:top-5 sm:right-5 z-50 text-white text-2xl font-bold bg-red-700 hover:text-gray-300 px-2 py-1 rounded"
+              className="fixed mt-5  top-4 right-4 sm:top-5 sm:right-5 z-50 text-white text-2xl font-bold bg-red-700 hover:text-gray-300 px-2 py-1 rounded"
             >
               X
             </button>
-              <h1 className="pt-5 text-4xl text-center mb-5 text-white">Create Your Account</h1>
+              <h1 className="pt-3 text-4xl text-center mb-5 text-white">Create Your Account</h1>
           <form  onSubmit={handleSubmit(onSubmit)} 
           className="w-full max-w-md mx-auto p-5 bg-gray-900 shadow-lg rounded-md" >
-              <div className="mb-5">
+              <div className="mb-3">
                   <label  className="block mb-2 text-sm font-medium text-white">
                     User Name
                   </label>
@@ -59,7 +59,7 @@ import { useForm } from "react-hook-form";
                   {errors.username && <p className="text-red-700"> {errors.username.message}</p>}
                 </div>
                 
-                <div className="mb-5">
+                <div className="mb-3">
                   <label htmlFor="firstName" className="block mb-2 text-sm font-medium text-white">
                     First Name
                   </label>
@@ -75,7 +75,7 @@ import { useForm } from "react-hook-form";
                 
 
                 {/* Last Name */}
-                <div className="mb-5">
+                <div className="mb-3">
                   <label htmlFor="lastName" className="block mb-2 text-sm font-medium text-white">
                     Last Name
                   </label>
@@ -91,7 +91,7 @@ import { useForm } from "react-hook-form";
                 
 
                 {/* Email */}
-                <div className="mb-5">
+                <div className="mb-3">
                   <label htmlFor="email" className="block mb-2 text-sm font-medium text-white">
                     Email
                   </label>
@@ -107,7 +107,7 @@ import { useForm } from "react-hook-form";
               
 
                 {/* Password */}
-                <div className="mb-5">
+                <div className="mb-3">
                   <label htmlFor="password" className="block mb-2 text-sm font-medium text-white">
                     Password
                   </label>

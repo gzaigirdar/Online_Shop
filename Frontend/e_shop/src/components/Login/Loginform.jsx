@@ -48,7 +48,7 @@ function Loginform({ closeIt }) {
     formType === 'login' ? (
       (
         <>
-          <div className="relative bg-gray-900 h-screen overflow-auto w-screen p-10 mr-5">
+          <div className="relative bg-gradient-to-r from-slate-100 to-slate-900 h-screen overflow-auto w-screen p-10 ">
             <button
               onClick={closeIt}
               className="absolute top-5 right-5 text-white text-2xl font-bold bg-red-700 hover:text-gray-300 px-2 py-1 rounded"
@@ -58,7 +58,7 @@ function Loginform({ closeIt }) {
     
             <h1 className="pt-5 text-4xl text-center mb-5 text-white">Login to Your Account</h1>
     
-            <form  onSubmit={handleSubmit} className="max-w-md mx-auto p-5 bg-gray-900 shadow-lg rounded-md">
+            <form  onSubmit={handleSubmit} className="max-w-md mx-auto p-5 bg-gray-900 shadow-lg rounded-2xl">
               <div className="mb-5">
                 <label htmlFor="email" className="block mb-2 text-sm font-medium text-white">Your email</label>
                 <input
@@ -104,13 +104,11 @@ function Loginform({ closeIt }) {
               </button>
               {loading && <BeatLoader size={20} color='green' />}
               {error && <p className="text-red-500 font-semibold"> {error}</p>}
-            </form>
-    
-            <div className="mt-10 text-white">
+            <div className="justify-center items-center   mt-10 text-white">
               <p className="text-gray-400 mb-3">
               <a
                   onClick={() => setformType('forget')}
-                  className="underline text-blue-600 hover:text-blue-900 cursor-pointer"
+                  className="underline text-blue-700 hover:text-blue-900 cursor-pointer"
                 >
                   Forgot your password
               </a>
@@ -120,16 +118,18 @@ function Loginform({ closeIt }) {
 
               </p>
 
-              <p className="text-gray-400 mb-5">
+              <p className="text-gray-200 mb-5">
                 Don't have an account?{" "}
                 <a
                   onClick={() => setformType('acc')}
-                  className="underline text-blue-600 hover:text-blue-900 cursor-pointer"
+                  className="underline text-blue-700 hover:text-blue-900 cursor-pointer"
                 >
                   Sign up now
                 </a>
               </p>
             </div>
+            </form>
+    
           </div>
         </>
       )
