@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useParams } from "next/navigation";
+import { mockForgetPassword } from "../Mockdata_services/UserService/UserService";
 
 const schema = z.object({
   email: z.string().email({ message: "invalid email" })
@@ -14,21 +15,30 @@ function ForgotForm({close}) {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
+  const mock_data = process.env.NEXT_PUBLIC_MOCK_SERVICE;
+  const api_route = process.env.NEXT_PUBLIC_DB_API_USERS;
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(schema)
   });
 
   async function req_reset(email) {
-    await axios.post('http://localhost:5000/log/forgetPassword', { email:email });
+    await axios.post(`${api_route}/forgetPassword`, { email:email });
   }
 
   async function submit(data) {
     const { email } = data;
     try {
-      await req_reset(email);
-      setSuccess('Please check your email for a link to reset your password');
-      setError('');
+      if(mock_data === 'true'){
+        await mockForgetPassword('reset');
+
+      }
+      else{
+        await req_reset(email);
+        setSuccess('Please check your email for a link to reset your password');
+        setError('');
+
+      }
     } catch (e) {
       setError(e.response?.data?.message || e.message);
       setSuccess('');

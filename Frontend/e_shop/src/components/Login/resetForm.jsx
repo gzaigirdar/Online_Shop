@@ -6,8 +6,8 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useParams } from "next/navigation";
 import { useRouter } from 'next/navigation';
-
 import { BeatLoader } from "react-spinners";
+import { mockForgetPassword } from "../Mockdata_services/UserService/UserService";
 const schema = z.object({
     password: z.string().min(8, "Password must be at least 8 characters")
         .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
@@ -19,8 +19,9 @@ const schema = z.object({
     message: "Password doesn't match",
     path: ["confirmed_password"]
 });
-
 function ResetForm() {
+    const api_route = process.env.NEXT_PUBLIC_DB_API_USERS;
+  
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const {token} = useParams();
@@ -29,7 +30,16 @@ function ResetForm() {
     const [loading,setloading] = useState(false);
 
     async function reset(password) {
-        await axios.post('http://localhost:5000/log/resetPassword', { password:password,token:token });
+        try {
+            
+        
+            await axios.post(`${api_route}/resetPassword`, { password:password,token:token });
+    
+            }
+        catch (error) {
+            setError(e.response?.data?.message || e.message);
+            
+        }
     }
 
     async function submit(data) {

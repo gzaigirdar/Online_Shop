@@ -41,12 +41,12 @@ function Summary_review_card({open_modal}) {
   },[])
   return (
     <>
-    <div className=" flex flex-col m-2 bg-white items-center justify-center shadow-2xl rounded-lg ">
+    <div className=" flex flex-col m-2 bg-gray-200 items-center justify-center shadow-2xl rounded-lg p-6 ">
       {show_form && logged ? (
         <Review_form submit_rev={submit_rev} />
       ):
       <div>
-      <p className="text-center"> Overall Rating</p>
+      <p className="text-center font-bold uppercase text-lg mb-4">Overall Rating</p>
       
    
        <div className="flex flex-wrap justify-between  sm:ml-2 ">
@@ -58,12 +58,12 @@ function Summary_review_card({open_modal}) {
       </div>
       <hr className="border-t border-black-300 my-2" />
 
-      <div className="text-sm sm:text-base m-2 text-center">
+      <div className="text-sm font-light italic text-gray-700 m-2 text-center tracking-wide">
   Tell us what you think!!
 </div>
 
 {/* Responsive button */}
-<button onClick={submit_rev}  className="block items-center bg-green-400 hover:bg-red-300 text-white font-bold mb-2 mx-auto px-3 sm:px-4 py-1 sm:py-2 rounded-sm text-xs sm:text-sm w-1/2 max-w-md">
+<button onClick={submit_rev}  className="block items-center bg-gray-800 hover:bg-gray-600 text-white font-bold mb-2 mx-auto px-3 sm:px-4 py-1 sm:py-2 rounded-sm text-xs sm:text-sm w-1/2 max-w-md">
    {logged ? <p>Submit Review</p> : <p>Log in to submit review</p>}
 </button>
 

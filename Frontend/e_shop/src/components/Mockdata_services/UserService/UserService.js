@@ -148,6 +148,6 @@ export async function mockCreateUser(data) {
 }
 
 export async function mockForgetPassword(_data) {
-  throw createMockError("resetting password is not available in frontend demo only");
+  throw createMockError("Resetting Password is not available in Frontend Demo only");
 }
   
