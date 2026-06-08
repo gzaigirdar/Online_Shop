@@ -1,12 +1,14 @@
 'use client'
 import { useState,useContext } from "react"
 import { Login } from "../context/login_context"
+import { useLoginModal } from "../context/login_modal_context"
 import Link from "next/link"
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaChevronUp } from "react-icons/fa";
 
 
-export default function Navbar({open_modal}){
+export default function Navbar(){
+  const { openLoginModal } = useLoginModal();
    const {logged,changeStatus} = useContext(Login);
    const [show,setShow] =  useState(false);
    const [isOpen,setOpen] = useState(false);
@@ -39,7 +41,7 @@ export default function Navbar({open_modal}){
 
     {/* Nav Items (always horizontal) */}
     <nav className="hidden md:block w-full md:w-auto p-1">
-    <ul className="hidden md:flex justify-end items-center text-gray-200 text-sm space-x-2 md:space-x-4 pt-1">
+    <ul className="hidden md:flex justify-end items-center text-gray-100 text-sm space-x-2 md:space-x-4 pt-1">
     <li>
     <Link href="/" className="block py-0.5 px-1 md:px-3 font-sans bg-green-800 opacity-75 hover:bg-red-800 rounded-md">
       Home
@@ -69,7 +71,7 @@ export default function Navbar({open_modal}){
       <a className="block py-0.5 px-1 md:px-3 font-sans bg-green-800 hover:bg-red-800 rounded-md" href="#">Log out</a>
     </li>
   ) : (
-    <li onClick={() => open_modal()}>
+    <li onClick={() => openLoginModal()}>
       <a className="block py-0.5 px-1 md:px-3 font-sans  bg-green-800 opacity-75 rounded-md hover:bg-red-800" href="#">Log in</a>
     </li>
   )}
@@ -78,38 +80,37 @@ export default function Navbar({open_modal}){
     </nav>
   </header>
 
- <div className={`${isOpen ? 'block' : 'hidden'} md:hidden bg-slate-90   z-30 absolute top-full left-0 right-0  shadow-2xl p-2`}>
+ <div className={`${isOpen ? 'block' : 'hidden'} md:hidden bg-teal-950 z-30 absolute top-full left-0 right-0 shadow-2xl p-4`}>
   
-<ul className="flex flex-col items-center divide-y divide-gray-400 w-full">
-  <li className="w-full py-3 flex justify-center">
-       <Link href="/" className="inline-block font-sans bg-green-800 opacity-75 hover:bg-red-800 rounded-md px-2 py-0.5">
+<ul className="flex flex-col items-center divide-y divide-teal-800 w-full">
+  <li className="w-full py-4 flex justify-center">
+    <Link href="/" onClick={() => setOpen(false)} className="inline-block font-sans bg-pink-500 hover:bg-red-800 rounded-md px-6 py-2 text-base tracking-wide shadow-md transition-all duration-200">
       Home
     </Link>
   </li>
-  <li className="w-full py-3 flex justify-center">
-     <Link href="/About" className="inline-block font-sans bg-green-800 opacity-75 hover:bg-red-800 rounded-md px-2 py-0.5">
+  <li className="w-full py-4 flex justify-center">
+    <Link onClick={() => setOpen(false)}href="/About" className="inline-block font-sans bg-pink-500 hover:bg-red-800 rounded-md px-6 py-2 text-base tracking-wide shadow-md transition-all duration-200">
       About 
     </Link>
   </li>
-  <li className="w-full py-3 flex justify-center">
-      <Link href="/ReviewPage" className="inline-block font-sans bg-green-800 opacity-75 hover:bg-red-800 rounded-md px-2 py-0.5">
+  <li className="w-full py-4 flex justify-center">
+    <Link onClick={() => setOpen(false)} href="/ReviewPage" className="inline-block font-sans bg-pink-500 hover:bg-red-800 rounded-md px-6 py-2 text-base tracking-wide shadow-md transition-all duration-200">
       Reviews
     </Link>
   </li>
-  <li className="w-full py-3 flex justify-center">
-      <Link href="/Contact" className="inline-block font-sans bg-green-800 opacity-75 hover:bg-red-800 rounded-md px-2 py-0.5">
+  <li className="w-full py-4 flex justify-center">
+    <Link onClick={() => setOpen(false)} href="/Contact" className="inline-block font-sans bg-pink-500 hover:bg-red-800 rounded-md px-6 py-2 text-base tracking-wide shadow-md transition-all duration-200">
       Contact
     </Link>
   </li>
   
-    
   {logged ? (
-    <li className="w-full py-3 flex justify-center" onClick={() => changeStatus(false)}>
-      <a className="inline-block font-sans bg-green-800 opacity-75 hover:bg-red-800 rounded-md px-2 py-0.5" href="#">Log out</a>
+    <li className="w-full py-4 flex justify-center" onClick={() => (changeStatus(false), setOpen(false))}>
+      <a className="inline-block font-sans bg-pink-500 hover:bg-red-800 rounded-md px-6 py-2 text-base tracking-wide shadow-md transition-all duration-200" href="#">Log out</a>
     </li>
   ) : (
-    <li className="w-full py-3 flex justify-center" onClick={() => open_modal()}>
-      <a className="inline-block font-sans bg-green-800 opacity-75 hover:bg-red-800 rounded-md px-2 py-0.5" href="#">Log in</a>
+    <li className="w-full py-4 flex justify-center" onClick={() => openLoginModal()}>
+      <a className="inline-block font-sans bg-pink-500 hover:bg-red-800 rounded-md px-6 py-2 text-base tracking-wide shadow-md transition-all duration-200" href="#">Log in</a>
     </li>
   )}
   

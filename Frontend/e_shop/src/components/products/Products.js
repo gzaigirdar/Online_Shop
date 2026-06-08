@@ -9,14 +9,15 @@ import Order from "../order/Order";
 import { useEffect } from "react";
 import MenuBar from "../Menu bar/MenuBar.jsx";
 import { Login } from "../context/login_context.js";
-import { product_data } from "./Productsdata.js";
+import { useLoginModal } from "../context/login_modal_context.js";
 import { Inventory_context } from "../context/products_context.js";
 import { useCart } from "../context/cart_context.js";
 
 
-function Products({showModal,setShowModal}) {
+function Products() {
   
    const {logged} = useContext(Login)
+   const { openLoginModal } = useLoginModal();
    const {prod_data} = useContext(Inventory_context)
    const { cartItems, addItem, removeItem, updateQuantityById, subtotal, total,clearCart } = useCart();
    const taxes = cartItems.length > 0 ? 1.00 : 0;
@@ -40,7 +41,7 @@ function Products({showModal,setShowModal}) {
 
     function set_checkout(){
       if(!logged){
-        setShowModal(true)
+        openLoginModal()
         return;
       }
       setCheckout(prev => !prev)
@@ -126,7 +127,6 @@ function Products({showModal,setShowModal}) {
               total={total}
               checkout={set_checkout}
               updateQuantityById={updateQuantityById}
-              setShowModal={setShowModal}
               closeCart={closeCart}
             />
           

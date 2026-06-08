@@ -4,15 +4,17 @@ import Ratings from "./Ratings";
 import Rev_info from "./Rev_info";
 import Review_form from "./Forms/Review_form";
 import { Login } from "../context/login_context";
+import { useLoginModal } from "../context/login_modal_context";
 import { review_context } from "../context/review_context";
-function Summary_review_card({open_modal}) {
+function Summary_review_card() {
+  const { openLoginModal } = useLoginModal();
   const {logged,userInfo} = useContext(Login);
   const{getreviewStat} = useContext(review_context);
   const [stat,setStat] = useState({})
   const [show_form,setForm] = useState(false)
   function submit_rev(){
     if (!logged){
-      open_modal()
+      openLoginModal()
       
       
     }

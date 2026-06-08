@@ -1,30 +1,12 @@
 'use client'
-import { useState } from "react";
-import Order from "@/components/order/Order";  
-import Modal from "@/components/modals/Modal";
-import Loginform from "@/components/Login/Loginform";
-import Navbar from "@/components/navbar/Navbar";
 
-function page() {
-  const [showModal,setShowModal] = useState(false)
+function OrderPage() {
 
     return ( 
-      <>
-        <div>
-      <button onClick={() => setShowModal(true)}>Login</button>
-
-      <div> <Navbar/></div>
-      
-    
-    </div>
-      {showModal && (
-        <Modal show={showModal} onClose={() => setShowModal(false)}> 
-          <Loginform />
-        </Modal>
-      )}
-      </>
-      
+      <div>
+        Order Page
+      </div>
     );
 }
 
-export default page;
+export default OrderPage;

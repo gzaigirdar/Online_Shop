@@ -3,6 +3,7 @@ import {useState,useContext} from 'react';
 import {z} from 'zod';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Login } from "../context/login_context";
+import { useLoginModal } from "../context/login_modal_context";
 import { InquiryContext } from "../context/inquiry_context";
 
 
@@ -17,18 +18,18 @@ const schema = z.object(
     message: z.string().optional()
   }
   )
-function Contact({open_modal}) { 
+function Contact() { 
   const [error,setError] = useState(null);
   const [showForm,setShowform] = useState(true)
-  //const {logged,userInfo} = useContext(Login)
   const {submitInquiry} = useContext(InquiryContext)
   const {logged,userInfo} = useContext(Login)
+  const { openLoginModal } = useLoginModal();
   const {register,handleSubmit,formState: { errors }  } = useForm(
                                                   {resolver: zodResolver(schema)}
                                                   );
   async function handlesubmit(data){
     if(!logged){
-      open_modal()
+      openLoginModal()
       return
     }
     const {phone_num,message} = data;
@@ -169,25 +170,25 @@ function Contact({open_modal}) {
             </button>
           </form>
         </div>:
-        (<div class="min-h-sm flex items-center justify-center">
-            <div class="bg-white shadow-lg rounded-2xl p-6 max-w-sm text-center">
+        (<div className="min-h-sm flex items-center justify-center">
+            <div className="bg-white shadow-lg rounded-2xl p-6 max-w-sm text-center">
               
               
-              <div class="flex items-center justify-center w-12 h-12 mx-auto mb-4 bg-green-100 rounded-full">
-                <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" stroke-width="2"
+              <div className="flex items-center justify-center w-12 h-12 mx-auto mb-4 bg-green-100 rounded-full">
+                <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" strokeWidth="2"
                     viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round"
+                  <path strokeLinecap="round" strokeLinejoin="round"
                         d="M5 13l4 4L19 7"></path>
                 </svg>
               </div>
 
               
-              <h2 class="text-xl font-semibold text-gray-800">
+              <h2 className="text-xl font-semibold text-gray-800">
                 Submission Successful
               </h2>
 
-              <p class="text-green-700 mt-2">
-                We’ll get back to you soon! Thank You for Conatating Us!
+              <p className="text-green-700 mt-2">
+                We'll get back to you soon! Thank You for Contacting Us!
               </p>
 
              { /*<button class="mt-5 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
