@@ -57,7 +57,7 @@ function Contact() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 text-center">
         <h2 className="text-4xl font-bold text-gray-900">Contact</h2>
         <p className="pt-6 pb-6 text-base max-w-full text-center m-auto text-black font-serif italic">
-          Have questions? Choose an option below and we'll be happy to answer!
+          Have questions? Choose an option below and we{"'"}ll be happy to answer!
         </p>
       </div>
 
@@ -188,7 +188,7 @@ function Contact() {
               </h2>
 
               <p className="text-green-700 mt-2">
-                We'll get back to you soon! Thank You for Contacting Us!
+                We{"'"}ll get back to you soon! Thank You for Contacting Us!
               </p>
 
              { /*<button class="mt-5 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">

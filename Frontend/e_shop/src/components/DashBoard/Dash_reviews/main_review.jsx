@@ -78,7 +78,7 @@ function MainReview() {
                 reviews.filter((rev)=>{
                   return search.toLowerCase() === '' ? rev : rev.username.toLowerCase().includes(search) 
                 }).map((rev)=>(
-                <ReviewRow username={rev.username} review={rev.Review} ratings={rev.Rating} name={rev.name} id={rev._id} />
+                <ReviewRow key={rev._id} username={rev.username} review={rev.Review} ratings={rev.Rating} name={rev.name} id={rev._id} />
               
               
               )

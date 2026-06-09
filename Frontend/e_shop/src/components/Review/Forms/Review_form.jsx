@@ -83,7 +83,7 @@ function Review_form({submit_rev}) {
 
                     <div className="flex justify-start items-center space-x-1 mb-4">
                         { ratings.map((item)=>(
-                            <RevRating number={number} id={item} update_rating={update_rating}   />
+                            <RevRating key={item} number={number} id={item} update_rating={update_rating}   />
 
                         ))
 

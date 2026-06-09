@@ -1,4 +1,6 @@
 import { createContext, useContext, useState } from "react";
+import Modal from "../modals/Modal";
+import Loginform from "../Login/Loginform";
 
 const ModalContext = createContext();
 

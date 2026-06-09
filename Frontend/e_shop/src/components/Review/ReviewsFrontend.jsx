@@ -8,7 +8,7 @@ function ReviewsFrontend() {
         <div>
             {
                 reviews.map((rev)=>(
-                    <Review_Card rev={rev}/>
+                    <Review_Card key={rev._id} rev={rev}/>
                 ))
             }    
 

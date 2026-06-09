@@ -20,8 +20,8 @@ function OrderDetails({order_id,status,fname,lname,total,items,address,date}) {
         <span className="w-2/6 text-right">Number</span>
       </div>
       <div className="border-dashed border-t border-b border-gray-900 mt-1 my-2 py-2 px-1">
-       {items.map((item,index)=>(
-         <div  id={index} className="flex justify-between text-sm">
+        {items.map((item)=>(
+          <div  key={item._id || item.productName} className="flex justify-between text-sm">
          <span className="w-2/6 truncate">{item.productName}</span>
          <span className="w-2/6 text-right">{item.price}</span>
          <span className="w-2/6 text-right">{item.quantity}</span>

@@ -77,7 +77,7 @@ function ContactMain() {
                 return search.toLowerCase() === '' ? inquiry : inquiry.UserId.email.toLowerCase().includes(search);
               }).map((inquiry) => (
                
-                  <ContactRow inquiry={inquiry} />
+                  <ContactRow key={inquiry._id} inquiry={inquiry} />
 
                 ))
               }

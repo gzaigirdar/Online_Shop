@@ -119,7 +119,7 @@ function Loginform({ closeIt }) {
               </p>
 
               <p className="text-gray-200 mb-5">
-                Don't have an account?{" "}
+                Don{"'"}t have an account?{" "}
                 <a
                   onClick={() => setformType('acc')}
                   className="underline text-blue-700 hover:text-blue-900 cursor-pointer"
