@@ -80,37 +80,37 @@ export default function Navbar(){
     </nav>
   </header>
 
- <div className={`${isOpen ? 'block' : 'hidden'} md:hidden bg-teal-950 z-30 absolute top-full left-0 right-0 shadow-2xl p-4`}>
+ <div className={`${isOpen ? 'block' : 'hidden'} md:hidden  bg-gradient-to-r from-slate-100 to-slate-900 z-30 absolute top-full left-0 right-0 shadow-2xl p-4`}>
   
 <ul className="flex flex-col items-center divide-y divide-teal-800 w-full">
   <li className="w-full py-4 flex justify-center">
-    <Link href="/" onClick={() => setOpen(false)} className="inline-block font-sans bg-pink-500 hover:bg-red-800 rounded-md px-6 py-2 text-base tracking-wide shadow-md transition-all duration-200">
+    <Link href="/" onClick={() => setOpen(false)} className="inline-block font-sans bg-pink-700 hover:bg-red-800 rounded-md px-6 py-2 text-base tracking-wide shadow-md transition-all duration-200">
       Home
     </Link>
   </li>
   <li className="w-full py-4 flex justify-center">
-    <Link onClick={() => setOpen(false)}href="/About" className="inline-block font-sans bg-pink-500 hover:bg-red-800 rounded-md px-6 py-2 text-base tracking-wide shadow-md transition-all duration-200">
+    <Link onClick={() => setOpen(false)}href="/About" className="inline-block font-sans bg-pink-700 hover:bg-red-800 rounded-md px-6 py-2 text-base tracking-wide shadow-md transition-all duration-200">
       About 
     </Link>
   </li>
   <li className="w-full py-4 flex justify-center">
-    <Link onClick={() => setOpen(false)} href="/ReviewPage" className="inline-block font-sans bg-pink-500 hover:bg-red-800 rounded-md px-6 py-2 text-base tracking-wide shadow-md transition-all duration-200">
+    <Link onClick={() => setOpen(false)} href="/ReviewPage" className="inline-block font-sans bg-pink-700 hover:bg-red-800 rounded-md px-6 py-2 text-base tracking-wide shadow-md transition-all duration-200">
       Reviews
     </Link>
   </li>
   <li className="w-full py-4 flex justify-center">
-    <Link onClick={() => setOpen(false)} href="/Contact" className="inline-block font-sans bg-pink-500 hover:bg-red-800 rounded-md px-6 py-2 text-base tracking-wide shadow-md transition-all duration-200">
+    <Link onClick={() => setOpen(false)} href="/Contact" className="inline-block font-sans bg-pink-700 hover:bg-red-800 rounded-md px-6 py-2 text-base tracking-wide shadow-md transition-all duration-200">
       Contact
     </Link>
   </li>
   
   {logged ? (
     <li className="w-full py-4 flex justify-center" onClick={() => (changeStatus(false), setOpen(false))}>
-      <a className="inline-block font-sans bg-pink-500 hover:bg-red-800 rounded-md px-6 py-2 text-base tracking-wide shadow-md transition-all duration-200" href="#">Log out</a>
+      <a className="inline-block font-sans bg-pink-700 hover:bg-red-800 rounded-md px-6 py-2 text-base tracking-wide shadow-md transition-all duration-200" href="#">Log out</a>
     </li>
   ) : (
     <li className="w-full py-4 flex justify-center" onClick={() => openLoginModal()}>
-      <a className="inline-block font-sans bg-pink-500 hover:bg-red-800 rounded-md px-6 py-2 text-base tracking-wide shadow-md transition-all duration-200" href="#">Log in</a>
+      <a className="inline-block font-sans bg-pink-700 hover:bg-red-800 rounded-md px-6 py-2 text-base tracking-wide shadow-md transition-all duration-200" href="#">Log in</a>
     </li>
   )}
   

@@ -103,8 +103,8 @@ function Loginform({ closeIt }) {
                 Submit
               </button>
               {loading && <BeatLoader size={20} color='green' />}
-              {error && <p className="text-red-500 font-semibold"> {error}</p>}
-            <div className="justify-center items-center   mt-10 text-white">
+              {error && <p className=" m-2 text-red-500 font-semibold"> {error}</p>}
+            <div className="justify-center items-center   mt-5 text-white">
               <p className="text-gray-400 mb-3">
               <a
                   onClick={() => setformType('forget')}

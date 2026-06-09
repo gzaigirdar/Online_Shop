@@ -21,9 +21,12 @@ import { useForm } from "react-hook-form";
         let res;
         try {
           res = await createAccount(username, fname, lname, email, password);
+          setError(null)
           setSucccess('Account creation Succesfull!')
-          setTimeout(5)
-          back('login')
+       
+          setTimeout(() => {
+            back('login')
+          }, 2000);
 
           
         } catch (error) {
@@ -38,7 +41,7 @@ import { useForm } from "react-hook-form";
 
         return (
           <>
-            <div className="relative bg-gray-900 h-screen overflow-auto w-screen p-10">
+            <div className="relative bg-gradient-to-r from-slate-100 to-slate-900 h-screen overflow-auto w-screen p-10">
             <button
               onClick={close}
               className="fixed mt-5  top-4 right-4 sm:top-5 sm:right-5 z-50 text-white text-2xl font-bold bg-red-700 hover:text-gray-300 px-2 py-1 rounded"
@@ -147,8 +150,6 @@ import { useForm } from "react-hook-form";
                   Create Account
                 </button>
               
-            </form>
-
               <div className="mt-2 text-white text-center">
               <div>{error && <span className="text-red-500 text-2xl">{error}</span>}</div>
               <div>{success && <span className="text-green-500 text-2xl">{success}</span>}</div>
@@ -160,6 +161,8 @@ import { useForm } from "react-hook-form";
                   </a>
                 </p>
               </div>
+            </form>
+
             </div>
           </>
         );

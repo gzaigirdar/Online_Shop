@@ -1,5 +1,8 @@
 'use client'
 import { useState } from "react";
+import { FaChevronDown} from "react-icons/fa";
+import { FaAnglesDown } from "react-icons/fa6";
+
 
 export default function MenuBar({search,change,show_cart,items}) {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,13 +20,13 @@ export default function MenuBar({search,change,show_cart,items}) {
           <div className="relative flex-1 sm:flex-none sm:w-auto">
             <div
               role="button"
-              className="btn p-2 sm:p-2.5 w-full sm:w-auto justify-between rounded-full border border-cyan-500/40 bg-blue-950/60 text-cyan-100 shadow-[0_0_12px_rgba(6,182,212,0.15)] hover:bg-blue-900/70 hover:border-cyan-400/60 hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:ring-2 hover:ring-cyan-400/40 transition-all duration-200 active:scale-[0.98]"
+              className="btn flex justify-center items-center sm:p-2.5 w-full sm:w-auto sm:justify-between rounded-full border border-cyan-500/40 bg-blue-950/60 text-cyan-100 shadow-[0_0_12px_rgba(6,182,212,0.15)] hover:bg-blue-900/70 hover:border-cyan-400/60 hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:ring-2 hover:ring-cyan-400/40 transition-all duration-200 active:scale-[0.98]"
               onClick={() => setIsOpen((prev) => !prev)}
             >
               <span className={selectedType ? "font-medium text-white" : "text-white/50"}>
                 {selectedType || "Select type"}
               </span>
-              <span className={`ml-2 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}>⬇️</span>
+              <FaAnglesDown size={15} className={`ml-2 text-red-500 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
             </div>
 
             {isOpen && (
