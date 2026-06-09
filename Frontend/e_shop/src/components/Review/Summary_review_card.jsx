@@ -43,7 +43,7 @@ function Summary_review_card() {
   },[])
   return (
     <>
-    <div className=" flex flex-col m-2 bg-gray-200 items-center justify-center shadow-2xl rounded-lg p-6 ">
+    <div className=" flex flex-col md:mt-15  bg-gray-200 items-center justify-center shadow-2xl rounded-lg p-6 ">
       {show_form && logged ? (
         <Review_form submit_rev={submit_rev} />
       ):

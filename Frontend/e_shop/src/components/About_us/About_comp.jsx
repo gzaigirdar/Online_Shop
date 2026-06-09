@@ -1,6 +1,6 @@
 function About_comp() {
     return (
-      <div className="flex flex-col-reverse sm:flex-row bg-gradient-to-r from-slate-100 to-slate-900 items-center max-w-screen-xl min-h-screen mx-auto">
+      <div className="flex flex-col-reverse sm:flex-row bg-gradient-to-r from-slate-100 to-slate-900 items-center min-h-screen">
         <div className="sm:w-2/3  p-4 sm:p-8 flex justify-center items-center">
           <div className="image object-center text-center ">
             <img src="https://i.pinimg.com/originals/c8/81/0f/c8810f01aae58f4edea38ff555f48f26.jpg" alt="About Us" />
