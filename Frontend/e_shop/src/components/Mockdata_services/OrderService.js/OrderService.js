@@ -3,8 +3,8 @@ import { mockUsers } from "../UserService/UserService.js";
 let mockOrders = [
     {
         "_id": "68e9a2004629db9aae553329",
-        "fname": "N/A",
-        "lname": "N/A",
+        "fname": "John",
+        "lname": "Cena",
         "orderStatus": "Pending",
         "total": 100,
         "address": {
@@ -32,8 +32,8 @@ let mockOrders = [
     },
     {
         "_id": "69f291481b679a0635a3d56c",
-        "fname": "N/A",
-        "lname": "N/A",
+        "fname": "Omar",
+        "lname": "Alvarez",
         "orderStatus": "Pending",
         "total": 45,
         "address": {
