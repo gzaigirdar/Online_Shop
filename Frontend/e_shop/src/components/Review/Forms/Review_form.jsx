@@ -2,7 +2,7 @@
 
 import { useState,useContext } from "react";
 import { useForm } from "react-hook-form";
-import RevRating from "../rev_rating";
+import RevRating from "../Rev_rating";
 import Msg_confirm from "@/components/Msg_confirm";
 import { review_context } from '../../context/review_context';
 import { Login } from "@/components/context/login_context";

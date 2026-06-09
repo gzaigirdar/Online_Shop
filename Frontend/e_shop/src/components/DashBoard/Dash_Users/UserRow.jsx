@@ -1,6 +1,7 @@
 import { useState } from "react";
 import DashModal from "../Dashboard modal/DashModal";
-import UserDetails from "./userDetails";
+import UserDetails from "./UserDetails";
+
 import UserAction from "./UserAction";
 function UserRow({user}) {
     const status = user.admin? 'Admin':'User';

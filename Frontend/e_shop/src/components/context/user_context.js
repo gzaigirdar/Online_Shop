@@ -7,7 +7,7 @@ export function UsersProvider({children}){
 
     const [users,setUsers] = useState([]);
     const users_api = process.env.NEXT_PUBLIC_DB_API_USERS;
-    const mock_service = process.env.NEXT_PUBLIC_MOCK_SERVICE;
+ 
     
  
   
