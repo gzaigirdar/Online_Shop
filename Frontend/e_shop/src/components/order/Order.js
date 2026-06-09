@@ -37,7 +37,7 @@ function Order ({cartitem,total,subtotal,taxes,close,redirect})  {
                   <div className="overflow-y-auto border border-gray-700 rounded-lg p-2 mb-4" 
                         style={{ height: '50vh' }}>
                           {cartitem.map((item)=>(
-                            <OrderItem item={item}/>
+                            <OrderItem key={item._id} item={item}/>
                           ))}
                   </div>
                 </div>
