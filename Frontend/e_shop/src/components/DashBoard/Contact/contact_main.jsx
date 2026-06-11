@@ -54,7 +54,7 @@ function ContactMain() {
      </div>
      {/* end of search component */}
 
-        <div className="mx-2 md:mx-6 lg:mx-auto lg:max-w-5xl">
+        <div className="mx-2 md:mx-6 lg:max-w-5xl">
         <div className="shadow rounded border border-gray-200">
           <div className="max-h-[320px] overflow-y-auto overflow-x-auto">
           <table className="min-w-full bg-white table-auto">
@@ -74,7 +74,7 @@ function ContactMain() {
               
               {
               inquiries.filter((inquiry) => {
-                return search.toLowerCase() === '' ? inquiry : inquiry.UserId.email.toLowerCase().includes(search);
+                return search.toLowerCase() === '' ? inquiry : inquiry.UserId.email.toLowerCase().includes(search.toLowerCase());
               }).map((inquiry) => (
                
                   <ContactRow key={inquiry._id} inquiry={inquiry} />

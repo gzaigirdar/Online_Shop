@@ -35,9 +35,9 @@ export let mockUsers = [
   {
     name: { fname: "userdemo1", lname: "username1" },
     _id: "69054bde8805700013d47e11",
-    username: "fzaigirdar",
-    email: "fzaigirdar@yahoo.com",
-    password: "password123",
+    username: "user1",
+    email: "user1r@gmail.com",
+    password: "Password1",
     admin: true,
     createdAt: "2025-10-31T23:53:02.946Z",
     updatedAt: "2026-05-30T02:14:20.716Z",

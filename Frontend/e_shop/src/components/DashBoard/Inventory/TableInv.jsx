@@ -76,7 +76,7 @@ function InvTable() {
         <DashModal open={showAddModal} setOpen={setShowAddModal}>
           <AddProd closeit={() => setShowAddModal(false)} />
         </DashModal>
-
+       <div className="mx-2 md:mx-6 lg:max-w-5xl"> 
         <div className="shadow rounded border border-gray-200">
           <div className="max-h-[320px] overflow-y-auto overflow-x-auto">
           <table className="min-w-full bg-white table-auto">
@@ -94,7 +94,7 @@ function InvTable() {
 
               {
                 prod_data.filter((item) => {
-                  return search.toLowerCase() === '' ? item : item.name.toLowerCase().includes(search);
+                  return search.toLowerCase() === '' ? item : item.name.toLowerCase().includes(search.toLowerCase());
                 }).map(
                   item => (
                     <InvRow key={item._id} id={item._id} name={item.name} cake_type={item.type}
@@ -110,6 +110,7 @@ function InvTable() {
           </table>
           </div>
 
+        </div>
         </div>
 
       </div>

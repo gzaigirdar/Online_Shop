@@ -59,7 +59,7 @@ function OrderTable() {
 </div>
 
 
-      <div className="mx-2 md:mx-6 lg:mx-auto lg:max-w-5xl">
+      <div className="mx-2 md:mx-6 lg:max-w-5xl">
         <div className="shadow rounded border border-gray-200">
           <div className="max-h-[320px] overflow-y-auto overflow-x-auto">
           <table className="min-w-full bg-white table-auto">
@@ -75,7 +75,7 @@ function OrderTable() {
             <tbody className="text-gray-700">
               {
                 order_Items.filter((order) => {
-                  return searchterm.toLowerCase() === '' ? order : order.address.phone_number.includes(searchterm);
+                  return searchterm.toLowerCase() === '' ? order : order.address.phone_number.includes(searchterm.toLowerCase());
                 }).map((order) => (
                   <OrderRow
                     key={order._id}

@@ -48,7 +48,7 @@ function UsersMain() {
     </div>
   </div>
 </div>
-        <div className="mx-2 md:mx-6 lg:mx-auto lg:max-w-5xl">
+        <div className="mx-2 md:mx-6 lg:max-w-5xl">
         <div className="shadow rounded border border-gray-200">
           <div className="max-h-[320px] overflow-y-auto overflow-x-auto">
           <table className="min-w-full bg-white table-auto">
@@ -69,7 +69,7 @@ function UsersMain() {
               
               { 
               users.filter((user)=>{
-                return search.toLowerCase() === '' ? user : user.username.toLowerCase().includes(search);
+                return search.toLowerCase() === '' ? user : user.username.toLowerCase().includes(search.toLowerCase());
 
               }).map((user)=>(
                 <UserRow key={user._id} user={user} />

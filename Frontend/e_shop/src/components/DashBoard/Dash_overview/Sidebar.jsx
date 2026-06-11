@@ -1,6 +1,14 @@
+'use client'
+import { useRouter } from "next/navigation";
 import SideItem from "./SideItem";
 import { inv_svg,order_svg,overView_svg,msg_svg,review_svg,users_svg} from "./sidebar_svg";
 function SideBar({switch_comp}) {
+  const router = useRouter();
+
+
+  function back_to_home(){
+    router.push('/')
+  }
   
 
 
@@ -11,7 +19,7 @@ function SideBar({switch_comp}) {
 
           {/* Sidebar content */}
 <div className="flex flex-row sm:flex-col items-center justify-evenly sm:justify-start w-full h-auto sm:h-full overflow-x-auto sm:overflow-y-auto text-gray-700 bg-pink-200 rounded" >
-  <a className="flex items-center sm:w-full px-3 mt-3 shrink-0" href="#">
+  <a className="hidden sm:flex items-center sm:w-full px-3 mt-3 shrink-0" href="#">
     <svg
       className="w-8 h-8 fill-current"
       viewBox="0 0 20 20"
@@ -28,12 +36,12 @@ function SideBar({switch_comp}) {
     <SideItem  title={'Messages'}  svg={msg_svg} switch_comp={switch_comp}/>
     <SideItem  title={'Reviews'} svg={review_svg} switch_comp={switch_comp} />
     <SideItem  title={'Accounts'}  svg={users_svg} switch_comp={switch_comp}/>
-    <button
+    <button onClick={back_to_home}
     type="button"
-    className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-3 sm:px-5 py-2.5 text-center me-2 mb-2 shrink-0"
+    className="md:mt-2.5 text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-2 sm:px-5 py-1.5 sm:py-2.5 text-center me-2 mb-2  shrink-0"
   >
-    <span className="hidden sm:inline">Logout</span>
-    <svg className="sm:hidden w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
+    <span className="hidden sm:inline mt-2">Logout</span>
+    <svg className="sm:hidden w-5 h-5 " fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
   </button>
 
     

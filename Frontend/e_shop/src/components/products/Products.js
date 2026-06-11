@@ -92,7 +92,7 @@ function Products() {
                <div className="rounded-lg p-2 sm:p-4">
                  <div className="grid grid-cols-3 gap-2 ">
                   { prod_data.filter((product)=> {
-                    return search.toLowerCase() === '' ? product : product.name.toLowerCase().includes(search)
+                    return search.toLowerCase() === '' ? product : product.name.toLowerCase().includes(search.toLowerCase())
                   }).map((product)=>
                     product.type == type ? (
                       <div className=""  key={product._id} >

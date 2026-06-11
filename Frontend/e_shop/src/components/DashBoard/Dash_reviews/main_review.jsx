@@ -55,7 +55,7 @@ function MainReview() {
 
 
         
-          <div className="mx-2 md:mx-6 lg:mx-auto lg:max-w-5xl">
+          <div className="mx-2 md:mx-6 lg:max-w-5xl">
           <div className="shadow rounded border border-gray-200">
           <div className="max-h-[320px] overflow-y-auto overflow-x-auto">
           <table className="min-w-full bg-white table-auto">
@@ -76,7 +76,7 @@ function MainReview() {
               
               {
                 reviews.filter((rev)=>{
-                  return search.toLowerCase() === '' ? rev : rev.username.toLowerCase().includes(search) 
+                  return search.toLowerCase() === '' ? rev : rev.username.toLowerCase().includes(search.toLowerCase()) 
                 }).map((rev)=>(
                 <ReviewRow key={rev._id} username={rev.username} review={rev.Review} ratings={rev.Rating} name={rev.name} id={rev._id} />
               
